@@ -1,4 +1,4 @@
-class FrontPageController < ActionController::Base
+class FrontPageController < ApplicationController
 
   def welcome
   end
