@@ -1,5 +1,24 @@
-#welcome_message
+#top
+
+%span#welcome_message
   Welcome to your Pixel Paisan!
 
-%div#canvas_pane
-  %canvas#canvas
+%span
+  Current canvas size: x
+  %span#canvas_width
+    0
+  , y
+  %span#canvas_height
+    0
+
+%br
+
+%span
+  Canvas Size
+  %input{:type => 'text', :value => '29', :id => 'grid_size_field'}
+
+%span
+  Cell Size
+  %input{:type => 'text', :value => '20', :id => 'cell_size_field'}
+
+%canvas#canvas
