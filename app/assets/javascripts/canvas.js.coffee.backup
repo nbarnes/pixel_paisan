@@ -3,8 +3,8 @@ $ ->
   context = document.getElementById('canvas').getContext("2d")
 
   mouse_loc =
-    x: (e) -> e.pageX - $('#canvas').offset().left
-    y: (e) -> e.pageY - $('#canvas').offset().top
+    x: (e) -> e.pageX - $('#canvas').offset.left
+    y: (e) -> e.pageY - $('#canvas').offset.top
 
   window.grid_size = () ->
     $('#grid_size_field').val()
@@ -65,3 +65,6 @@ $ ->
   $('#canvas').mousemove (e) ->
     if mouse_down
       draw_cell(mouse_loc.x(e), mouse_loc.y(e))
+
+
+
