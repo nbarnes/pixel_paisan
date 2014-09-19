@@ -3,7 +3,7 @@
 %span#welcome_message
   Welcome to your Pixel Paisan!
 
-%span
+%span#canvas_size_display
   Current canvas size: x
   %span#canvas_width
     0
@@ -20,5 +20,7 @@
 %span
   Cell Size
   %input{:type => 'text', :value => '20', :id => 'cell_size_field'}
+
+%input{:type => 'button', :value => 'Clear', :id => 'canvas_clear_button'}
 
 %canvas#canvas{:width => 500, :height => 500}
