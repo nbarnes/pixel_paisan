@@ -12,4 +12,4 @@ $ ->
     if mouse_down
       x = mouse_loc.x(e)
       y = mouse_loc.y(e)
-      draw_cell(mouse_loc.x(e), mouse_loc.y(e))
+      trigger_cell(mouse_loc.x(e), mouse_loc.y(e))

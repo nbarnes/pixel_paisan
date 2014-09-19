@@ -1,21 +1,14 @@
 $ ->
 
-  window.draw_cell = (canvas_x, canvas_y) ->
-    context.fillStyle = "red";
+  drawing_mode = 'paint'
+
+  window.trigger_cell = (canvas_x, canvas_y) ->
     cell_x = x_to_cell_x ( canvas_x )
     cell_y = y_to_cell_y ( canvas_y )
-    target_x = cell_x_to_x ( x_to_cell_x(canvas_x) )
-    target_y = cell_y_to_y ( y_to_cell_y(canvas_y) )
-    context.fillRect(target_x, target_y, cell_size(), cell_size())
+    cells[cell_x][cell_y].trigger(255, 0, 0, 0.5)
 
   x_to_cell_x = (canvas_x) ->
     Math.floor(canvas_x / cell_size())
 
   y_to_cell_y = (canvas_y) ->
     Math.floor(canvas_y / cell_size())
-
-  cell_x_to_x = (cell_x) ->
-    cell_x * cell_size()
-
-  cell_y_to_y = (cell_y) ->
-    cell_y * cell_size()
