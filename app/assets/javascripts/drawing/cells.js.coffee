@@ -2,20 +2,24 @@ $ ->
 
   class window.Cell
     constructor: (@x, @y) ->
-      [@r, @g, @b, @a] = [0, 0, 0, 0]
+      @my_fillStyle = "rgba(0, 0, 120, 0)"
 
-    trigger: (r, b, g, a) ->
-      @r = r if r?
-      @g = g if g?
-      @b = b if b?
-      @a = a if a?
-      context.fillStyle = "rgba(#{@r}, #{@g}, #{@b}, #{@a})"
+    trigger: ->
       target_x = cell_x_to_x ( @x )
       target_y = cell_y_to_y ( @y )
+      @my_fillStyle = context.fillStyle
       context.fillRect(target_x, target_y, cell_size(), cell_size())
 
+    redraw: ->
+      target_x = cell_x_to_x ( @x )
+      target_y = cell_y_to_y ( @y )
+      old_fillStyle = context.fillStyle
+      context.fillStyle = @my_fillStyle
+      context.fillRect(target_x, target_y, cell_size(), cell_size())
+      context.fillStyle = old_fillStyle
+
     clear: () ->
-      [@r, @g, @b, @a] = [0, 0, 0, 0]
+      @my_fillStyle = "rgba(0, 120, 0, 0)"
 
   cell_x_to_x = (cell_x) ->
     cell_x * cell_size()

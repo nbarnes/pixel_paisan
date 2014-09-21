@@ -1,4 +1,4 @@
 $ ->
 
   $('#canvas_clear_button').click (e) ->
-    clear_canvas()
+    reset_drawing()

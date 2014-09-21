@@ -16,6 +16,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 
+gem 'rails-12factor' # for Heroku
+
 group :test, :development do
   gem 'jasmine-rails'
   gem 'capybara-webkit'

@@ -14,7 +14,16 @@ $ ->
   window.cell_size = () ->
     $('#cell_size_field').val()
 
-  window.set_canvas_size = () ->
+  resize_canvas_element = ->
+    resize_cell_matrix()
+    new_size = canvas_size_in_cells() * cell_size()
+    change_canvas_attrs(new_size)
+    $('#canvas').width(new_size)
+    $('#canvas').height(new_size)
+    $('#canvas_width').text($('#canvas').width())
+    $('#canvas_height').text($('#canvas').height())
+
+  resize_cell_matrix = ->
     for x in [0...canvas_size_in_cells()]
       unless cells[x]?
         cells[x] = new Array
@@ -22,34 +31,36 @@ $ ->
         unless cells[x][y]?
           cells[x][y] = new Cell(x, y)
 
-    new_size = canvas_size_in_cells() * cell_size()
-    $('#canvas').attr({width: new_size, height: new_size })
-    $('#canvas').width(new_size)
-    $('#canvas').height(new_size)
-    $('#canvas_width').text($('#canvas').width())
-    $('#canvas_height').text($('#canvas').height())
+  window.reset_drawing = ->
+    change_canvas_attrs($('#canvas').attr('width'))
 
-    redraw_cells()
-
-  redraw_cells = () ->
-    for x in [0...canvas_size_in_cells()]
-      for y in [0...canvas_size_in_cells()]
-        cells[x][y].trigger()
-
-  window.clear_canvas = () ->
     for x in [0...cells.length]
       for y in [0...cells.length]
         cells[x][y].clear()
 
-    # one blanks the underlying canvas element by resetting its
-    # HTML attribute size without an actual delta
-    new_size = canvas_size_in_cells() * cell_size()
-    $('#canvas').attr({width: new_size, height: new_size })
+  # resizing / blanking the canvas also resets the fillStyle, so we
+  # have to store it for a moment
+  change_canvas_attrs = (new_size) ->
+    old_fillStyle = context.fillStyle
+    $('#canvas').attr({width: new_size, height: new_size})
+    context.fillStyle = old_fillStyle
 
-  $('#cell_size_field').change () ->
-    set_canvas_size()
+  redraw = ->
+    for x in [0...canvas_size_in_cells()]
+      for y in [0...canvas_size_in_cells()]
+        cells[x][y].redraw()
 
   $('#canvas_size_in_cells_field').change () ->
-    set_canvas_size()
+    handle_canvas_size_field_changed($('#canvas_size_in_cells_field'))
 
-  set_canvas_size()
+  $('#cell_size_field').change () ->
+    handle_canvas_size_field_changed($('#cell_size_field'))
+
+  handle_canvas_size_field_changed = (canvas_size_input_element) ->
+    if canvas_size_input_element.val() > 50
+      canvas_size_input_element.val(50)
+    resize_canvas_element()
+    redraw()
+
+  context.fillStyle = "rgba(255, 0, 0, 1)"
+  resize_canvas_element()
