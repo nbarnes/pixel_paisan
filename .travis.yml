@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 1.8.7
+- 1.9.2
+- 1.9.3
+- rbx
+deploy:
+  provider: heroku
+  api_key:
+    secure: UfaYxHBLs0C3Qh4L7XyUUazYr9kNAgLaSd7UB/d7XBUZtWCYAujJ7zME+EPzeyKRWu9/25E1WSZfWbMnQ4Kgne9U5x2KFadPAXkawea4DFXM0rJYpGy665JAyp7jvUsGf7GXUVhZ9qvnRL240+Q5vpZzsabu+DlnDcibSXo84s4=
+  app: pixel_paisan
+  on:
+    repo: nbarnes/pixel_paisan
