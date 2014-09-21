@@ -1,13 +1,18 @@
 language: ruby
 rvm:
-- 1.8.7
-- 1.9.2
-- 1.9.3
-- rbx
+- 2.0.0
+script:
+- psql -c 'create database portfolio_test_postgres;' -U postgres
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rake
+bundler_args: --binstubs=./bundler_stubs
 deploy:
   provider: heroku
   api_key:
-    secure: UfaYxHBLs0C3Qh4L7XyUUazYr9kNAgLaSd7UB/d7XBUZtWCYAujJ7zME+EPzeyKRWu9/25E1WSZfWbMnQ4Kgne9U5x2KFadPAXkawea4DFXM0rJYpGy665JAyp7jvUsGf7GXUVhZ9qvnRL240+Q5vpZzsabu+DlnDcibSXo84s4=
-  app: pixel_paisan
+    secure: BwEotIJty3w34ACxW+8/zft7Npi7NOzm4fkUr1puZad7yrqqDhvRZQjrhO6wqvxGhHR0Rkw7y2BzwV4WdcBkNcL4msZ5OSSRiJcqqdqsxHG28KgmD+JSkIvmVF4TuJgteTgfT20Lq/H97Os4JKQaIekoxWRFtoj8nhhwi27LmXc=
+  app: nbarnes
   on:
     repo: nbarnes/pixel_paisan
+  run:
+  - rake db:migrate
