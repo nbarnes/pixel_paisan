@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222215011) do
+ActiveRecord::Schema.define(version: 20140915193234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20131222215011) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+
+  create_table "embeddable_tweets", id: false, force: true do |t|
+    t.integer  "tweet_id",        limit: 8
+    t.text     "oembed_html"
+    t.datetime "tweet_timestamp"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "posts", force: true do |t|
     t.string   "title"
