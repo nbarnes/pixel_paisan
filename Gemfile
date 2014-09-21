@@ -16,8 +16,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 
-gem 'capybara-webkit'
-gem 'minitest-rails-capybara'
+group :test, :development do
+  gem 'jasmine-rails'
+  gem 'capybara-webkit'
+  gem 'minitest-rails-capybara'
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'
