@@ -1,6 +1,6 @@
 $ ->
 
-  $('#eraser_button').click (e) ->
+  $('#erase_button').click (e) ->
     context.globalCompositeOperation = "destination-out";
     set_color(255, 255, 255, 1)
 
