@@ -25,7 +25,6 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
-  gem 'pry-debugger'
 end
 
 # Use unicorn as the app server
