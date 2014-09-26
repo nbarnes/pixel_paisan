@@ -1,0 +1,17 @@
+#notice
+  = notice
+
+%h1
+  = @palette.name
+
+#colors_index.clearfix
+  = render 'colors/colors_collection', colors: @palette.colors
+
+%br
+
+#color_form
+%br
+
+= link_to 'Add New Color', new_color_palette_path, remote: true, :id => 'new_color_link'
+
+= link_to 'Back', palettes_path

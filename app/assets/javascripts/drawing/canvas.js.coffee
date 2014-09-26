@@ -64,3 +64,4 @@ $ ->
 
   context.fillStyle = "rgba(255, 0, 0, 1)"
   resize_canvas_element()
+  load_palette(default_palette)

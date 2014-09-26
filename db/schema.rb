@@ -11,9 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140922200734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "colors", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "r"
+    t.integer  "g"
+    t.integer  "b"
+    t.float    "a"
+  end
+
+  create_table "palette_colors", force: true do |t|
+    t.integer  "palette_id"
+    t.integer  "color_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "palettes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
 
 end

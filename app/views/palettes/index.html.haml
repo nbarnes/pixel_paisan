@@ -1,0 +1,15 @@
+%h1
+  Listing palettes
+
+%br
+
+- @palettes.each do |palette|
+
+  %h1
+    = link_to palette.name, palette_path(palette)
+
+  = render 'colors/colors_block', colors: palette.colors
+  %br
+%br
+%br
+= link_to 'New Palette', new_palette_path

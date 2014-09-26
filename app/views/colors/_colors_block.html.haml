@@ -1,0 +1,4 @@
+
+.colors_block.clearfix
+  - colors.each do |color|
+    .color_entry{ :style => "background: rgb(#{color.r},#{color.g},#{color.b})" }

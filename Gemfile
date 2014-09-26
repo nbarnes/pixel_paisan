@@ -18,10 +18,14 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor' # for Heroku
 
+gem 'simple_form'
+
 group :test, :development do
   gem 'jasmine-rails'
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
+  gem 'pry-rails'
+  gem 'pry-debugger'
 end
 
 # Use unicorn as the app server

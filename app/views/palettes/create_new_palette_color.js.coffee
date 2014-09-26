@@ -1,0 +1,1 @@
+alert('create_new_palette_color.js.coffee')
