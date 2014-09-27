@@ -8,23 +8,12 @@ class ColorsController < ApplicationController
     @colors = Color.all
   end
 
-  def edit
-  end
-
-  def new
-    @color = Color.new
-  end
-
   def create
     @palette = Palette.find(params[:color][:palette][:id])
     @color = Color.create!(color_params)
     palette_color = @palette.palette_colors.build
     palette_color.color_id = @color.id
     palette_color.save
-  end
-
-  def update
-    @color.update_attributes(color_params)
   end
 
   private

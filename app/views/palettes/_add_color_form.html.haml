@@ -1,4 +1,4 @@
-= simple_form_for @color, remote: true, action: create_color_palette_path do |f|
+= simple_form_for @color, remote: true do |f|
   = f.simple_fields_for :palette do |palette_form|
     = palette_form.hidden_field :id, value: @palette.id
   = f.input  :r

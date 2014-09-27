@@ -4,8 +4,9 @@
 %h1
   = @palette.name
 
-#colors_index.clearfix
-  = render 'colors/colors_collection', colors: @palette.colors
+.colors_index.clearfix
+  - @palette.colors.each do |color|
+    = render 'colors/color_bubble', color: color
 
 %br
 
@@ -13,5 +14,9 @@
 %br
 
 = link_to 'Add New Color', new_color_palette_path, remote: true, :id => 'new_color_link'
-
-= link_to 'Back', palettes_path
+:preserve
+   *
+= link_to 'Back to Index', palettes_path
+:preserve
+   *
+= link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }

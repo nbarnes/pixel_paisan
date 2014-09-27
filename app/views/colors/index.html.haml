@@ -1,8 +1,9 @@
 %h1
   Colors index
 
-#colors_index.clearfix
-  = render 'colors/colors_collection', colors: @colors
+.colors_index.clearfix
+  - @colors.each do |color|
+    = render 'colors/color_bubble', color: color
 
 %br
 
