@@ -1,3 +1,8 @@
 
-%div{ :style => "background: rgb(#{color.r},#{color.g},#{color.b})", :class => 'color_bubble' }
-  = "#{color.r},#{color.g},#{color.b}"
+.color_bubble_with_remove_pane
+  .color_bubble{ :style => "background: rgb(#{color.r},#{color.g},#{color.b})" }
+    = "#{color.r},#{color.g},#{color.b}"
+  - if palette_id != nil
+    - palette_color = PaletteColor.find_by(color_id: color.id, palette_id: palette_id)
+    %div.remove_color_link
+      = render 'palettes/delete_palette_color_link', palette_color: palette_color

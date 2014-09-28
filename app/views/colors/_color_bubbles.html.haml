@@ -1,6 +1,3 @@
 .colors_index.clearfix
   - colors.each do |color|
-    = render color
-    - if palette_id != nil
-      - palette_color = PaletteColor.find_by(color_id: color.id, palette_id: palette_id)
-      = render 'palettes/delete_palette_color_link', palette_color: palette_color
+    = render 'colors/color', color: color, palette_id: palette_id

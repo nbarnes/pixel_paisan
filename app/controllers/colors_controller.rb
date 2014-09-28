@@ -8,18 +8,12 @@ class ColorsController < ApplicationController
   end
 
   def create
-    puts ('--------------------------------')
-    puts ('start of ColorsController.create')
-    puts ('--------------------------------')
     @palette = Palette.find(params[:color][:palette][:id])
     @color = Color.create!(color_params)
     @palette_color = @palette.palette_colors.build
     @palette_color.color_id = @color.id
     @palette_color.save
     render 'palettes/add_new_palette_color', color: @color
-    puts ('--------------------------------')
-    puts ('end of ColorsController.create')
-    puts ('--------------------------------')
   end
 
   def destroy
@@ -34,6 +28,6 @@ class ColorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def color_params
-      params.require(:color).permit(:r, :g, :b, :a)
+      params.require(:color).permit(:r, :g, :b, :a, :palette)
     end
 end
