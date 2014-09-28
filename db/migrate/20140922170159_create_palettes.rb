@@ -4,7 +4,7 @@ class CreatePalettes < ActiveRecord::Migration
 
       t.timestamps
 
-      t.string :name
+      t.string :name, null: :false
 
     end
   end

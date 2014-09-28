@@ -1,14 +1,10 @@
 %h1
   Colors index
 
-.colors_index.clearfix
-  - @colors.each do |color|
-    = render 'colors/color_bubble', color: color
+= render 'colors/color_bubbles', colors: @colors, palette_id: nil
 
 %br
 
 #color_form
 
 %br
-
-= link_to 'New Color', new_color_path, remote: true, :id => 'new_color_link'

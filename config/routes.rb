@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :colors
-
+  resources :colors, only: [:create, :index, :destroy]
 
   resources :palettes do
     member do
@@ -9,6 +8,8 @@ Rails.application.routes.draw do
       post 'create_color'
     end
   end
+
+  resources :palette_colors, only: [:create, :destroy]
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 

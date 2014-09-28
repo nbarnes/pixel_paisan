@@ -1,5 +1,4 @@
 class ColorsController < ApplicationController
-  before_action :set_color, only: [:show, :edit, :update, :destroy]
   respond_to :html, :js
 
   # GET /colors
@@ -9,11 +8,22 @@ class ColorsController < ApplicationController
   end
 
   def create
+    puts ('--------------------------------')
+    puts ('start of ColorsController.create')
+    puts ('--------------------------------')
     @palette = Palette.find(params[:color][:palette][:id])
     @color = Color.create!(color_params)
-    palette_color = @palette.palette_colors.build
-    palette_color.color_id = @color.id
-    palette_color.save
+    @palette_color = @palette.palette_colors.build
+    @palette_color.color_id = @color.id
+    @palette_color.save
+    render 'palettes/add_new_palette_color', color: @color
+    puts ('--------------------------------')
+    puts ('end of ColorsController.create')
+    puts ('--------------------------------')
+  end
+
+  def destroy
+    Color.find(params[:id]).destroy
   end
 
   private

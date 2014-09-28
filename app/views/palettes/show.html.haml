@@ -4,9 +4,7 @@
 %h1
   = @palette.name
 
-.colors_index.clearfix
-  - @palette.colors.each do |color|
-    = render 'colors/color_bubble', color: color
+= render 'colors/color_bubbles', colors: @palette.colors, palette_id: @palette.id
 
 %br
 
