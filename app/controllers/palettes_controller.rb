@@ -1,5 +1,5 @@
 class PalettesController < ApplicationController
-  before_action :set_palette, only: [:show, :edit, :update, :destroy]
+  before_action :set_palette, only: [:show, :edit, :update, :destroy, :return_json]
   respond_to :html
 
   def index
@@ -7,6 +7,10 @@ class PalettesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  # show.json.rb
+    end
   end
 
   def new
@@ -22,14 +26,14 @@ class PalettesController < ApplicationController
     end
   end
 
-  def new_color
-    @palette = Palette.find(params[:id])
-    @color = Color.new
-  end
-
   def destroy
     @palette.destroy
     redirect_to palettes_url, notice: "Pallete '#{@palette.name} was deleted."
+  end
+
+  def new_color
+    @palette = Palette.find(params[:id])
+    @color = Color.new
   end
 
   private

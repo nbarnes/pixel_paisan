@@ -12,6 +12,7 @@ $ ->
     set_erase()
 
   window.load_palette = (palette) ->
+    $('#palette_colors').empty()
 
     for i in [0...palette.colors.length]
       color = palette.colors[i]
@@ -21,11 +22,16 @@ $ ->
       color_button.css('background-color', "rgb(#{r},#{g},#{b}")
       color_button.bind 'click', get_click_handler(r, g, b, a)
 
-      $('#palette_pane').append(color_button)
+      $('#palette_colors').append(color_button)
 
 
   get_click_handler = (r, g, b, a) ->
     ->
       set_color(r, g, b, a)
+
+  $('#palette_selector').change (e) ->
+    selected_palette_id = $( '#palette_selector option:selected' ).val()
+    $.getJSON "/palettes/#{selected_palette_id}", (data) ->
+      load_palette(data)
 
 

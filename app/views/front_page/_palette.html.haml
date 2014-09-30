@@ -2,5 +2,12 @@
 
   #erase_button
 
+  %select{ :id => 'palette_selector' }
+    - @palettes.each do |palette|
+      %option{ value: palette.id }
+        = palette.name
+
+  #palette_colors
+
   .templates
     .color_button
