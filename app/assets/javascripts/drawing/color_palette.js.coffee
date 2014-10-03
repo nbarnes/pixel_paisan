@@ -1,12 +1,12 @@
 $ ->
 
   set_erase = (r, g, b, a, composite) ->
-    context.globalCompositeOperation = "destination-out";
-    context.fillStyle = "rgba(255, 255, 255, 1)"
+    pp_context.globalCompositeOperation = "destination-out";
+    pp_context.fillStyle = "rgba(255, 255, 255, 1)"
 
   set_color = (r, g, b, a) ->
-    context.globalCompositeOperation = "source-over";
-    context.fillStyle = "rgba(#{r}, #{g}, #{b}, #{a})"
+    pp_context.globalCompositeOperation = "source-over";
+    pp_context.fillStyle = "rgba(#{r}, #{g}, #{b}, #{a})"
 
   $('#erase_button').click (e) ->
     set_erase()
@@ -33,5 +33,7 @@ $ ->
     selected_palette_id = $( '#palette_selector option:selected' ).val()
     $.getJSON "/palettes/#{selected_palette_id}", (data) ->
       load_palette(data)
+
+  load_palette(pp_default_palette)
 
 

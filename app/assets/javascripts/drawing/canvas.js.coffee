@@ -1,10 +1,10 @@
 $ ->
 
-  window.context = document.getElementById('canvas').getContext("2d")
+  window.pp_context = document.getElementById('painting_canvas').getContext("2d")
 
   window.mouse_loc =
-    x: (e) -> e.pageX - $('#canvas').offset().left
-    y: (e) -> e.pageY - $('#canvas').offset().top
+    x: (e) -> e.pageX - $('#painting_canvas').offset().left
+    y: (e) -> e.pageY - $('#painting_canvas').offset().top
 
   window.cells = new Array
 
@@ -18,10 +18,10 @@ $ ->
     resize_cell_matrix()
     new_size = canvas_size_in_cells() * cell_size()
     change_canvas_attrs(new_size)
-    $('#canvas').width(new_size)
-    $('#canvas').height(new_size)
-    $('#canvas_width').text($('#canvas').width())
-    $('#canvas_height').text($('#canvas').height())
+    $('#painting_canvas').width(new_size)
+    $('#painting_canvas').height(new_size)
+    $('#canvas_width').text($('#painting_canvas').width())
+    $('#canvas_height').text($('#painting_canvas').height())
 
   resize_cell_matrix = ->
     for x in [0...canvas_size_in_cells()]
@@ -32,7 +32,7 @@ $ ->
           cells[x][y] = new Cell(x, y)
 
   window.reset_drawing = ->
-    change_canvas_attrs($('#canvas').attr('width'))
+    change_canvas_attrs($('#painting_canvas').attr('width'))
 
     for x in [0...cells.length]
       for y in [0...cells.length]
@@ -41,9 +41,9 @@ $ ->
   # resizing / blanking the canvas also resets the fillStyle, so we
   # have to store it for a moment
   change_canvas_attrs = (new_size) ->
-    old_fillStyle = context.fillStyle
-    $('#canvas').attr({width: new_size, height: new_size})
-    context.fillStyle = old_fillStyle
+    old_fillStyle = pp_context.fillStyle
+    $('#painting_canvas').attr({width: new_size, height: new_size})
+    pp_context.fillStyle = old_fillStyle
 
   redraw = ->
     for x in [0...canvas_size_in_cells()]
@@ -62,6 +62,5 @@ $ ->
     resize_canvas_element()
     redraw()
 
-  context.fillStyle = "rgba(255, 0, 0, 1)"
+  pp_context.fillStyle = "rgba(255, 0, 0, 1)"
   resize_canvas_element()
-  load_palette(default_palette)

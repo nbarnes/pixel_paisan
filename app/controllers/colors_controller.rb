@@ -8,12 +8,19 @@ class ColorsController < ApplicationController
   end
 
   def create
-    @palette = Palette.find(params[:color][:palette][:id])
-    @color = Color.create!(color_params)
-    @palette_color = @palette.palette_colors.build
-    @palette_color.color_id = @color.id
-    @palette_color.save
-    render 'palettes/add_new_palette_color', color: @color
+    respond_to do |format|
+      format.html {
+        @palette = Palette.find(params[:color][:palette][:id])
+        @color = Color.create!(color_params)
+        @palette_color = @palette.palette_colors.build
+        @palette_color.color_id = @color.id
+        @palette_color.save
+        render 'palettes/add_new_palette_color', color: @color
+      }
+      format.json {
+        puts 'got a json request in ColorsController.create'
+      }
+    end
   end
 
   def destroy

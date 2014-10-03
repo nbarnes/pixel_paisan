@@ -17,7 +17,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'rails_12factor' # for Heroku
-
 gem 'simple_form', '~> 3.1.0.rc2'
 
 group :test, :development do

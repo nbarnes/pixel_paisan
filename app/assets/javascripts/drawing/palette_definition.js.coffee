@@ -1,6 +1,6 @@
 $ ->
 
-  window.default_palette =
+  window.pp_default_palette =
     name: 'default'
     colors: [
       { r:   0, g: 255, b: 255, a: 1 }

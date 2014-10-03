@@ -3,12 +3,12 @@
 %span#welcome_message
   Welcome to your Pixel Paisan!
 
-%span#canvas_size_display
+%span#painting_canvas_size_display
   Current canvas size: x
-  %span#canvas_width
+  %span#painting_canvas_width
     0
   , y
-  %span#canvas_height
+  %span#painting_canvas_height
     0
 
 %br
@@ -27,8 +27,10 @@
 
 = render 'front_page/palette'
 
-%canvas#canvas{:width => 500, :height => 500}
+%canvas#painting_canvas{:width => 500, :height => 500}
 
 %br
 
 = link_to 'Palette Editors', palettes_path
+
+= render 'front_page/color_picker'

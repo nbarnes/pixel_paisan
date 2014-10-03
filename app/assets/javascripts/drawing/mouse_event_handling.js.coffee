@@ -1,20 +1,21 @@
 $ ->
 
-  mouse_down = false
+  my_mouse_down = false
   old_mouse_location = null
 
-  $('#canvas').mousedown (e) ->
-    mouse_down = true
+  $('#painting_canvas').mousedown (e) ->
+    my_mouse_down = true
     old_mouse_location = e
     x = mouse_loc.x(e)
     y = mouse_loc.y(e)
     trigger_cell(x, y)
 
   $('body').mouseup (e) ->
-    mouse_down = false
+    my_mouse_down = false
+    return true
 
-  $('#canvas').mousemove (e) ->
-    if mouse_down
+  $('#painting_canvas').mousemove (e) ->
+    if my_mouse_down
       old_x = mouse_loc.x(old_mouse_location)
       old_y = mouse_loc.y(old_mouse_location)
       old_mouse_location = e
