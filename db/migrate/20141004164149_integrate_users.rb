@@ -5,6 +5,7 @@ class IntegrateUsers < ActiveRecord::Migration
     add_column :palettes, :is_default, :boolean
 
     add_column :users, :name, :string
+    add_column :users, :role, :string
   end
 
 end

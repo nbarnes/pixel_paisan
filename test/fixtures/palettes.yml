@@ -17,7 +17,7 @@ palette3:
 palette4:
   name: palette4
   user_id: rocket
-  is_default: nil
+  is_default: false
 
 palette5:
   name: palette5
