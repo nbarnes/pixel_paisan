@@ -18,7 +18,11 @@ class ColorsController < ApplicationController
         render 'palettes/add_new_palette_color', color: @color
       }
       format.json {
-        puts 'got a json request in ColorsController.create'
+        @palette = Palette.find(params[:palette_id])
+        @color = Color.create!(r: params[:r], g: params[:g], b: params[:b], a: params[:a])
+        @palette_color = @palette.palette_colors.build
+        @palette_color.color_id = @color.id
+        @palette_color.save
       }
     end
   end

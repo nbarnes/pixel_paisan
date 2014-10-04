@@ -1,0 +1,17 @@
+galactus:
+ name: Galactus the World Devourer
+ email: galactus@everywhere.com
+ encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+ role: admin
+
+tony:
+ name: Tony Stark
+ email: iron_man@stark.com
+ encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+ role: user
+
+rocket:
+ name: Rocket Raccoon
+ email: theguywiththegun@knowwhere.com
+ encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+ role: user

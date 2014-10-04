@@ -13,17 +13,16 @@ $ ->
 
   window.load_palette = (palette) ->
     $('#palette_colors').empty()
-
     for i in [0...palette.colors.length]
       color = palette.colors[i]
-      color_button = $('.templates .color_button').clone()
+      add_color_to_palette(color)
 
+  window.add_color_to_palette = (color) ->
+      color_button = $('.templates .color_button').clone()
       [r, g, b, a] = [color.r, color.g, color.b, color.a]
       color_button.css('background-color', "rgb(#{r},#{g},#{b}")
       color_button.bind 'click', get_click_handler(r, g, b, a)
-
       $('#palette_colors').append(color_button)
-
 
   get_click_handler = (r, g, b, a) ->
     ->

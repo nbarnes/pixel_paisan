@@ -18,6 +18,7 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor' # for Heroku
 gem 'simple_form', '~> 3.1.0.rc2'
+gem 'devise' # authentication
 
 group :test, :development do
   gem 'jasmine-rails'
