@@ -33,6 +33,4 @@ $ ->
     $.getJSON "/palettes/#{selected_palette_id}", (data) ->
       load_palette(data)
 
-  load_palette(pp_default_palette)
-
-
+  $('#palette_selector').trigger('change')

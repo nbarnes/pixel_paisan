@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :palettes
 
+  validates :name, uniqueness: true
+
 end

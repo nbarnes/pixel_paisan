@@ -1,32 +1,6 @@
 
-palette_color1:
-  palette: palette1
-  color: red
-
-palette_color7:
-  palette: palette1
-  color: blue
-
-palette_color8:
-  palette: palette1
-  color: green
-
-palette_color2:
-  palette: palette3
-  color: blue
-
-palette_color3:
-  palette: palette2
-  color: green
-
-palette_color4:
-  palette: palette4
-  color: green
-
-palette_color5:
-  palette: palette5
-  color: green
-
-palette_color6:
-  palette: palette6
-  color: green
+<% 1.upto(125) do |i| %>
+  palette_color_fixture_<%= i %>:
+    palette: palette2
+    color: color_fixture_<%= i %>
+<% end %>

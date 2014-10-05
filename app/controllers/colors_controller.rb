@@ -9,20 +9,25 @@ class ColorsController < ApplicationController
 
   def create
     respond_to do |format|
-      format.html {
+      format.js {
         @palette = Palette.find(params[:color][:palette][:id])
         @color = Color.create!(color_params)
         @palette_color = @palette.palette_colors.build
         @palette_color.color_id = @color.id
         @palette_color.save
-        render 'palettes/add_new_palette_color', color: @color
+        render 'palettes/add_new_palette_color', color: @color, palette: @palette
       }
       format.json {
         @palette = Palette.find(params[:palette_id])
-        @color = Color.create!(r: params[:r], g: params[:g], b: params[:b], a: params[:a])
-        @palette_color = @palette.palette_colors.build
-        @palette_color.color_id = @color.id
-        @palette_color.save
+        if user_signed_in? and @palette.user_id == current_user.id
+          @color = Color.create!(r: params[:r], g: params[:g], b: params[:b], a: params[:a])
+          @palette_color = @palette.palette_colors.build
+          @palette_color.color_id = @color.id
+          @palette_color.save
+          render :create
+        else
+          head :unauthorized
+        end
       }
     end
   end

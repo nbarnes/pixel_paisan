@@ -8,8 +8,9 @@ class PalettesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html  # index.html.erb
-      format.json  # show.json.rb
+      format.html
+        @palette_colors = PaletteColor.where(palette_id: @palette.id)
+      format.json
     end
   end
 

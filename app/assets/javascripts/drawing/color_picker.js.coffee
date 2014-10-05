@@ -20,7 +20,7 @@ $ ->
       dataType: 'JSON'
       error: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX posting of new color failure')
-          console.log("#{jqXHR}")
+          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
           console.log("#{errorThrown}")
       success: (data, textStatus, jqXHR) ->

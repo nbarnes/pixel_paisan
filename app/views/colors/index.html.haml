@@ -1,7 +1,9 @@
 %h1
   Colors index
 
-= render 'colors/color_bubbles', colors: @colors, palette_id: nil
+.colors_block.clearfix
+  - @colors.each do |color|
+    .color_entry{ :style => "background: rgb(#{color.r},#{color.g},#{color.b})" }
 
 %br
 

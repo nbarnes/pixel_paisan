@@ -1,19 +1,15 @@
 
-red:
-  r: 255
-  g: 0
-  b: 0
-  a: 1
-
-green:
-  r: 0
-  g: 255
-  b: 0
-  a: 1
-
-blue:
-  r: 0
-  g: 0
-  b: 255
-  a: 1
-
+<% fixture_count = 1 %>
+<% vals = [0, 64, 128, 192, 255] %>
+<% vals.each do |r_val| %>
+  <% vals.each do |g_val| %>
+    <% vals.each do |b_val| %>
+      color_fixture_<%= fixture_count %>:
+        r: <%= r_val %>
+        g: <%= g_val %>
+        b: <%= b_val %>
+        a: 1
+      <% fixture_count += 1 %>
+    <% end %>
+  <% end %>
+<% end %>

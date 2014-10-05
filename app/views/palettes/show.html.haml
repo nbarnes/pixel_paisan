@@ -4,7 +4,12 @@
 %h1
   = @palette.name
 
-= render 'colors/color_bubbles', colors: @palette.colors, palette_id: @palette.id
+.color_bubbles.clearfix
+  - if @palette.colors
+    - @palette.colors.each do |color|
+      .color_and_delete_link_holder
+        = render 'colors/color', color: color
+        = render 'palettes/delete_palette_color_link', palette_color: @palette_color
 
 %br
 
