@@ -11,10 +11,12 @@
 #color_form
 %br
 
-= link_to 'Add New Color', new_color_palette_path, remote: true, :id => 'new_color_link'
-:preserve
-   *
+- if user_signed_in? and current_user.id == @palette.user_id
+  = link_to 'Add New Color', new_color_palette_path, remote: true, :id => 'new_color_link'
+  :preserve
+     *
 = link_to 'Back to Index', palettes_path
-:preserve
-   *
-= link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }
+- if user_signed_in? and current_user.id == @palette.user_id
+  :preserve
+     *
+  = link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }

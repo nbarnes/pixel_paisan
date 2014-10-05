@@ -1,25 +1,25 @@
 
 palette1:
-  name: palette1
-  user_id: galactus
+  name: galactus' palette
   is_default: false
+  user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
 
 palette2:
-  name: palette2
-  user_id: galactus
+  name: default
   is_default: true
+  user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
 
 palette3:
-  name: palette3
-  user_id: tony
+  name: tony's palette
   is_default: false
+  user_id: <%= ActiveRecord::FixtureSet.identify(:tony) %>
 
 palette4:
-  name: palette4
-  user_id: rocket
+  name: rocket's first palette
   is_default: false
+  user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>
 
 palette5:
-  name: palette5
-  user_id: rocket
+  name: rocket's second palette
   is_default: false
+  user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>
