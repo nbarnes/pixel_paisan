@@ -4,12 +4,18 @@
 <% vals.each do |r_val| %>
   <% vals.each do |g_val| %>
     <% vals.each do |b_val| %>
-      color_fixture_<%= fixture_count %>:
-        r: <%= r_val %>
-        g: <%= g_val %>
-        b: <%= b_val %>
-        a: 1
+color_fixture_<%= fixture_count %>:
+  r: <%= r_val %>
+  g: <%= g_val %>
+  b: <%= b_val %>
+  a: 1
       <% fixture_count += 1 %>
     <% end %>
   <% end %>
 <% end %>
+
+color_fixture1:
+  r: 145
+  g: 97
+  b: 11
+  a: 1

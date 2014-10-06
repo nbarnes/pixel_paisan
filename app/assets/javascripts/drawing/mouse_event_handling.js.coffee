@@ -15,13 +15,21 @@ $ ->
     return true
 
   $('#painting_canvas').mousemove (e) ->
-    if my_mouse_down
+    if old_mouse_location != null
+
       old_x = mouse_loc.x(old_mouse_location)
       old_y = mouse_loc.y(old_mouse_location)
+
       old_mouse_location = e
+
       new_x = mouse_loc.x(e)
       new_y = mouse_loc.y(e)
-      brensenham_line_algorithm(old_x, old_y, new_x, new_y)
+
+      if my_mouse_down
+        brensenham_line_algorithm(old_x, old_y, new_x, new_y)
+      else
+        redraw_cell(old_x, old_y)
+        draw_cursor(new_x, new_y)
 
   brensenham_line_algorithm = (start_x, start_y, end_x, end_y) ->
 
