@@ -15,13 +15,12 @@ $ ->
     if target_cell != null
       target_cell.redraw()
 
-  get_cell = (canvas_x, canvas_y, func) ->
+  get_cell = (canvas_x, canvas_y) ->
     cell_x = x_to_cell_x(canvas_x)
     cell_y = y_to_cell_y(canvas_y)
-    if ((cell_x <= cells.length) && (cell_y <= cells[0].length))
+    if ((cell_x < cells.length) && (cell_y < cells[0].length))
       return cells[cell_x][cell_y]
     else
-      console.log('susan')
       return null
 
   x_to_cell_x = (canvas_x) ->
