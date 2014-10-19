@@ -1,3 +1,4 @@
+//= require ./undo
 //= require ./cells
 //= require ./canvas
 //= require ./palette_definition

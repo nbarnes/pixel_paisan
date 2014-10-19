@@ -2,16 +2,33 @@ $ ->
 
   my_mouse_down = false
   old_mouse_location = null
+  undo_block = []
 
   $('#painting_canvas').mousedown (e) ->
     my_mouse_down = true
     old_mouse_location = e
     x = mouse_loc.x(e)
     y = mouse_loc.y(e)
-    trigger_cell(x, y)
+    undo_action = trigger_cell(x, y)
+    if undo_action != null
+      undo_block.push( undo_action )
 
   $('body').mouseup (e) ->
+    mouseup_or_mouseleave()
+
+  $('#painting_canvas').mouseleave (e) ->
+    mouseup_or_mouseleave()
+    # remove cursor from canvas if the mouse leaves
+    if old_mouse_location != null
+      old_x = mouse_loc.x(old_mouse_location)
+      old_y = mouse_loc.y(old_mouse_location)
+      redraw_cell(old_x, old_y)
+
+  mouseup_or_mouseleave = () ->
     my_mouse_down = false
+    if undo_block.length != 0
+      undo_stack.push( undo_block )
+    undo_block = []
     return true
 
   $('#painting_canvas').mousemove (e) ->
@@ -61,7 +78,9 @@ $ ->
         fraction += delta_y
         current_x += slope_x
 
-        trigger_cell(current_x, current_y)
+        undo_action = trigger_cell(current_x, current_y)
+        if undo_action != null
+          undo_block.push( undo_action )
 
     else
       fraction = delta_x - (delta_y>>1)
@@ -72,4 +91,6 @@ $ ->
         fraction += delta_x
         current_y += slope_y
 
-        trigger_cell(current_x, current_y)
+        undo_action = trigger_cell(current_x, current_y)
+        if undo_action != null
+          undo_block.push( undo_action )
