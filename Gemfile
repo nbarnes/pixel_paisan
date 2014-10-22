@@ -12,6 +12,9 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+
+gem 'chunky_png'
+
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
@@ -22,6 +25,7 @@ gem 'devise' # authentication
 
 group :test, :development do
   gem 'jasmine-rails'
+  gem 'jasmine-jquery-rails'
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'

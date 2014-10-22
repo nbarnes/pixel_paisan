@@ -4,16 +4,22 @@ $ ->
     target_cell = get_cell(canvas_x, canvas_y)
     if target_cell != null
       target_cell.trigger()
+    else
+      return null
 
   window.draw_cursor = (canvas_x, canvas_y) ->
     target_cell = get_cell(canvas_x, canvas_y)
     if target_cell != null
       target_cell.draw_cursor()
+    else
+      return null
 
   window.redraw_cell = (canvas_x, canvas_y) ->
     target_cell = get_cell(canvas_x, canvas_y)
     if target_cell != null
       target_cell.redraw()
+    else
+      return null
 
   get_cell = (canvas_x, canvas_y) ->
     cell_x = x_to_cell_x(canvas_x)

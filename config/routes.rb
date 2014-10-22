@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :images
+
   devise_for :users
+
   resources :colors, only: [:create, :index, :destroy]
 
   resources :palettes do

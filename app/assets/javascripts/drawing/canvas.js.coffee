@@ -32,19 +32,17 @@ $ ->
           cells[x][y] = new Cell(x, y)
 
   window.reset_drawing = ->
-    console.log('resetting drawing')
-
     for x in [0...cells.length]
       for y in [0...cells.length]
         cells[x][y].clear()
     change_canvas_attrs($('#painting_canvas').attr('width'))
 
   # resizing / blanking the canvas also resets the fillStyle, so we
-  # have to store it for a moment
+  # have to store the color for a moment and then reset it
   change_canvas_attrs = (new_size) ->
-    old_fillStyle = pp_context.fillStyle
+    old_color = get_drawing_color()
     $('#painting_canvas').attr({width: new_size, height: new_size})
-    pp_context.fillStyle = old_fillStyle
+    set_drawing_color = old_color
 
   redraw = ->
     for x in [0...canvas_size_in_cells()]
@@ -63,5 +61,9 @@ $ ->
     resize_canvas_element()
     redraw()
 
-  pp_context.fillStyle = "rgba(255, 0, 0, 1)"
+  $('#canvas_size_in_cells_field').val('15')
+  $('#cell_size_field').val('15')
   resize_canvas_element()
+  $('#palette_selector').trigger('change')
+  $("#painting_canvas").focus()
+  set_drawing_color({r: 255, g: 0, b: 0, a: 1})
