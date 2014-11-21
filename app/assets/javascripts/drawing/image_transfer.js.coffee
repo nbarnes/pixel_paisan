@@ -2,9 +2,9 @@ $ ->
 
   $('#upload_button').click () ->
     payload = canvas_to_json()
-    # file_name = prompt("Please enter a name for the image")
-    payload.file_name = 'the_image.png'
-    if payload.file_name != null
+    # image_name = prompt("Please enter a name for the image")
+    payload.image_name = 'the_image.png'
+    if payload.image_name != null
       post_image(payload)
     console.log "canvas_to_json called"
 
@@ -37,8 +37,9 @@ $ ->
   post_image = (payload) ->
     $.ajax "/images",
       type: 'POST'
-      data: payload
-      dataType: 'HTML'
+      data: JSON.stringify(payload)
+      dataType: 'json'
+      contentType: 'application/json'
       error: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX posting of new image failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")

@@ -23,7 +23,8 @@
 
 %input{:type => 'button', :value => 'Clear', :id => 'canvas_clear_button'}
 %input{:type => 'button', :value => 'Undo', :id => 'undo_button'}
-%input{:type => 'button', :value => 'Upload', :id => 'upload_button'}
+- if user_signed_in?
+  %input{:type => 'button', :value => 'Upload', :id => 'upload_button'}
 
 %br
 

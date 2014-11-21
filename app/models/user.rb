@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :palettes
+  has_many :images
+  has_many :galleries
 
   validates :name, uniqueness: true
 

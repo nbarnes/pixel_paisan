@@ -1,12 +1,11 @@
-# Read about fixtures at
-# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+image01:
+  user_id: galactus
+  gallery_id: gallery01
+  image_name: the_image.png
+  png_data: \x89PNG\r\n\u001A\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0004\u0002\u0003\u0000\u0000\u0000ԟv\xED\u0000\u0000\u0000\tPLTE@\xC0\x80\xFF\u0000\u0000\xFF\xFF\xFFK;\xCA\xDC\u0000\u0000\u0000\u0003tRNS\xFF\xFF\u0000\xD7\xCA\rA\u0000\u0000\u0000\u0010IDATx\x9Cc\xCA`RbR`\xDA\a\u0000\u0004\xD0\u0001qA\xC9\u0013\x98\u0000\u0000\u0000\u0000IEND\xAEB`\x82
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+image02:
+  user_id: galactus
+  gallery_id: gallery01
+  image_name: the_image.png
+  png_data: \x89PNG\r\n\u001A\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0004\u0002\u0003\u0000\u0000\u0000ԟv\xED\u0000\u0000\u0000\fPLTE\u0000\xFF\xC0\x80\u0000\u0000\xFF\u0000\u0000\xFF\xFF\xFF\xD5B'\f\u0000\u0000\u0000\u0004tRNS\xFF\xFF\xFF\u0000@*\xA9\xF4\u0000\u0000\u0000\u0010IDATx\x9Cc\xDA\xC3$\xCD\xC4\xC0\xF4\f\u0000\u0006\xC1\u0001ư\rS\x9F\u0000\u0000\u0000\u0000IEND\xAEB`\x82
