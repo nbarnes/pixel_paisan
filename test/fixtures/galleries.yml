@@ -1,2 +1,2 @@
 gallery01:
-  user_id: galactus
+  user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>

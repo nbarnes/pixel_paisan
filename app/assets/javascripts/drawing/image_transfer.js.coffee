@@ -3,7 +3,7 @@ $ ->
   $('#upload_button').click () ->
     payload = canvas_to_json()
     # image_name = prompt("Please enter a name for the image")
-    payload.image_name = 'the_image.png'
+    payload.name = 'the_image.png'
     if payload.image_name != null
       post_image(payload)
     console.log "canvas_to_json called"

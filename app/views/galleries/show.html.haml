@@ -1,0 +1,6 @@
+
+%b
+  This is a single gallery, displaying a collection of images
+%br
+- @gallery.images.each do |image|
+  = render 'gallery_thumbnail', image: image

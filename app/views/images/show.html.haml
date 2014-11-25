@@ -1,1 +1,5 @@
-image show
+.image_holder
+  = image_tag ChunkyPNG::Image.from_blob(@image.png_display_blob).to_data_url, class: 'image_display'
+  %br
+  .image_name
+    = @image.name

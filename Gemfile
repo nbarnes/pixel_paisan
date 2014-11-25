@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
+gem 'rmagick'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 

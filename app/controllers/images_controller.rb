@@ -13,13 +13,17 @@ class ImagesController < ApplicationController
     respond_to do |format|
       format.json do
         if user_signed_in?
-          png = build_png(params[:image_data])
           image = Image.new()
-          image.png_data = png.to_blob
+          png = build_png(params[:image_data])
+          png.save(params[:name])
+          image.png_blob = png.to_blob
+          image.png_thumbnail_blob = get_resized_blob(png, 200)
+          image.png_display_blob = get_resized_blob(png, 600)
           image.user_id = current_user.id
-          image.image_name = params[:image_name]
+          image.name = params[:name]
+          image.gallery = current_user.galleries[0]
           image.save!
-          binding.pry
+
           render json: {
             message: "Image post success",
             status: 200

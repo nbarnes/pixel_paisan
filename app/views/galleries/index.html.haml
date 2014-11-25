@@ -1,0 +1,7 @@
+%b
+  This is an index showing all of the galleries
+
+- @galleries.each do |gallery|
+  This is a gallery.
+  = link_to gallery.id, gallery_path(gallery)
+  %br

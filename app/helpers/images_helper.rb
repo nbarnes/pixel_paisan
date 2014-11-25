@@ -1,5 +1,8 @@
 module ImagesHelper
   require 'chunky_png'
+  require 'rmagick'
+  require 'chunky_png/rmagick'
+
 
   def build_png(rgba)
     png_dimension = rgba.size
@@ -20,6 +23,11 @@ module ImagesHelper
 
   def alpha_as_255(a)
     return a*255
+  end
+
+  def get_resized_blob(canvas, dimension)
+    resized_image = ChunkyPNG::RMagick.export(canvas).scale(dimension, dimension)
+    return ChunkyPNG::RMagick.import(resized_image).to_blob({:compression => Zlib::NO_COMPRESSION})
   end
 
 end

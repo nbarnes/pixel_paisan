@@ -1,0 +1,4 @@
+.image_holder
+  = image_tag ChunkyPNG::Image.from_blob(image.png_thumbnail_blob).to_data_url, class: "image_display"
+  %br
+  = link_to image.name, image_path(image)

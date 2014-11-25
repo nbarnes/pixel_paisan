@@ -62,7 +62,7 @@ $ ->
     redraw()
 
   $('#canvas_size_in_cells_field').val('4')
-  $('#cell_size_field').val('15')
+  $('#cell_size_field').val('25')
   resize_canvas_element()
   $('#palette_selector').trigger('change')
   $("#painting_canvas").focus()

@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(version: 20141024020950) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "gallery_id"
-    t.binary   "png_data"
-    t.string   "image_name"
+    t.binary   "png_blob"
+    t.binary   "png_thumbnail_blob"
+    t.binary   "png_display_blob"
+    t.string   "name"
   end
 
   create_table "palette_colors", force: true do |t|

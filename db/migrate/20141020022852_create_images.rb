@@ -5,8 +5,10 @@ class CreateImages < ActiveRecord::Migration
 
       t.integer :user_id
       t.integer :gallery_id
-      t.binary :png_data
-      t.string :image_name
+      t.binary :png_blob
+      t.binary :png_thumbnail_blob
+      t.binary :png_display_blob
+      t.string :name
     end
   end
 end
