@@ -25,8 +25,8 @@ class Snapshot < ActiveRecord::Base
     FileUtils.mkdir_p(storage_dir) unless File.directory?(storage_dir)
 
     original_png = build_png(pixels)
-    thumbnail_png = get_resized_png(original_png, 200)
-    display_png = get_resized_png(original_png, 600)
+    thumbnail_png = get_resized_png(original_png, 128)
+    display_png = get_resized_png(original_png, 512)
 
     original_png.save(storage_dir + "/original.png")
     thumbnail_png.save(storage_dir + "/thumbnail.png")
