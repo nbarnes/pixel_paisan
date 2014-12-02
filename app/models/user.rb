@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :palettes
-  has_many :images
-  has_many :galleries
+  has_many :palettes, dependent: :destroy
+  has_many :images, dependent: :destroy
+  has_many :galleries, dependent: :destroy
 
   validates :name, uniqueness: true
 

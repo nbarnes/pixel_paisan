@@ -1,0 +1,5 @@
+.picture_holder
+  = image_tag @picture.current_version.display_png.to_data_url, class: 'picture_display'
+  %br
+  .picture_name
+    = @picture.name

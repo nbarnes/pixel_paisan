@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :user, :path => "accounts"
 
   resources :users
-  resources :images, only: [:create, :show, :destroy]
+  resources :pictures, only: [:show, :destroy]
+  resources :snapshots, only: [:create, :show, :destroy]
   resources :galleries, only: [:show, :index]
   resources :colors, only: [:create, :index, :destroy]
   resources :palette_colors, only: [:create, :destroy]

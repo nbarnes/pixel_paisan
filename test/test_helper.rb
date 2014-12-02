@@ -8,7 +8,7 @@ require "minitest/rails/capybara"
 class ActiveSupport::TestCase
   fixtures :all
 
-  def login_galactus
+  def login_admin
     visit root_path
     click_on 'Login'
     fill_in 'Email', with: users(:galactus).email
@@ -16,7 +16,7 @@ class ActiveSupport::TestCase
     click_on 'Log in'
   end
 
-  def login_tony
+  def login_user
     visit root_path
     click_on 'Login'
     fill_in 'Email', with: users(:tony).email

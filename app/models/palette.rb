@@ -7,6 +7,6 @@ class Palette < ActiveRecord::Base
 
   accepts_nested_attributes_for :colors, :allow_destroy => :false
 
-  validates :name, presence: true
+  validates :name, :user, presence: true
 
 end

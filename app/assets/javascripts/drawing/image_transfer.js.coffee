@@ -3,10 +3,13 @@ $ ->
   $('#upload_button').click () ->
     payload = canvas_to_json()
     # image_name = prompt("Please enter a name for the image")
-    payload.name = 'the_image.png'
+    entered_picture_name = $('#picture_name_field').val()
+    if entered_picture_name == '<enter picture name>'
+      payload.name = ""
+    else payload.name = entered_picture_name
     if payload.image_name != null
       post_image(payload)
-    console.log "canvas_to_json called"
+    # console.log "canvas_to_json called"
 
   canvas_to_json = () ->
     image = {}
@@ -35,7 +38,7 @@ $ ->
   # sending JSON, we are expecting an HTML response (either 200
   # ok or 500 internal_server_error otherwise empty headers)
   post_image = (payload) ->
-    $.ajax "/images",
+    $.ajax "/snapshots",
       type: 'POST'
       data: JSON.stringify(payload)
       dataType: 'json'
