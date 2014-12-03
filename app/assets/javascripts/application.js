@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require spectrum
+//= require jquery-readyselector
 //= require drawing
 //= require_tree .

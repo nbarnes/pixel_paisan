@@ -1,0 +1,41 @@
+#top
+
+%span#painting_canvas_size_display
+  Current canvas size: x
+  %span#painting_canvas_width
+    0
+  , y
+  %span#painting_canvas_height
+    0
+
+%br
+
+%span
+  Canvas Size
+  %input{:type => 'text', :value => '20', :id => 'canvas_size_in_cells_field'}
+
+%span
+  Cell Size
+  %input{:type => 'text', :value => '20', :id => 'cell_size_field'}
+
+%input{:type => 'button', :value => 'Clear', :id => 'canvas_clear_button'}
+%input{:type => 'button', :value => 'Undo', :id => 'undo_button'}
+- if user_signed_in?
+  %input{:type => 'button', :value => 'Upload', :id => 'upload_button'}
+
+%br
+
+Picture Name:
+%input{:type => 'text', :value => 'image', :id => 'picture_name_field'}
+
+%br
+
+= render 'front_page/palette'
+
+%canvas#painting_canvas{:width => 500, :height => 500}
+
+%br
+
+= link_to 'Palette Editors', palettes_path
+
+= render 'front_page/color_picker'
