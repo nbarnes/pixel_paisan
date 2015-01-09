@@ -2,9 +2,6 @@
 $ ->
   $('.front_page.welcome').ready ->
 
-    # window.pp_context = null
-    # window.mouse_loc = null
-    # window.cells = null
     window.pp_context = document.getElementById('painting_canvas').getContext("2d")
 
     window.mouse_loc =
@@ -64,12 +61,6 @@ $ ->
         canvas_size_input_element.val(50)
       resize_canvas_element()
       redraw()
-
-    # pp_context = document.getElementById('painting_canvas').getContext("2d")
-    # mouse_loc =
-    #   x: (e) -> e.pageX - $('#painting_canvas').offset().left
-    #   y: (e) -> e.pageY - $('#painting_canvas').offset().top
-    # cells = new Array
 
     $('#canvas_size_in_cells_field').val('4')
     $('#cell_size_field').val('25')

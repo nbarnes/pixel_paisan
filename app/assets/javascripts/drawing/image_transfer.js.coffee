@@ -24,15 +24,15 @@ $ ->
 
       return image
 
-    canvas_to_rgba_string = () ->
-      string = ""
+    # canvas_to_rgba_string = () ->
+    #   string = ""
 
-      for x in [0...canvas_size_in_cells()]
-        for y in [0...canvas_size_in_cells()]
-          c = cells[x][y].my_color
-          string = string + "#{c.r}#{c.g}#{c.b}#{c.a}"
+    #   for x in [0...canvas_size_in_cells()]
+    #     for y in [0...canvas_size_in_cells()]
+    #       c = cells[x][y].my_color
+    #       string = string + "#{c.r}#{c.g}#{c.b}#{c.a}"
 
-      return string
+    #   return string
 
     # 'dataType' is NOT flagging the data being sent, but rather
     # flagging the expected data form response.  So, though we are

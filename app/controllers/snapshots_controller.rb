@@ -3,7 +3,6 @@ class SnapshotsController < ApplicationController
 
   before_action :set_snapshot, only: [:destroy]
 
-
   def create
     respond_to do |format|
       format.json do
@@ -24,7 +23,7 @@ class SnapshotsController < ApplicationController
           picture_for_snapshot.current_version = snapshot
 
           render json: {
-            message: "Image post success",
+            message: "Snapshot post success",
             status: 200
           }, status: 200
         else
@@ -34,8 +33,11 @@ class SnapshotsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   def destroy
-    @image.destroy
   end
 
   private

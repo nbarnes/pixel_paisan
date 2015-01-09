@@ -1,23 +1,6 @@
-.picture_holder
+.display_entry
   = image_tag @picture.current_version.display_png.to_data_url, class: 'picture_display'
   %br
   .picture_name
     = @picture.name
 %br
-#slick_carousel_holder
-  %div
-    This is slide 1
-  %div
-    This is slide 2
-  %div
-    This is slide 3
-  %div
-    This is slide 4
-  %div
-    This is slide 5
-  %div
-    This is slide 6
-  %div
-    This is slide 7
-  %div
-    This is slide 8
