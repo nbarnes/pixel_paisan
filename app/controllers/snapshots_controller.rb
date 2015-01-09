@@ -10,6 +10,8 @@ class SnapshotsController < ApplicationController
           snapshot = Snapshot.new()
 
           picture_for_snapshot = Picture.where(name: params[:name])[0]
+
+
           if !picture_for_snapshot
             picture_for_snapshot = Picture.new
             picture_for_snapshot.name = params[:name]
@@ -17,10 +19,14 @@ class SnapshotsController < ApplicationController
             picture_for_snapshot.gallery = current_user.galleries[0]
             picture_for_snapshot.save!
           end
+
           snapshot.picture = picture_for_snapshot
           snapshot.save!
+
           snapshot.save_pngs(params[:image_data])
+          picture_for_snapshot.snapshots << snapshot
           picture_for_snapshot.current_version = snapshot
+          picture_for_snapshot.save!
 
           render json: {
             message: "Snapshot post success",
@@ -45,7 +51,7 @@ class SnapshotsController < ApplicationController
       @snapshot = Snapshot.find(params[:id])
     end
 
-    def image_params
+    def snapshot_params
       params[:snapshot].permit(:png_data)
     end
 end

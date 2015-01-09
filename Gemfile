@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.8'
 
 gem 'pg'
 
@@ -21,7 +21,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'rails_12factor' # for Heroku
-gem 'simple_form', '~> 3.1.0.rc2'
+gem 'simple_form'
 gem 'devise' # authentication
 
 group :test, :development do

@@ -7,9 +7,9 @@ $ ->
       entered_picture_name = $('#picture_name_field').val()
       if entered_picture_name == '<enter picture name>'
         payload.name = ""
-      else payload.name = entered_picture_name
-      if payload.image_name != null
-        post_image(payload)
+      else
+        payload.name = entered_picture_name
+      post_image(payload)
       # console.log "canvas_to_json called"
 
     canvas_to_json = () ->
