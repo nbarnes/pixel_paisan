@@ -3,14 +3,13 @@ $ ->
 
     $('#upload_button').click () ->
       payload = canvas_to_json()
-      # image_name = prompt("Please enter a name for the image")
       entered_picture_name = $('#picture_name_field').val()
       if entered_picture_name == '<enter picture name>'
         payload.name = ""
       else
         payload.name = entered_picture_name
+      payload.picture_id = picture_id
       post_image(payload)
-      # console.log "canvas_to_json called"
 
     canvas_to_json = () ->
       image = {}
@@ -23,16 +22,6 @@ $ ->
           image.image_data[x].push(cell.my_color)
 
       return image
-
-    # canvas_to_rgba_string = () ->
-    #   string = ""
-
-    #   for x in [0...canvas_size_in_cells()]
-    #     for y in [0...canvas_size_in_cells()]
-    #       c = cells[x][y].my_color
-    #       string = string + "#{c.r}#{c.g}#{c.b}#{c.a}"
-
-    #   return string
 
     # 'dataType' is NOT flagging the data being sent, but rather
     # flagging the expected data form response.  So, though we are
@@ -52,3 +41,4 @@ $ ->
         success: (data, textStatus, jqXHR) ->
             console.log('AJAX posting of new image success')
             console.log("Data = #{JSON.stringify(data, undefined, 2)}")
+            window.picture_id = data.picture_id

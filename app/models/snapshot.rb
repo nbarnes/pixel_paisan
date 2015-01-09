@@ -1,7 +1,6 @@
 class Snapshot < ActiveRecord::Base
   include SnapshotsHelper
 
-
   belongs_to :picture, inverse_of: :snapshots
 
   validates :picture, presence: true
@@ -22,7 +21,7 @@ class Snapshot < ActiveRecord::Base
     dir = "#{Rails.root}/user_images/user_#{picture.user.id}/snapshot_#{id}"
   end
 
-  def save_pngs(pixels)
+  def save_pngs!(pixels)
     FileUtils.mkdir_p(storage_dir) unless File.directory?(storage_dir)
 
     original_png = build_png(pixels)

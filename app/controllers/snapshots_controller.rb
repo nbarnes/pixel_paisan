@@ -8,10 +8,10 @@ class SnapshotsController < ApplicationController
       format.json do
         if user_signed_in?
           snapshot = Snapshot.new()
-
-          picture_for_snapshot = Picture.where(name: params[:name])[0]
-
-          if !picture_for_snapshot
+          binding.pry
+          if params[:picture_id]
+            picture_for_snapshot = Picture.where(id: params[:picture_id])[0]
+          else
             picture_for_snapshot = Picture.new
             picture_for_snapshot.name = params[:name]
             picture_for_snapshot.user_id = current_user.id
@@ -20,13 +20,15 @@ class SnapshotsController < ApplicationController
           end
 
           snapshot.picture = picture_for_snapshot
-          snapshot.save_pngs(params[:image_data])
+          # Have to save the snapshot to the database before you save the
+          # PNGs or the Snapshot doesn't have an ID to save the PNGs under
           snapshot.save!
-
-
+          snapshot.save_pngs!(params[:image_data])
+          binding.pry
           render json: {
             message: "Snapshot post success",
-            status: 200
+            status: 200,
+            picture_id: picture_for_snapshot.id
           }, status: 200
         else
           head :unauthorized

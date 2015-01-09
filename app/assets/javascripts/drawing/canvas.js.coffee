@@ -1,7 +1,7 @@
 
 $ ->
   $('.front_page.welcome').ready ->
-
+    window.picture_id = undefined
     window.pp_context = document.getElementById('painting_canvas').getContext("2d")
 
     window.mouse_loc =
