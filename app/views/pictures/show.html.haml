@@ -6,6 +6,6 @@
   .picture_name
     = @picture.name
 
-  - @picture.snapshots.each do |snapshot|
+  - @picture.snapshots.reverse.each do |snapshot|
     = render 'snapshot_thumbnail', snapshot: snapshot
 %br

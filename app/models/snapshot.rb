@@ -3,7 +3,6 @@ class Snapshot < ActiveRecord::Base
 
 
   belongs_to :picture, inverse_of: :snapshots
-  belongs_to :picture, inverse_of: :current_version
 
   validates :picture, presence: true
 

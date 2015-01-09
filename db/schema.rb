@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.integer  "user_id"
     t.integer  "gallery_id"
     t.string   "name"
-    t.integer  "current_version_id"
   end
 
   create_table "snapshots", force: true do |t|

@@ -6,7 +6,6 @@ class CreatePictures < ActiveRecord::Migration
       t.integer :user_id
       t.integer :gallery_id
       t.string :name
-      t.integer :current_version_id
 
     end
   end
