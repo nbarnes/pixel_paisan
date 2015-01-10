@@ -8,7 +8,6 @@ class SnapshotsController < ApplicationController
       format.json do
         if user_signed_in?
           snapshot = Snapshot.new()
-          binding.pry
           if params[:picture_id]
             picture_for_snapshot = Picture.where(id: params[:picture_id])[0]
           else
@@ -20,11 +19,12 @@ class SnapshotsController < ApplicationController
           end
 
           snapshot.picture = picture_for_snapshot
+          snapshot.cell_size = params[:cell_size]
           # Have to save the snapshot to the database before you save the
           # PNGs or the Snapshot doesn't have an ID to save the PNGs under
           snapshot.save!
           snapshot.save_pngs!(params[:image_data])
-          binding.pry
+
           render json: {
             message: "Snapshot post success",
             status: 200,

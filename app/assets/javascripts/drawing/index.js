@@ -7,5 +7,5 @@
 //= require ./test_data_palette
 //= require ./drawing
 //= require ./mouse_event_handling
-//= require ./reset_button
+//= require ./buttons
 //= require ./color_picker

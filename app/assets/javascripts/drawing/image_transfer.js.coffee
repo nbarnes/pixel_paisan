@@ -9,6 +9,7 @@ $ ->
       else
         payload.name = entered_picture_name
       payload.picture_id = picture_id
+      payload.cell_size = $('#cell_size_field').val()
       post_image(payload)
 
     canvas_to_json = () ->

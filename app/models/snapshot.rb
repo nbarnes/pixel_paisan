@@ -4,6 +4,7 @@ class Snapshot < ActiveRecord::Base
   belongs_to :picture, inverse_of: :snapshots
 
   validates :picture, presence: true
+  validates :cell_size, numericality: { less_than_or_equal_to: 50 }
 
   def original_png
     return File.open(storage_dir + '/original.png', 'rb') { |io| image = ChunkyPNG::Image.from_io(io) }
