@@ -18,8 +18,6 @@ gem "rmagick", :require => 'RMagick'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-gem 'spring',        group: :development
-
 gem 'rails_12factor' # for Heroku
 gem 'simple_form'
 gem 'devise' # authentication
@@ -30,6 +28,11 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
+end
+
+group :development do
+  gem 'spring'
+  gem 'brakeman', :require => false
 end
 
 # Use unicorn as the app server
