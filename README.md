@@ -1,7 +1,9 @@
+[![Build Status](https://travis-ci.org/nbarnes/pixel_paisan.svg?branch=master)](https://travis-ci.org/nbarnes/pixel_paisan)
+
 Pixel Paisan
 ============
 
-Pixel Paisan is (will be) a combination of a pixel art painting tool and social image sharing site. The goal is to provide the functionality of a pixel-art focused paint tool, similar to many other paint programs, with the ability to easily save and share one's creations with a larger audience.
+Pixel Paisan is a combination of a pixel art painting tool and social image sharing site. The goal is to provide the functionality of a pixel-art focused paint tool, similar to many other paint programs, with the ability to easily save and share one's creations with a larger audience.
 
 TECHNOLOGY
 ==========
