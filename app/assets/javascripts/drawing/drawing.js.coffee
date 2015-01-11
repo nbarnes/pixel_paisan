@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     window.trigger_cell = (canvas_x, canvas_y) ->
       target_cell = get_cell(canvas_x, canvas_y)

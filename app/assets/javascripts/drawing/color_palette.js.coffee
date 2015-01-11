@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     set_erase = (r, g, b, a, composite) ->
       set_drawing_color( {r: 255, g: 255, b: 255, a: 0} )

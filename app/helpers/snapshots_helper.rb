@@ -26,6 +26,15 @@ module SnapshotsHelper
     return a*255
   end
 
+  def alpha_as_0_1(a255)
+    return a255 / 255.0
+  end
+
+  def extract_ChunkyPNG_color(color)
+    alpha = alpha_as_0_1(ChunkyPNG::Color.a(color))
+    return {r: ChunkyPNG::Color.r(color), g: ChunkyPNG::Color.g(color), b: ChunkyPNG::Color.b(color), a: alpha}
+  end
+
   def get_resized_png(canvas, dimension)
     resized_image = ChunkyPNG::RMagick.export(canvas).scale(dimension, dimension)
     return ChunkyPNG::RMagick.import(resized_image)

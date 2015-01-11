@@ -1,7 +1,7 @@
 class SnapshotsController < ApplicationController
   include SnapshotsHelper
 
-  before_action :set_snapshot, only: [:destroy]
+  before_action :set_snapshot, only: [:edit, :destroy]
 
   def create
     respond_to do |format|
@@ -37,11 +37,15 @@ class SnapshotsController < ApplicationController
     end
   end
 
-  def edit
-
+  def destroy
   end
 
-  def destroy
+  def show
+    respond_to do |format|
+      format.json do
+
+      end
+    end
   end
 
   private

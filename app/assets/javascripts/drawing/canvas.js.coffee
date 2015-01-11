@@ -1,6 +1,6 @@
-
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
+
     window.picture_id = undefined
     window.pp_context = document.getElementById('painting_canvas').getContext("2d")
 
@@ -15,7 +15,7 @@ $ ->
     window.cell_size = () ->
       $('#cell_size_field').val()
 
-    resize_canvas_element = ->
+    window.resize_canvas_element = ->
       resize_cell_matrix()
       new_size = canvas_size_in_cells() * cell_size()
       change_canvas_attrs(new_size)
@@ -62,7 +62,7 @@ $ ->
       resize_canvas_element()
       redraw()
 
-    $('#canvas_size_in_cells_field').val('4')
+    $('#canvas_size_in_cells_field').val('6')
     $('#cell_size_field').val('25')
     resize_canvas_element()
     $('#palette_selector').trigger('change')

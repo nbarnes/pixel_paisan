@@ -4,6 +4,8 @@
   %br
   .picture_name
     = @picture.name
+    %br
+    = link_to 'Edit In Painter', edit_picture_path(@picture)
 
   - @picture.snapshots.reverse.each do |snapshot|
     = render 'snapshot_thumbnail', snapshot: snapshot

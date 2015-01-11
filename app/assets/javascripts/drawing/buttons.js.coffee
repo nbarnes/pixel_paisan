@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     $('#canvas_clear_button').click (e) ->
       reset_drawing()

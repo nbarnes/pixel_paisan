@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     window.pp_default_palette =
       name: 'default'

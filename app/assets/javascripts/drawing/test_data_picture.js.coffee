@@ -1,10 +1,10 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
-    window.test_data_picutre =
+    test_data_picture =
       name: 'test_picture_01'
       picture_id: 42
-      cell_size: 13
+      cell_size: 50
       image: [ [
         { r:   0, g: 255, b: 255, a: 1 }
         { r: 255, g: 255, b: 255, a: 1 }
@@ -26,3 +26,6 @@ $ ->
         { r:   0, g: 128, b: 128, a: 1 }
         { r: 255, g: 255, b: 255, a: 1 }
       ] ]
+
+    $('#load_test_image_button').click (e) ->
+      import_snapshot(test_data_picture)

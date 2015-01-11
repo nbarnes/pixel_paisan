@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     class window.Cell
       constructor: (@x, @y) ->
@@ -8,7 +8,7 @@ $ ->
       trigger: ->
         old_color = @my_color
         @my_color = get_drawing_color()
-        fill_rect(@x, @y)
+        this.fill_rect()
         if colors_equal(old_color, @my_color)
           return null
         else
@@ -17,27 +17,32 @@ $ ->
       redraw: ->
         old_color = get_drawing_color()
         set_drawing_color(@my_color)
-        fill_rect(@x, @y)
+        this.fill_rect()
         set_drawing_color(old_color)
 
       clear: () ->
         @my_color = {r: 255, g: 255, b: 255, a: 0}
 
       draw_cursor: ->
-        fill_rect(@x, @y)
+        this.fill_rect()
 
       undo: (old_color) ->
         @my_color = old_color
         this.redraw()
 
-    fill_rect = (x, y) ->
-      color = get_drawing_color()
-      target_x = cell_x_to_x ( x )
-      target_y = cell_y_to_y ( y )
-      if color.a == 0
-        pp_context.clearRect(target_x, target_y, cell_size(), cell_size())
-      else if color.a > 0
-        pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
+      import: (color) ->
+        set_drawing_color(color)
+        @my_color = get_drawing_color()
+        this.fill_rect()
+
+      fill_rect: ->
+        color = get_drawing_color()
+        target_x = cell_x_to_x ( @x )
+        target_y = cell_y_to_y ( @y )
+        if color.a == 0
+          pp_context.clearRect(target_x, target_y, cell_size(), cell_size())
+        else if color.a > 0
+          pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
 
     cell_x_to_x = (cell_x) ->
       cell_x * cell_size()

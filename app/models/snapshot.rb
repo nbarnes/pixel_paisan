@@ -34,4 +34,21 @@ class Snapshot < ActiveRecord::Base
     display_png.save(storage_dir + "/display.png")
   end
 
+  def image_data_json
+    image_data = Array.new
+    png = original_png
+
+    dimension = png.height
+
+    dimension.times do |x|
+      image_data.push Array.new
+      dimension.times do |y|
+        image_data[x][y] = extract_ChunkyPNG_color(png.pixels[(dimension*y + x)])
+      end
+    end
+
+    return image_data
+
+  end
+
 end

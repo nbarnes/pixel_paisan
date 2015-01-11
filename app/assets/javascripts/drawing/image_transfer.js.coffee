@@ -1,5 +1,5 @@
 $ ->
-  $('.front_page.welcome').ready ->
+  $('#painting_application_panel').ready ->
 
     $('#upload_button').click () ->
       payload = canvas_to_json()
@@ -8,6 +8,7 @@ $ ->
         payload.name = ""
       else
         payload.name = entered_picture_name
+      # console.log("Picture id = #{picture_id}")
       payload.picture_id = picture_id
       payload.cell_size = $('#cell_size_field').val()
       post_image(payload)
