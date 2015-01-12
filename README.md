@@ -1,9 +1,12 @@
+http://pixel-paisan.herokuapp.com
+=================================
+
 [![Build Status](https://travis-ci.org/nbarnes/pixel_paisan.svg?branch=master)](https://travis-ci.org/nbarnes/pixel_paisan)
+
 
 Pixel Paisan
 ============
-
-Pixel Paisan is a combination of a pixel art painting tool and social image sharing site. The goal is to provide the functionality of a pixel-art focused paint tool, similar to many other paint programs, with the ability to easily save and share one's creations with a larger audience.
+Pixel Paisan is a social pixel art site. The goal is to provide the functionality of a pixel-art focused paint tool, similar to many other paint programs, with the ability to easily save and share one's creations with a larger audience.
 
 TECHNOLOGY
 ==========
@@ -11,8 +14,7 @@ Pixel Paisan is built on Ruby on Rails with Coffeescript, HAML, and SASS for the
 
 WHERE
 =====
-
-Live builds of Pixel Paisan can be found at pixel-paisan.heroku.com. The github repo is at https://github.com/nbarnes/pixel_paisan.
+Live builds of Pixel Paisan can be found at http://pixel-paisan.herokuapp.com. The github repo is at https://github.com/nbarnes/pixel_paisan.
 
 ABOUT ME
 ========
