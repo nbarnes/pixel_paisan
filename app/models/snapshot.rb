@@ -48,7 +48,16 @@ class Snapshot < ActiveRecord::Base
     end
 
     return image_data
+  end
 
+  def copy_for_branch(new_pic)
+    new_ss = Snapshot.new
+    new_ss.cell_size = cell_size
+    new_ss.picture = new_pic
+    new_ss.save!
+    new_dir = new_ss.storage_dir
+    FileUtils.mkdir_p(new_dir) unless File.directory?(new_dir)
+    FileUtils.cp_r("#{storage_dir}/.", new_dir)
   end
 
 end

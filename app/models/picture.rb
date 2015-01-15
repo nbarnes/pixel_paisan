@@ -22,4 +22,14 @@ class Picture < ActiveRecord::Base
     return json
   end
 
+  def copy_for_branch(current_user)
+    pic = Picture.create
+    pic.name = name
+    pic.gallery = current_user.galleries[0]
+    pic.user = current_user
+    current_version.copy_for_branch(pic)
+    pic.save!
+    return pic
+  end
+
 end

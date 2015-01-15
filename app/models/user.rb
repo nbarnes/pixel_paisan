@@ -10,4 +10,10 @@ class User < ActiveRecord::Base
 
   validates :name, uniqueness: true
 
+  after_create :create_galleries
+
+  def create_galleries
+    self.galleries.create
+  end
+
 end

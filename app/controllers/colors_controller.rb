@@ -1,8 +1,7 @@
 class ColorsController < ApplicationController
+  before_action :set_gallery, only: [:destroy]
   respond_to :html, :js
 
-  # GET /colors
-  # GET /colors.json
   def index
     @colors = Color.all
   end
@@ -11,11 +10,14 @@ class ColorsController < ApplicationController
     respond_to do |format|
       format.js {
         @palette = Palette.find(params[:color][:palette][:id])
-        @color = Color.create!(color_params)
-        @palette_color = @palette.palette_colors.build
-        @palette_color.color_id = @color.id
-        @palette_color.save
-        render 'palettes/add_new_palette_color', color: @color, palette: @palette
+        if user_signed_in? and @palette.user_id == current_user.id
+          @color = Color.create!(color_params)
+          @palette_color = @palette.palette_colors.build
+          @palette_color.color_id = @color.id
+          @palette_color.save
+          render 'palettes/add_new_palette_color', color: @color, palette: @palette
+        else
+          head :unauthorized
       }
       format.json {
         @palette = Palette.find(params[:palette_id])
@@ -33,7 +35,7 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    Color.find(params[:id]).destroy
+    throw Exception('Exception in ColorsController#destroy')
   end
 
   private

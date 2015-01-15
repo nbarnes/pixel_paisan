@@ -28,8 +28,12 @@ class PalettesController < ApplicationController
   end
 
   def destroy
-    @palette.destroy
-    redirect_to palettes_url, notice: "Pallete '#{@palette.name} was deleted."
+    if @palette.user == current_user
+      @palette.destroy
+      redirect_to palettes_url, notice: "Pallete '#{@palette.name} was deleted."
+    else
+      head :unauthorized
+    end
   end
 
   def new_color

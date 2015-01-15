@@ -8,7 +8,7 @@ $ ->
         payload.name = ""
       else
         payload.name = entered_picture_name
-      # console.log("Picture id = #{picture_id}")
+      console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
       payload.picture_id = picture_id
       payload.cell_size = $('#cell_size_field').val()
       post_image(payload)
@@ -36,11 +36,11 @@ $ ->
         dataType: 'json'
         contentType: 'application/json'
         error: (jqXHR, textStatus, errorThrown) ->
-            console.log('AJAX posting of new image failure')
-            console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-            console.log("#{textStatus}")
-            console.log("#{errorThrown}")
+          console.log('AJAX posting of new image failure')
+          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
+          console.log("#{textStatus}")
+          console.log("#{errorThrown}")
         success: (data, textStatus, jqXHR) ->
-            console.log('AJAX posting of new image success')
-            console.log("Data = #{JSON.stringify(data, undefined, 2)}")
-            window.picture_id = data.picture_id
+          console.log('AJAX posting of new image success')
+          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
+          window.picture_id = data.picture_id

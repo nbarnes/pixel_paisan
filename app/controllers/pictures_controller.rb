@@ -12,10 +12,18 @@ class PicturesController < ApplicationController
   end
 
   def destroy
-    @picture.destroy
+    if @picture.user == current_user
+      @picture.destroy
+    else
+      head :unauthorized
+    end
   end
 
   def edit
+    unless @picture.user == current_user
+      @picture = @picture.copy_for_branch(current_user)
+      redirect_to edit_picture_path(@picture)
+    end
     @palettes = Palette.where(is_default: true)
     if user_signed_in?
       @palettes.concat Palette.where(user_id: current_user.id)

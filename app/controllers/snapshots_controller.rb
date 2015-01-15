@@ -8,6 +8,7 @@ class SnapshotsController < ApplicationController
       format.json do
         if user_signed_in?
           snapshot = Snapshot.new()
+          binding.pry
           if params[:picture_id]
             picture_for_snapshot = Picture.where(id: params[:picture_id])[0]
           else
@@ -24,7 +25,6 @@ class SnapshotsController < ApplicationController
           # PNGs or the Snapshot doesn't have an ID to save the PNGs under
           snapshot.save!
           snapshot.save_pngs!(params[:image_data])
-
           render json: {
             message: "Snapshot post success",
             status: 200,
@@ -38,14 +38,14 @@ class SnapshotsController < ApplicationController
   end
 
   def destroy
+    if @snapshot.picture.user == current_user
+      @snapshot.destroy
+    else
+      head :unauthorized
+    end
   end
 
   def show
-    respond_to do |format|
-      format.json do
-
-      end
-    end
   end
 
   private

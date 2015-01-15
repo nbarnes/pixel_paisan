@@ -1,6 +1,5 @@
 %b
-  This is an index showing all of the galleries
+  View the collected work of Pixel Paisan's users!
+%br
 - @galleries.each do |gallery|
-  This is a gallery.
-  = link_to gallery.id, gallery_path(gallery)
-  %br
+  = render 'gallery_thumbnail', gallery: gallery

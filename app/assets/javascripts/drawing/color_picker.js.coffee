@@ -20,11 +20,11 @@ $ ->
         data: payload
         dataType: 'JSON'
         error: (jqXHR, textStatus, errorThrown) ->
-            console.log('AJAX posting of new color failure')
-            console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-            console.log("#{textStatus}")
-            console.log("#{errorThrown}")
+          console.log('AJAX posting of new color failure')
+          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
+          console.log("#{textStatus}")
+          console.log("#{errorThrown}")
         success: (data, textStatus, jqXHR) ->
-            console.log('AJAX posting of new color success')
-            console.log("Data = #{JSON.stringify(data, undefined, 2)}")
-            add_color_to_palette({ r: data.r, g: data.g, b: data.b, a: data.a })
+          console.log('AJAX posting of new color success')
+          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
+          add_color_to_palette({ r: data.r, g: data.g, b: data.b, a: data.a })
