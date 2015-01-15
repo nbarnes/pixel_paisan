@@ -9,6 +9,8 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'haml'
 
+gem 'unicorn'
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
