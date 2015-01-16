@@ -13,7 +13,9 @@ class PicturesController < ApplicationController
 
   def destroy
     if @picture.user == current_user
+      picture_gallery = @picture.gallery
       @picture.destroy
+      redirect_to gallery_path(picture_gallery)
     else
       head :unauthorized
     end
