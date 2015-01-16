@@ -2,6 +2,8 @@ $ ->
   $('#painting_application_panel').ready ->
 
     $('#upload_button').click () ->
+      $("#picture_saved_modal").modal({overlayClose: false})
+      $("#picture_saved_modal").text('Your picture is being saved.  This may take a few moments.')
       payload = canvas_to_json()
       entered_picture_name = $('#picture_name_field').val()
       if entered_picture_name == '<enter picture name>'
@@ -25,6 +27,12 @@ $ ->
 
       return image
 
+    set_modal_closable = () ->
+      $("#picture_saved_modal").addClass('simplemodal-close')
+      $.modal.impl.o.overlayClose = true
+      $.modal.impl.unbindEvents()
+      $.modal.impl.bindEvents()
+
     # 'dataType' is NOT flagging the data being sent, but rather
     # flagging the expected data form response.  So, though we are
     # sending JSON, we are expecting an HTML response (either 200
@@ -36,11 +44,15 @@ $ ->
         dataType: 'json'
         contentType: 'application/json'
         error: (jqXHR, textStatus, errorThrown) ->
+          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          set_modal_closable()
           console.log('AJAX posting of new image failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
           console.log("#{errorThrown}")
         success: (data, textStatus, jqXHR) ->
+          $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
+          set_modal_closable()
           console.log('AJAX posting of new image success')
           console.log("Data = #{JSON.stringify(data, undefined, 2)}")
           window.picture_id = data.picture_id

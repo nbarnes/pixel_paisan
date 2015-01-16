@@ -8,7 +8,7 @@ class SnapshotsController < ApplicationController
       format.json do
         if user_signed_in?
           snapshot = Snapshot.new()
-          binding.pry
+
           if params[:picture_id]
             picture_for_snapshot = Picture.where(id: params[:picture_id])[0]
           else
