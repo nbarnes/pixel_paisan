@@ -4,6 +4,10 @@ $ ->
     $('#upload_button').click () ->
       $("#picture_saved_modal").modal({overlayClose: false})
       $("#picture_saved_modal").text('Your picture is being saved.  This may take a few moments.')
+      window.saving_picture_modal_timeout = setTimeout ( ->
+        $("#picture_saved_modal").text('It is taking a long time to communicate with the Pixel Paisan server to save your picture. Your internet connection may have been interrupted. Click anywhere to close this window.')
+        set_modal_closable()
+        ), 300000
       payload = canvas_to_json()
       entered_picture_name = $('#picture_name_field').val()
       if entered_picture_name == '<enter picture name>'
@@ -46,6 +50,7 @@ $ ->
         error: (jqXHR, textStatus, errorThrown) ->
           $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
           set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
           console.log('AJAX posting of new image failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
@@ -53,6 +58,7 @@ $ ->
         success: (data, textStatus, jqXHR) ->
           $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
           set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
           console.log('AJAX posting of new image success')
           console.log("Data = #{JSON.stringify(data, undefined, 2)}")
           window.picture_id = data.picture_id
