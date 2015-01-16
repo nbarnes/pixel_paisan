@@ -18,6 +18,7 @@ class ColorsController < ApplicationController
           render 'palettes/add_new_palette_color', color: @color, palette: @palette
         else
           head :unauthorized
+        end
       }
       format.json {
         @palette = Palette.find(params[:palette_id])
