@@ -8,7 +8,7 @@
     - if @picture.user == current_user
       = link_to 'Edit In Painter', edit_picture_path(@picture)
       = button_to "Delete Image", { action: "destroy", id: @picture.id },
-                                method: :delete, data: { confirm: "Are you sure?" }
+                                method: :delete, data: { confirm: "Are you sure you want to destroy this picture?" }
     - elsif user_signed_in?
       = link_to 'Make your own copy and edit', edit_picture_path(@picture)
 

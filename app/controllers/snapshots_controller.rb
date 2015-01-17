@@ -39,7 +39,9 @@ class SnapshotsController < ApplicationController
 
   def destroy
     if @snapshot.picture.user == current_user
+      picture = @snapshot.picture
       @snapshot.destroy
+      redirect_to picture
     else
       head :unauthorized
     end
