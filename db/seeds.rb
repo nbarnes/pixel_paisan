@@ -6,23 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'Admin', :email => 'pixel.paisan@gmail.com', :password => '4lw4ysTr14ngl3L3ft', :password_confirmation => '4lw4ysTr14ngl3L3ft', :role => 'admin'
-puts 'New user created: ' << user.name
-puts 'Importing perler palette'
-perler_palette = Palette.create! name: 'Perler', user_id: user.id, is_default: true
-perler_palette_colors.each do |color|
-  color = Color.create!(color)
-  PaletteColor.create! palette_id: perler_palette.id, color_id: color.id
-end
-puts 'Importing HTML palette'
-html_palette = Palette.create! name: 'HTML colors', user_id: user.id, is_default: true
-html_colors.each do |color|
-  color = Color.create!(color)
-  PaletteColor.create! palette_id: html_palette.id, color_id: color.id
-end
-
-perler_palette_colors = [
+perler_colors = [
   {r: 0, g: 0, b: 0, a: 1},
   {r: 77, g: 77, b: 77, a: 1},
   {r: 147, g: 147, b: 147, a: 1},
@@ -82,4 +66,20 @@ html_colors = [
 ]
 
 
+
+puts 'SETTING UP DEFAULT USER LOGIN'
+user = User.create! :name => 'Admin', :email => 'pixel.paisan@gmail.com', :password => '4lw4ysTr14ngl3L3ft', :password_confirmation => '4lw4ysTr14ngl3L3ft', :role => 'admin'
+puts 'New user created: ' << user.name
+puts 'Importing perler palette'
+perler_palette = Palette.create! name: 'Perler', user_id: user.id, is_default: true
+perler_colors.each do |color|
+  color = Color.create!(color)
+  PaletteColor.create! palette_id: perler_palette.id, color_id: color.id
+end
+puts 'Importing HTML palette'
+html_palette = Palette.create! name: 'HTML colors', user_id: user.id, is_default: true
+html_colors.each do |color|
+  color = Color.create!(color)
+  PaletteColor.create! palette_id: html_palette.id, color_id: color.id
+end
 
