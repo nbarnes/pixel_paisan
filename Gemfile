@@ -18,12 +18,15 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
 gem "rmagick", :require => 'RMagick'
+gem 'fog'
+
+gem 'devise' # authentication
+gem 'figaro'
+gem 'simple_form'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'rails_12factor' # for Heroku
-gem 'simple_form'
-gem 'devise' # authentication
 
 group :test, :development do
   gem 'jasmine-rails'
