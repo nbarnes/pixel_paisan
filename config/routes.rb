@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-
-  devise_for :user, :path => "accounts"
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}, :path => "accounts"
 
   resources :users
   resources :pictures, only: [:show, :destroy, :edit]
