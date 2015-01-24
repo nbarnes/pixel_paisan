@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
   root 'front_page#welcome'
 
+  get '/*foo', to: redirect('/')
+
 end
