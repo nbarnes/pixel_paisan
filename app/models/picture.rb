@@ -1,3 +1,4 @@
+
 class Picture < ActiveRecord::Base
 
   belongs_to :user
@@ -27,7 +28,9 @@ class Picture < ActiveRecord::Base
     pic.name = name
     pic.gallery = current_user.galleries[0]
     pic.user = current_user
-    current_version.copy_for_branch(pic)
+    new_snapshot = current_version.copy_for_branch()
+    new_snapshot.picture_id = pic.id
+    pic.current_version = new_snapshot
     pic.save!
     return pic
   end

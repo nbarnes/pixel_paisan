@@ -24,6 +24,7 @@
 /config/application.yml
 
 /user_images
+/user_pngs
 
 aws_test_strings.rb
 
