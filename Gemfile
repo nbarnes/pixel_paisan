@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'chunky_png'
 gem "rmagick", :require => 'RMagick'
 gem 'fog'
+gem 'asset_sync'
 
 gem 'devise' # authentication
 gem 'figaro'

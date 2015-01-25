@@ -24,3 +24,7 @@
 /config/application.yml
 
 /user_images
+
+aws_test_strings.rb
+
+public/assets/
