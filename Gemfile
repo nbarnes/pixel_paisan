@@ -22,6 +22,9 @@ gem 'fog'
 gem 'asset_sync'
 gem 'sidekiq'
 
+# Sinatra for the sidekiq web monitor
+gem 'sinatra', :require => nil
+
 gem 'devise' # authentication
 gem 'figaro'
 gem 'simple_form'

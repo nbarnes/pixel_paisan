@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}, :path => "accounts"
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  mount Sidekiq::Web, at: "/sidekiq"
 
   root 'front_page#welcome'
 

@@ -1,8 +1,10 @@
-
-Sidekiq.configure_client do |config|
-  config.redis = {url: ENV.fetch("REDIS_URL", "redis://localhost/1"), namespace: "pixel-paisan"}
-end
-
-Sidekiq.configure_server do |config|
-  config.redis = {url: ENV.fetch("REDIS_URL", "redis://localhost/1"), namespace: "pixel-paisan"}
-end
+---
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:concurrency: 25
+# Set timeout to 8 on Heroku, longer if you manage your own systems.
+:timeout: 8
+:queues:
+  - [often, 7]
+  - [default, 5]
+  - [seldom, 3]
