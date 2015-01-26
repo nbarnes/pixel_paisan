@@ -1,0 +1,8 @@
+
+Sidekiq.configure_client do |config|
+  config.redis = {url: ENV.fetch("REDIS_URL", "redis://localhost/1"), namespace: "pixel-paisan"}
+end
+
+Sidekiq.configure_server do |config|
+  config.redis = {url: ENV.fetch("REDIS_URL", "redis://localhost/1"), namespace: "pixel-paisan"}
+end

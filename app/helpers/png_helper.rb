@@ -1,9 +1,8 @@
-module SnapshotsHelper
+module PngHelper
 
   require 'chunky_png'
   require 'rmagick'
   require 'chunky_png/rmagick'
-
 
   def build_png(rgba)
     png_dimension = rgba.size

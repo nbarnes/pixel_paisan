@@ -19,5 +19,9 @@ module PixelPaisan
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    FileUtils.mkdir_p(ENV['PNG_STORE_DIR']) unless File.directory?(ENV['PNG_STORE_DIR'])
+    FileUtils.mkdir_p('tmp/pixel_files') unless File.directory?('tmp/pixel_files')
+
   end
 end

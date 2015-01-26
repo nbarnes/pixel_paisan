@@ -1,5 +1,5 @@
 class Snapshot < ActiveRecord::Base
-  include SnapshotsHelper
+  include PngHelper
 
   belongs_to :picture, inverse_of: :snapshots
 
@@ -18,27 +18,18 @@ class Snapshot < ActiveRecord::Base
     get_file('display')
   end
 
-  def file_name(size_tag)
-    return "#{created_at.to_i}_#{id}_#{size_tag}.png"
+  def file_prefix()
+    return "#{created_at.to_i}_#{id}_"
   end
 
   def get_file(size_tag)
-    return File.open("#{ENV['PNG_STORE_DIR']}/#{file_name(size_tag)}") { |io| image = ChunkyPNG::Image.from_io(io) }
+    return File.open("#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png") { |io| image = ChunkyPNG::Image.from_io(io) }
   end
 
   def save_pngs!(pixels)
-    FileUtils.mkdir_p(ENV['PNG_STORE_DIR']) unless File.directory?(ENV['PNG_STORE_DIR'])
-
-    original_png = build_png(pixels)
-    thumbnail_png = get_resized_png(original_png, 128)
-    display_png = get_resized_png(original_png, 512)
-    original_file_name = file_name('original')
-    thumbnail_file_name = file_name('thumbnail')
-    display_file_name = file_name('display')
-
-    original_png.save("#{ENV['PNG_STORE_DIR']}/#{original_file_name}")
-    thumbnail_png.save("#{ENV['PNG_STORE_DIR']}/#{thumbnail_file_name}")
-    display_png.save("#{ENV['PNG_STORE_DIR']}/#{display_file_name}")
+    File.open("tmp/pixel_files/#{file_prefix}pixel_file.json", 'w+') { |file| file.write(pixels.to_json) }
+    worker = PngBuildWorker.new
+    worker.perform(file_prefix)
   end
 
   def image_data_json

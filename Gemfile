@@ -20,6 +20,7 @@ gem 'chunky_png'
 gem "rmagick", :require => 'RMagick'
 gem 'fog'
 gem 'asset_sync'
+gem 'sidekiq'
 
 gem 'devise' # authentication
 gem 'figaro'

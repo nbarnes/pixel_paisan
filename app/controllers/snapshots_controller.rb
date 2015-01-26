@@ -1,5 +1,5 @@
 class SnapshotsController < ApplicationController
-  include SnapshotsHelper
+  include PngHelper
 
   before_action :set_snapshot, only: [:edit, :destroy]
 
@@ -56,6 +56,6 @@ class SnapshotsController < ApplicationController
     end
 
     def snapshot_params
-      params[:snapshot].permit(:png_data)
+      params[:snapshot].permit(:image_data)
     end
 end
