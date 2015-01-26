@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     self.galleries.create
   end
 
+  def admin?
+    return role = 'admin'
+  end
+
 end

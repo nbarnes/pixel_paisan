@@ -23,5 +23,7 @@ module PixelPaisan
     FileUtils.mkdir_p(ENV['PNG_STORE_DIR']) unless File.directory?(ENV['PNG_STORE_DIR'])
     FileUtils.mkdir_p('tmp/pixel_files') unless File.directory?('tmp/pixel_files')
 
+    Sidekiq.logger.level = Logger::INFO
+
   end
 end
