@@ -1,6 +1,7 @@
 
 source 'https://rubygems.org'
 
+ruby "2.0.0"
 gem 'rails', '4.1.8'
 
 gem 'pg'
@@ -9,6 +10,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'haml'
+gem 'autoprefixer-rails'
 
 gem 'unicorn'
 
@@ -39,6 +41,7 @@ group :test, :development do
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
+  gem 'rails_best_practices'
 end
 
 group :development do
