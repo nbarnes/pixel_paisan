@@ -28,6 +28,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
+    ansi (1.5.0)
     arel (5.0.1.20140414130214)
     asset_sync (1.1.0)
       activemodel
@@ -72,7 +74,10 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colored (1.2)
+    colorize (0.7.7)
     connection_pool (2.0.0)
+    css_parser (1.3.6)
+      addressable
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -80,6 +85,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    docile (1.1.5)
     erubis (2.7.0)
     excon (0.43.0)
     execjs (2.2.2)
@@ -166,6 +172,11 @@ GEM
     formatador (0.2.5)
     haml (4.0.6)
       tilt
+    headhunter (0.1.9)
+      colorize
+      css_parser (>= 1.2.6)
+      nokogiri
+      rails
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.7.0)
@@ -206,6 +217,11 @@ GEM
       minitest-capybara (~> 0.7.0)
       minitest-metadata (~> 0.5.0)
       minitest-rails (~> 2.1)
+    minitest-reporters (1.0.20)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     multi_json (1.10.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -292,6 +308,11 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -349,11 +370,13 @@ DEPENDENCIES
   figaro
   fog
   haml
+  headhunter
   jasmine-jquery-rails
   jasmine-rails
   jbuilder (~> 2.0)
   jquery-rails
   minitest-rails-capybara
+  minitest-reporters
   pg
   pry-rails
   rails (= 4.1.8)
@@ -364,6 +387,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sidekiq
   simple_form
+  simplecov
   sinatra
   spring
   turbolinks

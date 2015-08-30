@@ -1,7 +1,7 @@
 
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 gem 'rails', '4.1.8'
 
 gem 'pg'
@@ -19,7 +19,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
-gem "rmagick", :require => 'RMagick'
+gem 'rmagick', :require => 'RMagick'
 gem 'fog'
 gem 'asset_sync'
 gem 'sidekiq'
@@ -47,6 +47,12 @@ end
 group :development do
   gem 'spring'
   gem 'brakeman', :require => false
+end
+
+group :test do
+  gem 'headhunter'
+  gem 'simplecov'
+  gem 'minitest-reporters'
 end
 
 # Use unicorn as the app server
