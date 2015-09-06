@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
   after_create :create_galleries
 
   def create_galleries
-    self.galleries.create
+    galleries.create
   end
 
   def admin?
-    return role = 'admin'
+    return role == 'admin'
   end
 
 end

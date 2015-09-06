@@ -18,7 +18,7 @@ class Snapshot < ActiveRecord::Base
     get_file('display')
   end
 
-  def file_prefix()
+  def file_prefix
     return "#{created_at.to_i}_#{id}_"
   end
 
@@ -33,15 +33,15 @@ class Snapshot < ActiveRecord::Base
   end
 
   def image_data_json
-    image_data = Array.new
+    image_data = []
     png = original_png
 
     dimension = png.height
 
     dimension.times do |x|
-      image_data.push Array.new
+      image_data.push []
       dimension.times do |y|
-        image_data[x][y] = extract_ChunkyPNG_color(png.pixels[(dimension*y + x)])
+        image_data[x][y] = extract_ChunkyPNG_color(png.pixels[(dimension * y + x)])
       end
     end
 
@@ -51,7 +51,7 @@ class Snapshot < ActiveRecord::Base
   def copy_for_branch(new_pic)
     new_ss = Snapshot.new
     new_ss.cell_size = cell_size
-    ['original', 'thumbnail', 'display'].each do |tag|
+    %w('original', 'thumbnail', 'display').each do |tag|
       src_name = "#{ENV['PNG_STORE_DIR']}/#{file_name(tag)}"
       dest_name = "#{ENV['PNG_STORE_DIR']}/#{new_ss.file_name(size_tag)}"
       File.copy(src_name, dest_name)

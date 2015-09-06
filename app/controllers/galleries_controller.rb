@@ -9,13 +9,12 @@ class GalleriesController < ApplicationController
   end
 
   private
+    def set_gallery
+      @gallery = Gallery.find(params[:id])
+    end
 
-  def set_gallery
-    @gallery = Gallery.find(params[:id])
-  end
-
-  def gallery_params
-    params[:gallery]
-  end
+    def gallery_params
+      params[:gallery]
+    end
 
 end

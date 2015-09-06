@@ -6,7 +6,7 @@ class PicturesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => @picture.as_json
+        render json: @picture.as_json
       end
     end
   end

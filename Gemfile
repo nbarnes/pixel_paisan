@@ -19,19 +19,19 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
-gem 'rmagick', :require => 'RMagick'
+gem 'rmagick', require: 'RMagick'
 gem 'fog'
 gem 'asset_sync'
 gem 'sidekiq'
 
 # Sinatra for the sidekiq web monitor
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
 
 gem 'devise' # authentication
 gem 'figaro'
 gem 'simple_form'
 
-gem 'sdoc', '~> 0.4.0',          group: :doc
+# gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'rails_12factor' # for Heroku
 
@@ -46,7 +46,7 @@ end
 
 group :development do
   gem 'spring'
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
 end
 
 group :test do

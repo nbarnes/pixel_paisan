@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
-feature "As a palette owner, I want to be able to edit my own palettes" do
+feature 'As a palette owner, I want to be able to edit my own palettes' do
 
-  scenario "existing account successfully logged in" do
+  scenario 'existing account successfully logged in' do
     login_galactus
     visit palettes_path
     click_on "galactus' palette"
