@@ -1,8 +1,0 @@
-= simple_form_for @color, remote: true do |f|
-  = f.simple_fields_for :palette do |palette_form|
-    = palette_form.hidden_field :id, value: @palette.id
-  = f.input  :r
-  = f.input  :g
-  = f.input  :b
-  = f.hidden_field :a, value: '1'
-  = f.button :submit

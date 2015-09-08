@@ -1,6 +1,6 @@
 class IntegrateUsers < ActiveRecord::Migration
   def change
-    add_column :palettes, :user_id, :integer
+    add_column :palettes, :user_id, :integer, null: false
     add_column :palettes, :is_default, :boolean
     add_column :users, :name, :string
     add_column :users, :role, :string

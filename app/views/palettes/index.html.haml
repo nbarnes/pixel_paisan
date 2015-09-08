@@ -20,4 +20,5 @@
   %br
 %br
 %br
-= link_to 'New Palette', new_palette_path
+- if user_signed_in?
+  = link_to 'New Palette', new_palette_path

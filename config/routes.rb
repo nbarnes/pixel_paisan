@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   resources :palettes do
     member do
-      get 'new_color'
-      post 'create_color'
+      get 'new_color', as: 'new_color'
+      post 'create_color', to: 'colors#create', as: 'create_color'
     end
   end
 

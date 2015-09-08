@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150109231611) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.integer  "user_id"
+    t.integer  "user_id",    null: false
     t.boolean  "is_default"
   end
 

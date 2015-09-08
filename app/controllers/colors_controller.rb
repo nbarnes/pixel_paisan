@@ -8,6 +8,16 @@ class ColorsController < ApplicationController
 
   def create
     respond_to do |format|
+      format.html do
+        @palette = Palette.find(params[:id])
+        head :unauthorized unless user_signed_in? && @palette.user_id == current_user.id
+
+        @color = Color.create!(color_params)
+        @palette_color = @palette.palette_colors.build
+        @palette_color.color_id = @color.id
+        @palette_color.save
+        render 'palettes/show', palette: @palette
+      end
       format.js do
         @palette = Palette.find(params[:color][:palette][:id])
         head :unauthorized unless user_signed_in? && @palette.user_id == current_user.id
@@ -17,7 +27,6 @@ class ColorsController < ApplicationController
         @palette_color.color_id = @color.id
         @palette_color.save
         render 'palettes/add_new_palette_color', color: @color, palette: @palette
-
       end
       format.json do
         @palette = Palette.find(params[:palette_id])
@@ -28,7 +37,6 @@ class ColorsController < ApplicationController
         @palette_color.color_id = @color.id
         @palette_color.save
         render :create
-
       end
     end
   end

@@ -1,0 +1,6 @@
+= simple_form_for @color, url: create_color_palette_path, method: 'post' do |f|
+  = f.input :r
+  = f.input :g
+  = f.input :b
+  = f.hidden_field :a, value: '1'
+  = f.button :submit

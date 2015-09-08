@@ -1,5 +1,5 @@
 class PalettesController < ApplicationController
-  before_action :set_palette, only: [:show, :edit, :update, :destroy, :return_json]
+  before_action :set_palette, only: [:show, :edit, :update, :destroy, :new_color, :return_json]
   respond_to :html
 
   def index
@@ -20,6 +20,7 @@ class PalettesController < ApplicationController
 
   def create
     @palette = Palette.new(palette_params)
+    @palette.user_id = current_user.id
     if @palette.save
       redirect_to @palette
     else
@@ -30,15 +31,18 @@ class PalettesController < ApplicationController
   def destroy
     if @palette.user == current_user
       @palette.destroy
-      redirect_to palettes_url, notice: "Pallete '#{@palette.name} was deleted."
+      redirect_to palettes_path, notice: "Pallete '#{@palette.name}' was deleted."
     else
       head :unauthorized
     end
   end
 
   def new_color
-    @palette = Palette.find(params[:id])
     @color = Color.new
+  end
+
+  def create_color
+    color = Color.new(params[:color])
   end
 
   private
