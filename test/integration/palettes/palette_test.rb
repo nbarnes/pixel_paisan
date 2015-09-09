@@ -39,7 +39,7 @@ feature 'Palettes' do
     page.wont_have_link "tony's palette"
   end
 
-  scenario 'As a palette owner, I can remove colors from my palettes', :js => true do
+  scenario 'As a palette owner, I can remove colors from my palettes', js: true do
     login_user
     visit palettes_path
     click_on "tony's palette"
@@ -60,6 +60,13 @@ feature 'Palettes' do
     visit palettes_path
     click_on "galactus' palette"
     page.wont_have_content 'Remove Color'
+  end
+
+  scenario 'As a site user, I can load any of the default palettes and my own owned ones', js: true do
+    login_user
+    visit root_path
+    page.must_have_css("option#tonys_palette")
+
   end
 
 end

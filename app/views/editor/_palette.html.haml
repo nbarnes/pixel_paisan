@@ -4,7 +4,7 @@
 
   %select{ :id => 'palette_selector' }
     - @palettes.each do |palette|
-      %option{ value: palette.id }
+      %option{ id: string_to_css_id(palette.name), value: palette.id }
         = palette.name
 
   #palette_colors
