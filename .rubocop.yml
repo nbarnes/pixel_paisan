@@ -1,4 +1,6 @@
 
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   Exclude:
     - 'db/schema.rb'
@@ -21,6 +23,9 @@ Style/EmptyLinesAroundClassBody:
 Style/IndentationConsistency:
   EnforcedStyle: rails
 
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
 Style/EmptyLinesAroundAccessModifier:
   Enabled: false
 
@@ -29,9 +34,3 @@ Style/EmptyLinesAroundBlockBody:
 
 Style/RedundantReturn:
   Enabled: false
-
-Metrics/LineLength:
-  Max: 112
-
-Metrics/MethodLength:
-  Max: 14

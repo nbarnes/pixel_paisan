@@ -3,12 +3,18 @@ palette_color_1:
   palette: palette1
   color: color_fixture_50
 
-<% 1.upto(125) do |i| %>
+<% 1.upto(27) do |i| %>
 palette_color_fixture_<%= i %>:
   palette: palette2
   color: color_fixture_<%= i %>
 <% end %>
 
+<% 1.upto(9) do |i| %>
+palette_color_fixture_<%= (i+27) %>:
+  palette: palette3
+  color: color_fixture_<%= i*3 %>
+<% end %>
+
 palette_color_2:
   palette: palette1
-  color: color_fixture_1
+  color: color_fixture1

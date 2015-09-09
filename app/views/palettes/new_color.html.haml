@@ -18,7 +18,7 @@
 %br
 
 = link_to 'Back to Index', palettes_path
-- if user_signed_in? and current_user.id == @palette.user_id
+- if current_palette_owner
   :preserve
      |
   = link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }

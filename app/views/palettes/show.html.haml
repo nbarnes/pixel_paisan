@@ -6,22 +6,23 @@
 
 .color_bubbles.clearfix
   - if @palette.colors
-    - @palette.palette_colors.each do |palette_color|
+    - @palette.colors.each do |color|
       .color_and_delete_link_holder
-        = render 'colors/color', color: palette_color.color
-        = render 'palettes/delete_palette_color_link', palette_color: palette_color
+        = render 'colors/color', color: color
+        - if current_palette_owner
+          = render 'palettes/delete_palette_color_link', palette_color: PaletteColor.for(@palette, color)
 
 %br
 
 #color_form
 %br
 
-- if user_signed_in? and current_user.id == @palette.user_id
+- if current_palette_owner
   = link_to 'Add New Color', new_color_palette_path, :id => 'new_color_link'
   :preserve
      |
 = link_to 'Back to Index', palettes_path
-- if user_signed_in? and current_user.id == @palette.user_id
+- if current_palette_owner
   :preserve
      |
   = link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }

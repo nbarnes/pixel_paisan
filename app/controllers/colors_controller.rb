@@ -1,4 +1,5 @@
 class ColorsController < ApplicationController
+  include PalettesHelper
   before_action :set_gallery, only: [:destroy]
   respond_to :html, :js
 
@@ -10,7 +11,7 @@ class ColorsController < ApplicationController
     respond_to do |format|
       format.html do
         @palette = Palette.find(params[:id])
-        head :unauthorized unless user_signed_in? && @palette.user_id == current_user.id
+        head :unauthorized unless current_palette_owner
 
         @color = Color.create!(color_params)
         @palette_color = @palette.palette_colors.build
@@ -20,7 +21,7 @@ class ColorsController < ApplicationController
       end
       format.js do
         @palette = Palette.find(params[:color][:palette][:id])
-        head :unauthorized unless user_signed_in? && @palette.user_id == current_user.id
+        head :unauthorized unless current_palette_owner
 
         @color = Color.create!(color_params)
         @palette_color = @palette.palette_colors.build
@@ -30,7 +31,7 @@ class ColorsController < ApplicationController
       end
       format.json do
         @palette = Palette.find(params[:palette_id])
-        head :unauthorized unless user_signed_in? && @palette.user_id == current_user.id
+        head :unauthorized unless current_palette_owner
 
         @color = Color.create!(r: params[:r], g: params[:g], b: params[:b], a: params[:a])
         @palette_color = @palette.palette_colors.build

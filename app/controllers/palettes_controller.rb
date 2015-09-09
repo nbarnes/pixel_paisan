@@ -1,4 +1,5 @@
 class PalettesController < ApplicationController
+  include PalettesHelper
   before_action :set_palette, only: [:show, :edit, :update, :destroy, :new_color, :return_json]
   respond_to :html
 
@@ -8,9 +9,11 @@ class PalettesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html
+      format.html do
         @palette_colors = PaletteColor.where(palette_id: @palette.id)
-      format.json
+      end
+      format.json do
+      end
     end
   end
 
@@ -42,7 +45,7 @@ class PalettesController < ApplicationController
   end
 
   def create_color
-    color = Color.new(params[:color])
+    @color = Color.new(params[:color])
   end
 
   private
