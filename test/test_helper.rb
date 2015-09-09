@@ -7,6 +7,7 @@ require 'minitest/rails/capybara'
 
 class ActiveSupport::TestCase
   fixtures :all
+  Capybara.javascript_driver = :webkit
 
   def login_admin
     visit root_path

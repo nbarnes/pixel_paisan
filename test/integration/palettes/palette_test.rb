@@ -39,16 +39,13 @@ feature 'Palettes' do
     page.wont_have_link "tony's palette"
   end
 
-  scenario 'As a palette owner, I can remove colors from my palettes' do
+  scenario 'As a palette owner, I can remove colors from my palettes', :js => true do
     login_user
     visit palettes_path
     click_on "tony's palette"
-    # find '128,255,255'
-    # up to .color_and_delete_link_holder
-    # down to .remove_color_link
-    # click on .remove_color_link
-    # confirm
-    # color's not there anymore.
+    find('div div div', text: '128,128,255').find(:xpath, '..').click_on 'Remove Color'
+    page.evaluate_script('window.confirm = function() { return true; }')
+    page.wont_have_content '128,128,255'
   end
 
   scenario 'As a non-owner, I cannot delete a palette' do
