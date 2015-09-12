@@ -1,7 +1,7 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $("#add_new_color_button").spectrum
+    $("#color_picker_opener").spectrum
       color: "#f00"
       change: (color) ->
         post_new_color_to_server(color)
@@ -19,12 +19,12 @@ $ ->
         type: 'POST'
         data: payload
         dataType: 'JSON'
+        success: (data, textStatus, jqXHR) ->
+          console.log('AJAX posting of new color success')
+          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
+          add_color_to_palette({ r: data.r, g: data.g, b: data.b, a: data.a })
         error: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX posting of new color failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
           console.log("#{errorThrown}")
-        success: (data, textStatus, jqXHR) ->
-          console.log('AJAX posting of new color success')
-          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
-          add_color_to_palette({ r: data.r, g: data.g, b: data.b, a: data.a })

@@ -38,11 +38,10 @@
 
   %br
 
-  = link_to 'Palette Editors', palettes_path
-
-  = render 'editor/color_picker'
+  #link_to_palettes_index
+    = link_to 'Palette Editors', palettes_path
 
   #picture_saved_modal
-    This is content for the basic modal window.
+    This is content for the picture saved modal window.
 
   = render 'editor/new_user_save_modal'

@@ -19,16 +19,6 @@ class ColorsController < ApplicationController
         @palette_color.save
         render 'palettes/show', palette: @palette
       end
-      format.js do
-        @palette = Palette.find(params[:color][:palette][:id])
-        head :unauthorized unless current_palette_owner
-
-        @color = Color.create!(color_params)
-        @palette_color = @palette.palette_colors.build
-        @palette_color.color_id = @color.id
-        @palette_color.save
-        render 'palettes/add_new_palette_color', color: @color, palette: @palette
-      end
       format.json do
         @palette = Palette.find(params[:palette_id])
         head :unauthorized unless current_palette_owner

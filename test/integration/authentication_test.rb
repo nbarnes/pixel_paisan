@@ -43,6 +43,4 @@ feature 'As a visitor, I want to sign into my existing account.' do
     page.wont_have_content users(:galactus).email
   end
 
-
-
 end
