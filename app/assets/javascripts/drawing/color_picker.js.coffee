@@ -1,10 +1,20 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $("#color_picker_opener").spectrum
-      color: "#f00"
-      change: (color) ->
-        post_new_color_to_server(color)
+    $("#color_picker_opener").click () ->
+      $("#color_picker_modal").modal({overlayClose: true})
+
+    $(".color_value_field").change () ->
+      new_r = $('#r_value_field').val()
+      new_g = $('#g_value_field').val()
+      new_b = $('#b_value_field').val()
+      new_color = "rgb(#{new_r}, #{new_g}, #{new_b})"
+      console.log(new_color)
+      $("#color_display_panel").css('background-color', new_color)
+
+
+    $("#add_new_color_button").click () ->
+      $.modal.close()
 
     post_new_color_to_server = (color) ->
       palette_id = $( '#palette_selector option:selected' ).val()

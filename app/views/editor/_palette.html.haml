@@ -1,15 +1,21 @@
+
 #palette_pane
 
-  #erase_button
+  #palette_border
 
-  %select{ :id => 'palette_selector' }
-    - @palettes.each do |palette|
-      %option{ id: string_to_css_id(palette.name), value: palette.id }
-        = palette.name
+    #erase_button
 
-  #palette_colors
+    %select{ :id => 'palette_selector' }
+      - @palettes.each do |palette|
+        %option{ id: string_to_css_id(palette.name), value: palette.id }
+          = palette.name
 
-  %input{type: 'button', value: 'Add Color', id: 'color_picker_opener', href: '#color_picker'}
+    #palette_colors
 
-  .templates
-    .color_button
+    .templates
+      .color_button
+
+  #color_picker_opener.button Add New Color
+
+
+= render 'editor/color_picker_modal'

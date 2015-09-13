@@ -2,7 +2,7 @@ $ ->
   $('#new_user_save_modal').ready ->
 
     $("#modal_user_login_test_button").click () ->
-      console.log('bob')
+      # console.log('bob')
       $("#new_user_save_modal").modal({overlayClose: true})
 
     $('#trigger_ajax_login_button').click () ->

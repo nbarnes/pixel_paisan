@@ -19,6 +19,7 @@ $ ->
       for i in [0...palette.colors.length]
         color = palette.colors[i]
         add_color_to_palette(color)
+      $('#color_picker_opener').visible(palette['current_user_is_owner'])
 
     window.add_color_to_palette = (color) ->
         color_button = $('.templates .color_button').clone()

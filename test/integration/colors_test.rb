@@ -1,3 +1,4 @@
+
 require 'test_helper'
 
 feature 'Colors' do
@@ -16,12 +17,13 @@ feature 'Colors' do
     login_user
     visit root_path
     select("tony's palette")
-    page.must_have_css('.sp-replacer.sp-light')
+    page.must_have_css('#color_picker_opener')
   end
 
   scenario 'Color adder widget not displayed when viewing or using palettes I do not own', js: true do
+    login_user
     visit root_path
-    page.wont_have_css('.sp-replacer.sp-light')
+    page.wont_have_css('#color_picker_opener')
   end
 
 end

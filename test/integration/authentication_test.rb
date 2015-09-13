@@ -1,6 +1,7 @@
+
 require 'test_helper'
 
-feature 'As a visitor, I want to sign into my existing account.' do
+feature 'Authentication' do
 
   scenario 'existing account successfully logged in' do
     # Given an existing user

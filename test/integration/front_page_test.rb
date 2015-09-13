@@ -1,3 +1,4 @@
+
 require 'test_helper'
 
 feature 'Front page' do
