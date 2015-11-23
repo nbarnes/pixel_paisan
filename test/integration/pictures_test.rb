@@ -12,17 +12,13 @@ feature 'Pictures' do
   end
 
   scenario 'As a picture owner, I can delete my pictures' do
-    login_user
-    visit palettes_path
-    click_on "tony's palette"
-    click_on 'Delete Palette'
-    page.must_have_content "Pallete 'tony's palette' was deleted."
-    page.wont_have_link "tony's palette"
   end
 
   scenario "a non-owner user, I cannot delete other people's pictures" do
     visit galleries_path
     click_on "Galactus the World Devourer's pictures"
+    # ???
+    # Profit!
   end
 
   scenario "as an authenticated user, I can branch anybody's pictures" do
