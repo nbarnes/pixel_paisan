@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.1)
+    CFPropertyList (2.3.2)
     actionmailer (4.1.8)
       actionpack (= 4.1.8)
       actionview (= 4.1.8)
@@ -35,11 +35,11 @@ GEM
       activemodel
       fog (>= 1.8.0)
       unf
-    autoprefixer-rails (6.0.2)
+    autoprefixer-rails (6.1.1)
       execjs
       json
     bcrypt (3.1.10)
-    brakeman (3.1.0)
+    brakeman (3.1.2)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
       haml (>= 3.0, < 5.0)
@@ -47,9 +47,10 @@ GEM
       multi_json (~> 1.2)
       ruby2ruby (>= 2.1.1, < 2.3.0)
       ruby_parser (~> 3.7.0)
+      safe_yaml
       sass (~> 3.0)
       slim (>= 1.3.6, < 4.0)
-      terminal-table (~> 1.4.5)
+      terminal-table (~> 1.4)
     builder (3.2.2)
     capybara (2.5.0)
       mime-types (>= 1.16)
@@ -57,51 +58,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.7.0)
+    capybara-webkit (1.7.1)
       capybara (>= 2.3.0, < 2.6.0)
       json
-    celluloid (0.17.1.2)
-      bundler
-      celluloid-essentials
-      celluloid-extras
-      celluloid-fsm
-      celluloid-pool
-      celluloid-supervision
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    celluloid-essentials (0.20.2.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    celluloid-extras (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    celluloid-fsm (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    celluloid-pool (0.20.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    celluloid-supervision (0.20.1.1)
-      bundler
-      dotenv
-      nenv
-      rspec-logsplit (>= 0.1.2)
-      timers (>= 4.1.1)
-    chunky_png (1.3.4)
+    chunky_png (1.3.5)
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.0)
@@ -111,11 +71,12 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1.1)
+    coffee-script-source (1.10.0)
     colored (1.2)
     colorize (0.7.7)
+    concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
-    css_parser (1.3.6)
+    css_parser (1.3.7)
       addressable
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -125,7 +86,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     docile (1.1.5)
-    dotenv (2.0.2)
     erubis (2.7.0)
     excon (0.45.4)
     execjs (2.6.0)
@@ -134,14 +94,15 @@ GEM
       thor (~> 0.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
-    fog (1.34.0)
+    fog (1.36.0)
+      fog-aliyun (>= 0.1.0)
       fog-atmos
       fog-aws (>= 0.6.0)
       fog-brightbox (~> 0.4)
       fog-core (~> 1.32)
       fog-dynect (~> 0.0.2)
       fog-ecloud (~> 0.1)
-      fog-google (>= 0.0.2)
+      fog-google (<= 0.1.0)
       fog-json
       fog-local
       fog-powerdns (>= 0.1.1)
@@ -155,9 +116,15 @@ GEM
       fog-terremark
       fog-vmfusion
       fog-voxel
+      fog-xenserver
       fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
+    fog-aliyun (0.1.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      ipaddress (~> 0.8)
+      xml-simple (~> 1.1)
     fog-atmos (0.1.0)
       fog-core
       fog-xml
@@ -170,13 +137,11 @@ GEM
       fog-core (~> 1.22)
       fog-json
       inflecto (~> 0.0.2)
-    fog-core (1.32.1)
+    fog-core (1.34.0)
       builder
       excon (~> 0.45)
       formatador (~> 0.2)
       mime-types
-      net-scp (~> 1.1)
-      net-ssh (>= 2.1.3)
     fog-dynect (0.0.2)
       fog-core
       fog-json
@@ -184,7 +149,7 @@ GEM
     fog-ecloud (0.3.0)
       fog-core
       fog-xml
-    fog-google (0.0.7)
+    fog-google (0.1.0)
       fog-core
       fog-json
       fog-xml
@@ -209,13 +174,13 @@ GEM
       fog-core
       fog-json
       fog-xml
-    fog-sakuracloud (1.1.1)
+    fog-sakuracloud (1.4.0)
       fog-core
       fog-json
     fog-serverlove (0.1.2)
       fog-core
       fog-json
-    fog-softlayer (0.4.7)
+    fog-softlayer (1.0.2)
       fog-core
       fog-json
     fog-storm_on_demand (0.1.1)
@@ -230,6 +195,9 @@ GEM
     fog-voxel (0.1.0)
       fog-core
       fog-xml
+    fog-xenserver (0.2.2)
+      fog-core
+      fog-xml
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
@@ -241,19 +209,18 @@ GEM
       css_parser (>= 1.2.6)
       nokogiri
       rails
-    highline (1.7.3)
-    hitimes (1.2.2)
+    highline (1.7.8)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jasmine-core (2.3.4)
     jasmine-jquery-rails (2.0.3)
-    jasmine-rails (0.11.0)
+    jasmine-rails (0.12.2)
       jasmine-core (>= 1.3, < 3.0)
       phantomjs (>= 1.9)
       railties (>= 3.2.0)
       sprockets-rails
-    jbuilder (2.3.1)
+    jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.4)
@@ -264,9 +231,9 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.99)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.3)
     minitest-capybara (0.7.2)
       capybara (~> 2.2)
       minitest (~> 5.0)
@@ -281,22 +248,18 @@ GEM
       minitest-capybara (~> 0.7.0)
       minitest-metadata (~> 0.5.0)
       minitest-rails (~> 2.1)
-    minitest-reporters (1.1.0)
+    minitest-reporters (1.1.5)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.11.2)
-    nenv (0.2.0)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
-    nokogiri (1.6.6.2)
+    nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
-    pg (0.18.3)
+    pg (0.18.4)
     phantomjs (1.9.8.0)
-    pry (0.10.1)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -338,21 +301,19 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.15.0)
     rake (10.4.2)
-    redis (3.2.1)
-    redis-namespace (1.5.2)
-      redis (~> 3.0, >= 3.0.4)
-    require_all (1.3.2)
+    redis (3.2.2)
+    require_all (1.3.3)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rmagick (2.15.4)
-    rspec-logsplit (0.1.3)
     ruby-progressbar (1.7.5)
     ruby2ruby (2.2.0)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
-    ruby_parser (3.7.1)
+    ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
-    sass (3.4.18)
+    safe_yaml (1.0.4)
+    sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -360,13 +321,12 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sexp_processor (4.6.0)
-    sidekiq (3.5.0)
-      celluloid (~> 0.17.0)
+    sidekiq (4.0.1)
+      concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
-      redis-namespace (~> 1.5, >= 1.5.2)
-    simple_form (3.1.1)
+    simple_form (3.2.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     simplecov (0.10.0)
@@ -382,20 +342,18 @@ GEM
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
     slop (3.6.0)
-    spring (1.4.0)
-    sprockets (3.3.4)
-      rack (~> 1.0)
+    spring (1.4.4)
+    sprockets (3.4.0)
+      rack (> 1, < 3)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     temple (0.7.6)
-    terminal-table (1.4.5)
+    terminal-table (1.5.2)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
-    timers (4.1.1)
-      hitimes
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -406,12 +364,13 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    unicorn (4.9.0)
+    unicorn (5.0.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
