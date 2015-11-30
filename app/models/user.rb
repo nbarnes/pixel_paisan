@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :pictures, dependent: :destroy
   has_many :galleries, dependent: :destroy
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { case_sensitive: false }
 
   after_create :create_galleries
 

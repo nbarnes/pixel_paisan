@@ -19,6 +19,7 @@ feature 'Pictures' do
     click_on "Galactus the World Devourer's pictures"
     # ???
     # Profit!
+    page.wont_have_content "Delete"
   end
 
   scenario "as an authenticated user, I can branch anybody's pictures" do

@@ -1,7 +1,7 @@
 
 require 'test_helper'
 
-feature 'Authentication' do
+feature 'Users' do
 
   scenario 'existing account successfully logged in' do
     # Given an existing user
