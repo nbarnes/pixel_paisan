@@ -1,7 +1,7 @@
 
 # rubocop:disable Lint/UselessAssignment
 class PngToS3StoreWorker
-  require CloudHelper
+  include CloudHelper
   include Sidekiq::Worker
 
   def perform(file_path)

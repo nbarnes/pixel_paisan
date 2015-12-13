@@ -5,10 +5,15 @@ feature 'Pictures' do
 
   scenario 'as an authenticated user, new pictures I save go to my gallery' do
     login_user
+    visit galleries_path
+    click_on "Tony Stark's pictures"
+    page.wont_have_content 'test_picture'
     visit root_path
-    # do some drawing
-    # save drawing
-    # drawing appears in gallery
+    fill_in 'picture_name_field', with: 'test_picture'
+    click_on 'Save Picture'
+    visit galleries_path
+    click_on "Tony Stark's pictures"
+    page.must_have_css "img#picture_thumbnail"
   end
 
   scenario 'As a picture owner, I can delete my pictures' do

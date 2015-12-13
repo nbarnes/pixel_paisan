@@ -5,6 +5,9 @@ require 'rails/test_help'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
 
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
+
 class ActiveSupport::TestCase
   fixtures :all
   Capybara.javascript_driver = :webkit
