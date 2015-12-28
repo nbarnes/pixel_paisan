@@ -5,8 +5,8 @@ $ ->
 
   (($) ->
     $.fn.visible = (to_show) ->
-      console.log("to_show = #{to_show}")
-      console.log(this)
+      # console.log("to_show = #{to_show}")
+      # console.log(this)
       if to_show == true
         this.show()
       else if to_show == false

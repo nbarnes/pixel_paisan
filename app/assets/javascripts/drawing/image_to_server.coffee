@@ -9,11 +9,7 @@ $ ->
         set_modal_closable()
         ), 300000
       payload = canvas_to_json()
-      entered_picture_name = $('#picture_name_field').val()
-      if entered_picture_name == '<enter picture name>'
-        payload.name = ""
-      else
-        payload.name = entered_picture_name
+      payload.name = $('#picture_name_display').val()
       console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
       payload.picture_id = picture_id
       payload.cell_size = $('#cell_size_field').val()
@@ -62,3 +58,4 @@ $ ->
           console.log('AJAX posting of new image success')
           console.log("Data = #{JSON.stringify(data, undefined, 2)}")
           window.picture_id = data.picture_id
+

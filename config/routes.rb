@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}, :path => "accounts"
 
   resources :users
-  resources :pictures, only: [:show, :destroy, :edit]
+  resources :pictures, only: [:show, :destroy, :edit] do
+    member do
+      post 'change_name', to: 'pictures#change_name', as: 'change_picture_name'
+    end
+  end
   resources :snapshots, only: [:create, :show, :destroy]
   resources :galleries, only: [:show, :index]
   resources :colors, only: [:create, :index, :destroy]
