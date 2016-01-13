@@ -22,8 +22,8 @@ gem 'chunky_png'
 gem 'rmagick', require: 'RMagick'
 gem 'fog'
 gem 'asset_sync'
-gem 'sidekiq'
 
+gem 'sidekiq'
 # Sinatra for the sidekiq web monitor
 gem 'sinatra', require: nil
 
