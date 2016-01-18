@@ -1,3 +1,4 @@
+# rake test TEST=test/integration/galleries_test.rb
 
 require 'test_helper'
 
@@ -11,12 +12,13 @@ feature 'Galleries' do
     visit root_path
     click_on 'Sign up'
     fill_in 'Email', with: 'srogers@usa.gov'
+    fill_in 'Name', with: 'Steve Rogers'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
     find_button('Sign up').click
 
     visit galleries_path
-    page.must_have_content "Steve Rogers' pictures"
+    page.must_have_content "Steve Rogers's pictures"
   end
 
   scenario 'Gallery shows all pictures for a user' do
