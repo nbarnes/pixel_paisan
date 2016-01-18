@@ -24,7 +24,13 @@ class Snapshot < ActiveRecord::Base
   end
 
   def get_file(size_tag)
-    return File.open("#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png") { |io| image = ChunkyPNG::Image.from_io(io) }
+    file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png"
+    if File.exist? file_name
+      file = File.open( file_name ) { |io| image = ChunkyPNG::Image.from_io(io) }
+    else
+      file = image_unavailable(size_tag)
+    end
+    return file
   end
 
   def save_pngs!(pixels)

@@ -7,7 +7,7 @@ class Gallery < ActiveRecord::Base
   validates :user, presence: true
 
   def thumbnail
-		return pictures[0] ? pictures[0].current_version.thumbnail_png : image_unavailable_png
+		return pictures[0] ? pictures[0].current_version.thumbnail_png : image_unavailable('thumbnail')
   end
 
 end
