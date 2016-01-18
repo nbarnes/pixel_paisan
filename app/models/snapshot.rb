@@ -1,5 +1,6 @@
 class Snapshot < ActiveRecord::Base
   include PngHelper
+  include ImageUnavailable
 
   belongs_to :picture, inverse_of: :snapshots
 

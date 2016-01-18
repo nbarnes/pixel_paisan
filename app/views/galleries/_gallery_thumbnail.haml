@@ -1,7 +1,6 @@
 
 .thumbnail_entry
   = link_to gallery_path(gallery) do
-    - unless gallery.pictures.empty?
-      = image_tag gallery.pictures[0].current_version.thumbnail_png.to_data_url, class: "picture_thumbnail"
+    = image_tag gallery.thumbnail.to_data_url, class: "picture_thumbnail"
     %br
     #{gallery.user.display_name}'s pictures

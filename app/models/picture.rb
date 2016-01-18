@@ -1,5 +1,6 @@
 
 class Picture < ActiveRecord::Base
+  include ImageUnavailable
 
   belongs_to :user
   belongs_to :gallery
