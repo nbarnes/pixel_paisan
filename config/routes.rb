@@ -1,4 +1,3 @@
-require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
@@ -19,9 +18,6 @@ Rails.application.routes.draw do
   end
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-  authenticate :user, lambda { |u| u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 
   root 'front_page#welcome'
 

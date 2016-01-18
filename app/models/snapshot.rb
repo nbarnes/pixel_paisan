@@ -29,7 +29,7 @@ class Snapshot < ActiveRecord::Base
   def save_pngs!(pixels)
     File.open("tmp/pixel_files/#{file_prefix}pixel_file.json", 'w+') { |file| file.write(pixels.to_json) }
 
-    PngBuildWorker.perform_async(file_prefix)
+    CreatePngsJob.perform_later file_prefix
   end
 
   def image_data_json

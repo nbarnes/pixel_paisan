@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2'
 
 gem 'pg'
 
@@ -22,10 +22,6 @@ gem 'chunky_png'
 gem 'rmagick', require: 'RMagick'
 gem 'fog'
 gem 'asset_sync'
-
-gem 'sidekiq'
-# Sinatra for the sidekiq web monitor
-gem 'sinatra', require: nil
 
 gem 'devise' # authentication
 gem 'figaro'

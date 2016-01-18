@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150109231611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "colors", force: true do |t|
+  create_table "colors", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "r"
@@ -25,20 +25,20 @@ ActiveRecord::Schema.define(version: 20150109231611) do
     t.float    "a"
   end
 
-  create_table "galleries", force: true do |t|
+  create_table "galleries", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
   end
 
-  create_table "palette_colors", force: true do |t|
+  create_table "palette_colors", force: :cascade do |t|
     t.integer  "palette_id"
     t.integer  "color_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "palettes", force: true do |t|
+  create_table "palettes", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150109231611) do
     t.boolean  "is_default"
   end
 
-  create_table "pictures", force: true do |t|
+  create_table "pictures", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(version: 20150109231611) do
     t.string   "name"
   end
 
-  create_table "snapshots", force: true do |t|
+  create_table "snapshots", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "picture_id"
     t.integer  "cell_size"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
