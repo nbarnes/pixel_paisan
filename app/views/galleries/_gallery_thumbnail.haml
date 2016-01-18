@@ -4,4 +4,4 @@
     - unless gallery.pictures.empty?
       = image_tag gallery.pictures[0].current_version.thumbnail_png.to_data_url, class: "picture_thumbnail"
     %br
-    #{gallery.user.name}'s pictures
+    #{gallery.user.display_name}'s pictures

@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     return role == 'admin'
   end
 
+  def display_name
+    return name.blank? ? email : name
+  end
+
 end
