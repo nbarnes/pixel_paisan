@@ -3,12 +3,6 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :update, :destroy, :edit]
 
   def show
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: @picture.as_json
-      end
-    end
   end
 
   def destroy
@@ -36,11 +30,19 @@ class PicturesController < ApplicationController
   end
 
   def edit
-    unless @picture.user == current_user
-      @picture = @picture.branch(current_user)
-      redirect_to edit_picture_path(@picture)
+    respond_to do |format|
+      format.html do
+        unless @picture.user == current_user
+          @picture = @picture.branch(current_user)
+          redirect_to edit_picture_path(@picture)
+        end
+        @palettes = palettes
+        @picture_id = @picture.id
+      end
+      format.json do
+        render json: @picture.editor_json
+      end
     end
-    @palettes = palettes
   end
 
   def update

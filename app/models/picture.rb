@@ -14,7 +14,7 @@ class Picture < ActiveRecord::Base
     end
   end
 
-  def as_json
+  def editor_json
     snapshot = current_version
     json = Hash.new
     json[:picture_name] = name

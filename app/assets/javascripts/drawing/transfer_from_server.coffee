@@ -7,7 +7,7 @@ $ ->
       resize_canvas_element()
       $('#picture_name_field').val(data.name)
       window.picture_id = data.picture_id
-      console.log("setting window.picture_id, #{picture_id} vs #{data.picture_id}")
+      # console.log("setting window.picture_id, #{picture_id} vs #{data.picture_id}")
       import_image_data(data.image_data)
 
     get_dimension = (image) ->
@@ -25,17 +25,17 @@ $ ->
     # 'dataType' is NOT flagging the data being sent, but rather
     # flagging the expected data response type.
     window.retrieve_picture_from_server = (picture_id) ->
-      $.ajax "/pictures/#{picture_id}",
+      $.ajax "/pictures/#{picture_id}/edit",
         type: 'GET'
         dataType: 'json'
         error: (jqXHR, textStatus, errorThrown) ->
-          console.log('AJAX get of snapshot data failure')
+          console.log('AJAX get of picture data failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
           console.log("#{errorThrown}")
         success: (data, textStatus, jqXHR) ->
-          console.log('AJAX get of snapshot data success')
+          console.log('AJAX get of picture data success')
           import_image(data)
 
   $('.pictures.edit').ready ->
-    retrieve_picture_from_server($('#picture_fetch_id').data('picture-id'))
+    retrieve_picture_from_server($('#painting_application_panel').data('picture-id'))

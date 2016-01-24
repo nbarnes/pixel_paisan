@@ -1,7 +1,7 @@
 class SnapshotsController < ApplicationController
   include PngHelper
 
-  before_action :set_snapshot, only: [:show, :destroy]
+  before_action :set_snapshot, only: [:destroy]
 
   def create
     head :unauthorized unless user_signed_in?
