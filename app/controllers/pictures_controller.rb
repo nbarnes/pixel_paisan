@@ -47,11 +47,12 @@ class PicturesController < ApplicationController
 
   def update
     head :unauthorized unless @picture.user == current_user
-    @picture.name = params[:name] if params[:name]
+    @picture.name = params[:picture_name] if params[:picture_name]
     @picture.add_snapshot(params[:pixel_data], params[:cell_size]) if params[:pixel_data]
-
+    @picture.save!
     render json: {
       message: "Picture update success",
+      picture_name: @picture.name,
       status: 200
     }, status: 200
 

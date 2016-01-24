@@ -13,3 +13,18 @@ $ ->
         this.hide()
       return
     ) jQuery
+
+  window.pixel_paisan_ajax = ({data, url, verb, success_callback, error_callback}) ->
+    $.ajax url,
+      type: verb,
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+      success: (data, textStatus, jqXHR) ->
+        # console.log("data = #{JSON.stringify(data, undefined, 2)}")
+        success_callback(data, textStatus, jqXHR)
+      error: (jqXHR, textStatus, errorThrown) ->
+        # console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
+        # console.log("#{textStatus}")
+        # console.log("#{errorThrown}")
+        error_callback(jqXHR, textStatus, errorThrown)

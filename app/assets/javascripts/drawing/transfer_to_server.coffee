@@ -14,15 +14,27 @@ $ ->
         payload.name = ""
       else
         payload.name = entered_picture_name
-      console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
+      # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
       payload.cell_size = $('#cell_size_field').val()
       payload.picture_id = picture_id
       if picture_id == undefined
-        console.log('POSTing picture')
+        # console.log('POSTing picture')
         post_image(payload)
       else
-        console.log('PATCHing picture')
+        # console.log('PATCHing picture')
         patch_image(payload)
+
+    $('#change_picture_name_button').click (e) ->
+      new_picture_name = window.prompt('Enter a new name for your picture', '').replace(/[^a-zA-Z0-9_]/gi, '')
+      if not new_picture_name
+        new_picture_name = 'unnamed_picture'
+      if picture_id == undefined
+        $('#picture_name_display').html(new_picture_name)
+      else
+        payload = {}
+        payload.picture_name = new_picture_name
+        payload.picture_id = picture_id
+        patch_picture_name( payload )
 
     canvas_to_json = () ->
       image = {}
@@ -47,44 +59,51 @@ $ ->
     # sending JSON, we are expecting an HTML response (either 200
     # ok or 500 internal_server_error otherwise empty headers)
     post_image = (payload) ->
-      $.ajax "/pictures",
-        type: 'POST'
-        data: JSON.stringify(payload)
-        dataType: 'json'
-        contentType: 'application/json'
-        error: (jqXHR, textStatus, errorThrown) ->
-          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
-          set_modal_closable()
-          clearTimeout(saving_picture_modal_timeout)
-          console.log('AJAX posting of new image failure')
-          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-          console.log("#{textStatus}")
-          console.log("#{errorThrown}")
-        success: (data, textStatus, jqXHR) ->
+      pixel_paisan_ajax(
+        data: payload
+        url: '/pictures'
+        verb: 'POST'
+        success_callback: (data, textStatus, jqXHR) ->
+          console.log('AJAX POSTing of new image success')
           $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
-          console.log('AJAX posting of new image success')
-          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
           window.picture_id = data.picture_id
+        error_callback: (jqXHR, textStatus, errorThrown) ->
+          console.log('AJAX POSTing of new image failure')
+          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
+      )
 
     patch_image = (payload) ->
-      $.ajax "/pictures/#{payload.picture_id}",
-        type: 'PATCH'
-        data: JSON.stringify(payload)
-        dataType: 'json'
-        contentType: 'application/json'
-        error: (jqXHR, textStatus, errorThrown) ->
-          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
-          set_modal_closable()
-          clearTimeout(saving_picture_modal_timeout)
-          console.log('AJAX patching of existing image failure')
-          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-          console.log("#{textStatus}")
-          console.log("#{errorThrown}")
-        success: (data, textStatus, jqXHR) ->
+      pixel_paisan_ajax(
+        data: payload
+        url: "/pictures/#{payload.picture_id}"
+        verb: 'PATCH'
+        success_callback: (data, textStatus, jqXHR) ->
+          console.log('AJAX PATCHing of existing image success')
           $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
-          console.log('AJAX patching of existing image success')
-          console.log("Data = #{JSON.stringify(data, undefined, 2)}")
+        error_callback: (jqXHR, textStatus, errorThrown) ->
+          console.log('AJAX PATCHing of existing image failure')
+          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
+      )
+
+    patch_picture_name = (payload) ->
+      pixel_paisan_ajax(
+        data: payload
+        url: "/pictures/#{payload.picture_id}"
+        verb: 'PATCH'
+        success_callback: (data, textStatus, jqXHR) ->
+          console.log('AJAX PATCHing of picture name success')
+          $('#picture_name_display').html(data.picture_name)
+        error_callback: (jqXHR, textStatus, errorThrown) ->
+          console.log('AJAX PATCHing of picture name error')
+      )
+
+
+
