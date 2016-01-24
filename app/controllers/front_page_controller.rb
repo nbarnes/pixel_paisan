@@ -1,7 +1,7 @@
 class FrontPageController < ApplicationController
 
   def welcome
-    @palettes = palettes
+    @palettes = user_palettes
     @picture_id = nil
   end
 

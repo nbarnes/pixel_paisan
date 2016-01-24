@@ -5,7 +5,7 @@ $ ->
       $('#cell_size_field').val(data.cell_size)
       $('#canvas_size_in_cells_field').val(get_dimension(data.image_data))
       resize_canvas_element()
-      $('#picture_name_field').val(data.name)
+      $('#picture_name_display').html(data.name)
       window.picture_id = data.picture_id
       # console.log("setting window.picture_id, #{picture_id} vs #{data.picture_id}")
       import_image_data(data.image_data)

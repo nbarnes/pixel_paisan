@@ -1,5 +1,13 @@
 
 #painting_application_panel{:data => {:picture_id => @picture_id}}
+
+  %span#picture_name_display
+    new_picture
+  %input{:type => 'button', :value => 'Change Name', :id => 'change_picture_name_button'}
+
+
+  %br
+
   %span#painting_canvas_size_display
     Current canvas size: x
     %span#painting_canvas_width
@@ -25,11 +33,6 @@
   - if user_signed_in?
     %input{:type => 'button', :value => 'Save Picture', :id => 'save_picture_button'}
   %input{:type => 'button', :value => 'Create New', :id => 'create_new_button'}
-
-  %br
-
-  Picture Name:
-  %input{:type => 'text', :value => 'image', :id => 'picture_name_field'}
 
   %br
 

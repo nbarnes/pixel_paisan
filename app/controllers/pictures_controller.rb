@@ -36,7 +36,7 @@ class PicturesController < ApplicationController
           @picture = @picture.branch(current_user)
           redirect_to edit_picture_path(@picture)
         end
-        @palettes = palettes
+        @palettes = user_palettes
         @picture_id = @picture.id
       end
       format.json do
