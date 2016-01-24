@@ -1,7 +1,7 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $('#upload_button').click () ->
+    $('#save_picture_button').click () ->
       $("#picture_saved_modal").modal({overlayClose: false})
       $("#picture_saved_modal").text('Your picture is being saved.  This may take a few moments.')
       window.saving_picture_modal_timeout = setTimeout ( ->
@@ -15,19 +15,24 @@ $ ->
       else
         payload.name = entered_picture_name
       console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
-      payload.picture_id = picture_id
       payload.cell_size = $('#cell_size_field').val()
-      post_image(payload)
+      payload.picture_id = picture_id
+      if picture_id == undefined
+        console.log('POSTing picture')
+        post_image(payload)
+      else
+        console.log('PATCHing picture')
+        patch_image(payload)
 
     canvas_to_json = () ->
       image = {}
-      image.image_data = []
+      image.pixel_data = []
 
       for x in [0...canvas_size_in_cells()]
-        image.image_data.push( [] )
+        image.pixel_data.push( [] )
         for y in [0...canvas_size_in_cells()]
           cell = cells[x][y]
-          image.image_data[x].push(cell.my_color)
+          image.pixel_data[x].push(cell.my_color)
 
       return image
 
@@ -42,7 +47,7 @@ $ ->
     # sending JSON, we are expecting an HTML response (either 200
     # ok or 500 internal_server_error otherwise empty headers)
     post_image = (payload) ->
-      $.ajax "/snapshots",
+      $.ajax "/pictures",
         type: 'POST'
         data: JSON.stringify(payload)
         dataType: 'json'
@@ -62,3 +67,24 @@ $ ->
           console.log('AJAX posting of new image success')
           console.log("Data = #{JSON.stringify(data, undefined, 2)}")
           window.picture_id = data.picture_id
+
+    patch_image = (payload) ->
+      $.ajax "/pictures/#{payload.picture_id}",
+        type: 'PATCH'
+        data: JSON.stringify(payload)
+        dataType: 'json'
+        contentType: 'application/json'
+        error: (jqXHR, textStatus, errorThrown) ->
+          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
+          console.log('AJAX patching of existing image failure')
+          console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
+          console.log("#{textStatus}")
+          console.log("#{errorThrown}")
+        success: (data, textStatus, jqXHR) ->
+          $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
+          console.log('AJAX patching of existing image success')
+          console.log("Data = #{JSON.stringify(data, undefined, 2)}")

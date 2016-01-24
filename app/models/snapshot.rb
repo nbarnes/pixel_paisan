@@ -55,7 +55,7 @@ class Snapshot < ActiveRecord::Base
     return image_data
   end
 
-  def copy_for_branch(new_pic)
+  def branch(new_pic)
     new_ss = Snapshot.new
     new_ss.cell_size = cell_size
     %w('original', 'thumbnail', 'display').each do |tag|

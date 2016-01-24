@@ -24,16 +24,24 @@ class Picture < ActiveRecord::Base
     return json
   end
 
-  def copy_for_branch(current_user)
+  def branch(current_user)
     pic = Picture.create
     pic.name = name
     pic.gallery = current_user.galleries[0]
     pic.user = current_user
-    new_snapshot = current_version.copy_for_branch()
+    new_snapshot = current_version.branch()
     new_snapshot.picture_id = pic.id
     pic.current_version = new_snapshot
     pic.save!
     return pic
+  end
+
+  def add_snapshot(pixel_data, cell_size)
+    snapshot = Snapshot.new()
+    snapshot.picture = self
+    snapshot.cell_size = cell_size
+    snapshot.save!
+    snapshot.save_pngs!(pixel_data)
   end
 
 end
