@@ -38,6 +38,7 @@ group :test, :development do
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
   gem 'rails_best_practices'
+  gem 'quiet_assets'
 end
 
 group :development do
