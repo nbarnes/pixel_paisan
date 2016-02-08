@@ -16,6 +16,17 @@ WHERE
 =====
 Live builds of Pixel Paisan can be found at http://pixel-paisan.herokuapp.com. The github repo is at https://github.com/nbarnes/pixel_paisan.
 
+CONTRIBUTOR COVENANT
+====================
+In the interest of fostering an open and welcoming environment, we as
+contributors and maintainers pledge to making participation in our project and
+our community a harassment-free experience for everyone, regardless of age, body
+size, disability, ethnicity, gender identity and expression, level of experience,
+nationality, personal appearance, race, religion, or sexual identity and
+orientation.
+
+Read more about the Contributor Covenant Code of Conduct at http://contributor-covenant.org.
+
 ABOUT ME
 ========
 My name is Nathaniel Barnes, and I am a software developer living in Seattle, WA with five family members, four horses, five cats, and eleven chickens. I enjoy making software tools, drinking chai, and watching chickens. I also like making pixel art, as this application suggests. I can be reached at nbarnes@gmail.com, found on Twitter as @foxbarnes, or at my professional portfolio site www.alightsabermind.com.
