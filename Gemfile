@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '4.2'
+gem 'rails', '~> 4.2'
 
 gem 'pg'
 
@@ -29,7 +29,9 @@ gem 'simple_form'
 
 # gem 'sdoc', '~> 0.4.0',          group: :doc
 
-gem 'rails_12factor' # for Heroku
+group :production do
+  gem 'rails_12factor' # for Heroku
+end
 
 group :test, :development do
   gem 'jasmine-rails'

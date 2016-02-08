@@ -1,5 +1,5 @@
 
-#painting_application_panel{:data => {:picture_id => @picture_id}}
+#painting_application_panel{data: {picture_id: @picture_id, user_logged_in: has_logged_in_user}}
 
   %span#picture_name_display> new_picture
   %input{:type => 'button', :value => 'Change Name', :id => 'change_picture_name_button'}
@@ -28,8 +28,7 @@
 
   %input{:type => 'button', :value => 'Clear', :id => 'canvas_clear_button'}
   %input{:type => 'button', :value => 'Undo', :id => 'undo_button'}
-  - if user_signed_in?
-    %input{:type => 'button', :value => 'Save Picture', :id => 'save_picture_button'}
+  %input{:type => 'button', :value => 'Save Picture', :id => 'save_picture_button'}
   %input{:type => 'button', :value => 'Create New', :id => 'create_new_button'}
 
   %br
@@ -43,7 +42,16 @@
   #link_to_palettes_index
     = link_to 'Palette Editors', palettes_path
 
-  #picture_saved_modal
-    This is content for the picture saved modal window.
+  #editor_modal_container.modal_container
 
-  = render 'editor/new_user_save_modal'
+    #picture_saving_pane.modal_content_pane
+      Your picture is being saved.  This may take a few moments.
+    #picture_saved_pane.modal_content_pane
+      Your picture has been successfully saved. Click anywhere to close this window.
+    #upload_timeout_pane.modal_content_pane
+      It is taking a long time to communicate with the Pixel Paisan server to save your picture. Your internet connection may have been interrupted. Click anywhere to close this window.
+    #picture_upload_error_pane.modal_content_pane
+      An error occured while uploading the picture.
+
+    #log_in_to_save_pane.modal_content_pane
+      You must be logged in to save your work.

@@ -2,27 +2,11 @@ $ ->
   $('#painting_application_panel').ready ->
 
     $('#save_picture_button').click () ->
-      $("#picture_saved_modal").modal({overlayClose: false})
-      $("#picture_saved_modal").text('Your picture is being saved.  This may take a few moments.')
-      window.saving_picture_modal_timeout = setTimeout ( ->
-        $("#picture_saved_modal").text('It is taking a long time to communicate with the Pixel Paisan server to save your picture. Your internet connection may have been interrupted. Click anywhere to close this window.')
-        set_modal_closable()
-        ), 300000
-      payload = canvas_to_json()
-      entered_picture_name = $('#picture_name_field').val()
-      if entered_picture_name == '<enter picture name>'
-        payload.name = ""
+      if a_user_is_logged_in()
+        save_picture_to_server()
       else
-        payload.name = entered_picture_name
-      # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
-      payload.cell_size = $('#cell_size_field').val()
-      payload.picture_id = picture_id
-      if picture_id == undefined
-        # console.log('POSTing picture')
-        post_image(payload)
-      else
-        # console.log('PATCHing picture')
-        patch_image(payload)
+        $('#editor_modal_container').modal({overlayClose: true})
+        show_modal_pane('log_in_to_save_pane')
 
     $('#change_picture_name_button').click (e) ->
       new_picture_name = window.prompt('Enter a new name for your picture', '').replace(/[^a-zA-Z0-9_]/gi, '')
@@ -35,6 +19,29 @@ $ ->
         payload.picture_name = new_picture_name
         payload.picture_id = picture_id
         patch_picture_name( payload )
+
+    save_picture_to_server = () ->
+        $("#editor_modal_container").modal({overlayClose: false})
+        show_modal_pane('picture_saving_pane')
+        window.saving_picture_modal_timeout = setTimeout ( ->
+          show_modal_pane('upload_timeout_pane')
+          set_modal_closable()
+          ), 300000
+        payload = canvas_to_json()
+        entered_picture_name = $('#picture_name_field').val()
+        if entered_picture_name == '<enter picture name>'
+          payload.name = ""
+        else
+          payload.name = entered_picture_name
+        # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
+        payload.cell_size = $('#cell_size_field').val()
+        payload.picture_id = picture_id
+        if picture_id == undefined
+          # console.log('POSTing picture')
+          post_image(payload)
+        else
+          # console.log('PATCHing picture')
+          patch_image(payload)
 
     canvas_to_json = () ->
       image = {}
@@ -65,13 +72,13 @@ $ ->
         verb: 'POST'
         success_callback: (data, textStatus, jqXHR) ->
           console.log('AJAX POSTing of new image success')
-          $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
+          show_modal_pane('picture_saved_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
           window.picture_id = data.picture_id
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX POSTing of new image failure')
-          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          show_modal_pane('picture_upload_error_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
       )
@@ -83,12 +90,12 @@ $ ->
         verb: 'PATCH'
         success_callback: (data, textStatus, jqXHR) ->
           console.log('AJAX PATCHing of existing image success')
-          $("#picture_saved_modal").text('Your picture has been successfully saved. Click anywhere to close this window.')
+          show_modal_pane('picture_saved_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX PATCHing of existing image failure')
-          $("#picture_saved_modal").text("An error occured while saving your picture: #{errorThrown}")
+          show_modal_pane('picture_upload_error_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
       )
@@ -105,5 +112,11 @@ $ ->
           console.log('AJAX PATCHing of picture name error')
       )
 
+    a_user_is_logged_in = () ->
+      return $('#painting_application_panel').data('user-logged-in')
+
+    show_modal_pane = (id_to_show) ->
+      $('.modal_content_pane').hide()
+      $('#' + id_to_show).show()
 
 

@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  respond_to :json
+  # respond_to :json
 
   private
 

@@ -12,4 +12,3 @@
 //= require ./mouse_event_handling
 //= require ./buttons
 //= require ./color_picker
-//= require ./user_sessions_modal
