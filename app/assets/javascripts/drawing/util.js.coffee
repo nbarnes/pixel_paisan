@@ -24,7 +24,7 @@ $ ->
       #   req.setRequestHeader('Accept', 'application/json');
       success: (data, textStatus, jqXHR) ->
         console.log('pixel_paisan_ajax success callback execution')
-        # console.log("returned data = #{JSON.stringify(data, undefined, 2)}")
+        console.log("returned data = #{JSON.stringify(data, undefined, 2)}")
         # console.log(textStatus)
         # console.log(jqXHR)
         # console.log(jqXHR.getAllResponseHeaders())

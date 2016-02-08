@@ -28,11 +28,7 @@ $ ->
           set_modal_closable()
           ), 300000
         payload = canvas_to_json()
-        entered_picture_name = $('#picture_name_field').val()
-        if entered_picture_name == '<enter picture name>'
-          payload.name = ""
-        else
-          payload.name = entered_picture_name
+        payload.name = $('#picture_name_display').html()
         # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
         payload.cell_size = $('#cell_size_field').val()
         payload.picture_id = picture_id
@@ -89,7 +85,7 @@ $ ->
         url: "/pictures/#{payload.picture_id}"
         verb: 'PATCH'
         success_callback: (data, textStatus, jqXHR) ->
-          console.log('AJAX PATCHing of existing image success')
+          # console.log('AJAX PATCHing of existing image success')
           show_modal_pane('picture_saved_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
@@ -106,7 +102,7 @@ $ ->
         url: "/pictures/#{payload.picture_id}"
         verb: 'PATCH'
         success_callback: (data, textStatus, jqXHR) ->
-          console.log('AJAX PATCHing of picture name success')
+          # console.log('AJAX PATCHing of picture name success')
           $('#picture_name_display').html(data.picture_name)
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX PATCHing of picture name error')

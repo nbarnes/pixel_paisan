@@ -24,7 +24,8 @@ class PicturesController < ApplicationController
     render json: {
       message: "Picture creation success",
       status: 200,
-      picture_id: picture.id
+      picture_id: picture.id,
+      picture_name: picture.name
     }, status: 200
 
   end
