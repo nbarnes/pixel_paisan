@@ -17,10 +17,7 @@ class CreatePngsJob < ActiveJob::Base
     thumbnail_file_name = "#{file_prefix}thumbnail.png"
     display_file_name = "#{file_prefix}display.png"
 
-    original_png_path = "#{ENV['PNG_STORE_DIR']}/#{original_file_name}"
-    puts original_png_path
-    original_png.save(original_png_path)
-
+    original_png.save("#{ENV['PNG_STORE_DIR']}/#{original_file_name}")
     thumbnail_png.save("#{ENV['PNG_STORE_DIR']}/#{thumbnail_file_name}")
     display_png.save("#{ENV['PNG_STORE_DIR']}/#{display_file_name}")
 

@@ -5,20 +5,25 @@ class StorePngToS3Job < ActiveJob::Base
 
   def perform(file_path)
 
-  	puts 'performing StorePngToS3Job'
+    if Rails.env.development? || Rails.env.test?
+      directory = local_fog_connection.directories.get(ENV['S3_BUCKET_NAME'])
+    else
+      directory = s3_fog_connection.directories.get(ENV['S3_BUCKET_NAME'])
+    end
 
-    # directory = fog_connection.directories.get(ENV['S3_BUCKET_NAME'])
-    # %w('original', 'thumbnail', 'display').each do |tag|
-    #   puts "file name = #{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png"
-    #   file = File.open("#{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png") do |io|
-    #     image = ChunkyPNG::Image.from_io(io)
-    #   end
-    #   remote_file = directory.files.create(
-    #     key:    "#{file_path}#{tag}.png",
-    #     body:   file.to_blob,
-    #     public: false
-    #   )
-    # end
+    binding.pry
+
+    %w(original thumbnail display).each do |tag|
+      puts "file name = #{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png"
+      file = File.open("#{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png") do |io|
+        image = ChunkyPNG::Image.from_io(io)
+      end
+      remote_file = directory.files.create(
+        key:    "#{file_path}#{tag}.png",
+        body:   file.to_blob,
+        public: false
+      )
+    end
 
   end
 
