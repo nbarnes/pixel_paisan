@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 20150109231611) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "picture_id"
+    t.string   "encoded_original_png"
+    t.string   "encoded_thumbnail_png"
+    t.string   "encoded_display_png"
     t.integer  "cell_size"
   end
 

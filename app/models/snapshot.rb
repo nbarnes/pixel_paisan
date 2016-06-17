@@ -1,12 +1,35 @@
 class Snapshot < ActiveRecord::Base
   include PngHelper
-  include CloudHelper
   include ImageUnavailable
 
   belongs_to :picture, inverse_of: :snapshots
 
   validates :picture, presence: true
   validates :cell_size, numericality: { less_than_or_equal_to: 50 }
+
+  def test_after_create
+    puts 'this fired during the after_create hook'
+  end
+
+  def populate(pixel_data, cell_size)
+    self.cell_size = cell_size
+
+    original_png = build_png(pixel_data)
+    thumbnail_png = get_resized_png(original_png, 128)
+    display_png = get_resized_png(original_png, 512)
+
+    original_file_name = "#{file_prefix}original.png"
+    thumbnail_file_name = "#{file_prefix}thumbnail.png"
+    display_file_name = "#{file_prefix}display.png"
+
+    original_png.save("#{ENV['PNG_STORE_DIR']}/#{original_file_name}")
+    thumbnail_png.save("#{ENV['PNG_STORE_DIR']}/#{thumbnail_file_name}")
+    display_png.save("#{ENV['PNG_STORE_DIR']}/#{display_file_name}")
+
+    encoded_original_png = original_png.to_blob
+    encoded_thumbnail_png = thumbnail_png.to_blob
+    encoded_display_png = display_png.to_blob
+  end
 
   def original_png
     get_file('original')
@@ -34,11 +57,11 @@ class Snapshot < ActiveRecord::Base
     return file
   end
 
-  def save_pngs!(pixels)
-    File.open("tmp/pixel_files/#{file_prefix}pixel_file.json", 'w+') { |file| file.write(pixels.to_json) }
+  # def save_pngs!(pixels)
+  #   File.open("tmp/pixel_files/#{file_prefix}pixel_file.json", 'w+') { |file| file.write(pixels.to_json) }
 
-    CreatePngsJob.perform_later file_prefix
-  end
+  #   CreatePngsJob.perform_later file_prefix
+  # end
 
   def image_data_json
     image_data = []

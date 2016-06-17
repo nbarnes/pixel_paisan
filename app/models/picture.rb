@@ -1,6 +1,7 @@
 
 class Picture < ActiveRecord::Base
   include ImageUnavailable
+  include PngHelper
 
   belongs_to :user
   belongs_to :gallery
@@ -27,8 +28,8 @@ class Picture < ActiveRecord::Base
   def branch(current_user)
     pic = Picture.create
     pic.name = name
-    pic.gallery = current_user.galleries[0]
     pic.user = current_user
+    pic.gallery = current_user.galleries[0]
     new_snapshot = current_version.branch()
     new_snapshot.picture_id = pic.id
     pic.current_version = new_snapshot
@@ -39,9 +40,8 @@ class Picture < ActiveRecord::Base
   def add_snapshot(pixel_data, cell_size)
     snapshot = Snapshot.new()
     snapshot.picture = self
-    snapshot.cell_size = cell_size
     snapshot.save!
-    snapshot.save_pngs!(pixel_data)
+    snapshot.populate(pixel_data, cell_size)
   end
 
 end
