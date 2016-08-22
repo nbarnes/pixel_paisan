@@ -4,15 +4,16 @@ module PngHelper
   require 'rmagick'
   require 'chunky_png/rmagick'
 
-  def build_png(rgba)
-    png_dimension = rgba.size
+  def build_png(pixels)
+    png_dimension = pixels.size
     png = ChunkyPNG::Image.new(png_dimension, png_dimension, ChunkyPNG::Color::TRANSPARENT)
 
-    rgba.each_with_index do |line, x|
+    pixels.each_with_index do |line, x|
       line.each_with_index do |column, y|
-        png[x,y] = build_ChunkyPNG_color(rgba[x][y])
+        png[x,y] = build_ChunkyPNG_color(pixels[x][y])
       end
     end
+
     return png
   end
 

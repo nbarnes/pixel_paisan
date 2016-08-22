@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109231611) do
+ActiveRecord::Schema.define(version: 20141125225339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,11 +57,13 @@ ActiveRecord::Schema.define(version: 20150109231611) do
   create_table "snapshots", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "picture_id"
-    t.string   "encoded_original_png"
-    t.string   "encoded_thumbnail_png"
-    t.string   "encoded_display_png"
-    t.integer  "cell_size"
+    t.integer  "picture_id",          null: false
+    t.integer  "cell_size",           null: false
+    t.integer  "original_png_width",  null: false
+    t.integer  "original_png_height", null: false
+    t.binary   "original_png_blob",   null: false
+    t.binary   "thumbnail_png_blob",  null: false
+    t.binary   "display_png_blob",    null: false
   end
 
   create_table "users", force: :cascade do |t|

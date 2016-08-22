@@ -11,8 +11,6 @@ class StorePngToS3Job < ActiveJob::Base
       directory = s3_fog_connection.directories.get(ENV['S3_BUCKET_NAME'])
     end
 
-    binding.pry
-
     %w(original thumbnail display).each do |tag|
       puts "file name = #{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png"
       file = File.open("#{ENV['PNG_STORE_DIR']}/#{file_path}#{tag}.png") do |io|

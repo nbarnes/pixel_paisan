@@ -18,7 +18,7 @@ class PicturesController < ApplicationController
     picture.name = params[:name]
     picture.user_id = current_user.id
     picture.gallery = current_user.galleries[0]
-    picture.add_snapshot(params[:pixel_data], params[:cell_size]) if params[:pixel_data]
+    picture.add_snapshot(params) if params[:pixels]
     picture.save!
 
     render json: {
@@ -49,7 +49,7 @@ class PicturesController < ApplicationController
   def update
     head :unauthorized unless @picture.user == current_user
     @picture.name = params[:picture_name] if params[:picture_name]
-    @picture.add_snapshot(params[:pixel_data], params[:cell_size]) if params[:pixel_data]
+    @picture.add_snapshot(params) if params[:pixels]
     @picture.save!
     render json: {
       message: "Picture update success",
@@ -65,7 +65,7 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params[:picture].permit(:name, :pixel_data)
+      params[:picture].permit(:name)
     end
 
 end

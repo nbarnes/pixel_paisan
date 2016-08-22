@@ -41,13 +41,13 @@ $ ->
 
     canvas_to_json = () ->
       image = {}
-      image.pixel_data = []
+      image.pixels = []
 
       for x in [0...canvas_size_in_cells()]
-        image.pixel_data.push( [] )
+        image.pixels.push( [] )
         for y in [0...canvas_size_in_cells()]
           cell = cells[x][y]
-          image.pixel_data[x].push(cell.my_color)
+          image.pixels[x].push(cell.my_color)
 
       return image
 

@@ -24,7 +24,7 @@ module PixelPaisan
 
     Figaro.load
     FileUtils.mkdir_p(ENV['PNG_STORE_DIR']) unless File.directory?(ENV['PNG_STORE_DIR'])
-    FileUtils.mkdir_p('tmp/pixel_files') unless File.directory?('tmp/pixel_files')
+    # FileUtils.mkdir_p('tmp/pixel_files') unless File.directory?('tmp/pixel_files')
 
   end
 end

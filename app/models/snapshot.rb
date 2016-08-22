@@ -7,40 +7,37 @@ class Snapshot < ActiveRecord::Base
   validates :picture, presence: true
   validates :cell_size, numericality: { less_than_or_equal_to: 50 }
 
-  def test_after_create
-    puts 'this fired during the after_create hook'
-  end
+  def initialize(opts = {})
 
-  def populate(pixel_data, cell_size)
-    self.cell_size = cell_size
+    pixels = opts[:pixels]
 
-    original_png = build_png(pixel_data)
-    thumbnail_png = get_resized_png(original_png, 128)
-    display_png = get_resized_png(original_png, 512)
+    super opts.except! :pixels
 
-    original_file_name = "#{file_prefix}original.png"
-    thumbnail_file_name = "#{file_prefix}thumbnail.png"
-    display_file_name = "#{file_prefix}display.png"
+    if pixels
+      original_png = build_png(pixels)
+      thumbnail_png = get_resized_png(original_png, THUMBNAIL_SIZE)
+      display_png = get_resized_png(original_png, DISPLAY_SIZE)
 
-    original_png.save("#{ENV['PNG_STORE_DIR']}/#{original_file_name}")
-    thumbnail_png.save("#{ENV['PNG_STORE_DIR']}/#{thumbnail_file_name}")
-    display_png.save("#{ENV['PNG_STORE_DIR']}/#{display_file_name}")
+      self.original_png_width = pixels.size
+      self.original_png_height = pixels[0].size
 
-    encoded_original_png = original_png.to_blob
-    encoded_thumbnail_png = thumbnail_png.to_blob
-    encoded_display_png = display_png.to_blob
+      self.original_png_blob = original_png.to_abgr_stream
+      self.thumbnail_png_blob = thumbnail_png.to_abgr_stream
+      self.display_png_blob = display_png.to_abgr_stream
+    end
+
   end
 
   def original_png
-    get_file('original')
+    get_file(ENV['ORIGINAL_SIZE_TAG'])
   end
 
   def thumbnail_png
-    get_file('thumbnail')
+    get_file(ENV['THUMBNAIL_SIZE_TAG'])
   end
 
   def display_png
-    get_file('display')
+    get_file(ENV['DISPLAY_SIZE_TAG'])
   end
 
   def file_prefix
@@ -48,47 +45,48 @@ class Snapshot < ActiveRecord::Base
   end
 
   def get_file(size_tag)
-    file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png"
-    if File.exist? file_name
-      file = File.open( file_name ) { |io| image = ChunkyPNG::Image.from_io(io) }
-    else
-      file = image_unavailable(size_tag)
-    end
-    return file
+    file_path = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png"
+    make_pngs unless File.exist? file_path
+    return File.open( file_path ) { |io| image = ChunkyPNG::Image.from_io(io) }
   end
 
-  # def save_pngs!(pixels)
-  #   File.open("tmp/pixel_files/#{file_prefix}pixel_file.json", 'w+') { |file| file.write(pixels.to_json) }
+  def make_pngs
+    original_png = ChunkyPNG::Image.from_abgr_stream(original_png_width, original_png_height, original_png_blob)
+    thumbnail_png = ChunkyPNG::Image.from_abgr_stream(THUMBNAIL_SIZE, THUMBNAIL_SIZE, thumbnail_png_blob)
+    display_png = ChunkyPNG::Image.from_abgr_stream(DISPLAY_SIZE, DISPLAY_SIZE, display_png_blob)
 
-  #   CreatePngsJob.perform_later file_prefix
-  # end
+    original_file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{ENV['ORIGINAL_SIZE_TAG']}.png"
+    thumbnail_file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{ENV['THUMBNAIL_SIZE_TAG']}.png"
+    display_file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{ENV['DISPLAY_SIZE_TAG']}.png"
 
-  def image_data_json
+    original_png.save(original_file_name)
+    thumbnail_png.save(thumbnail_file_name)
+    display_png.save(display_file_name)
+  end
+
+  def image_json
     image_data = []
     png = original_png
-
     dimension = png.height
-
     dimension.times do |x|
       image_data.push []
       dimension.times do |y|
         image_data[x][y] = extract_ChunkyPNG_color(png.pixels[(dimension * y + x)])
       end
     end
-
     return image_data
   end
 
-  def branch(new_pic)
-    new_ss = Snapshot.new
-    new_ss.cell_size = cell_size
-    %w('original', 'thumbnail', 'display').each do |tag|
-      src_name = "#{ENV['PNG_STORE_DIR']}/#{file_name(tag)}"
-      dest_name = "#{ENV['PNG_STORE_DIR']}/#{new_ss.file_name(size_tag)}"
-      File.copy(src_name, dest_name)
-    end
-    new_ss.save!
-    return new_ss
-  end
+  # def branch(new_pic)
+  #   new_ss = Snapshot.new
+  #   new_ss.cell_size = cell_size
+  #   %w('original', 'thumbnail', 'display').each do |tag|
+  #     src_name = "#{ENV['PNG_STORE_DIR']}/#{file_name(tag)}"
+  #     dest_name = "#{ENV['PNG_STORE_DIR']}/#{new_ss.file_name(size_tag)}"
+  #     File.copy(src_name, dest_name)
+  #   end
+  #   new_ss.save!
+  #   return new_ss
+  # end
 
 end

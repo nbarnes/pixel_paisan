@@ -20,7 +20,7 @@ class SnapshotsController < ApplicationController
 
     # Do we really need this if we're never creating via controller action?
     def snapshot_params
-      params[:snapshot].permit(:image_data)
+      params[:snapshot].permit(:pixels)
     end
 
 end
