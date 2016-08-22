@@ -3,7 +3,7 @@ class CreatePaletteColors < ActiveRecord::Migration
     create_table :palette_colors do |t|
       t.integer :palette_id, null: :false
       t.integer :color_id, null: :false
-      t.timestamps
+      t.timestamps, null: :false
     end
   end
 end
