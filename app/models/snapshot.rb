@@ -77,16 +77,21 @@ class Snapshot < ActiveRecord::Base
     return image_data
   end
 
-  # def branch(new_pic)
-  #   new_ss = Snapshot.new
-  #   new_ss.cell_size = cell_size
-  #   %w('original', 'thumbnail', 'display').each do |tag|
-  #     src_name = "#{ENV['PNG_STORE_DIR']}/#{file_name(tag)}"
-  #     dest_name = "#{ENV['PNG_STORE_DIR']}/#{new_ss.file_name(size_tag)}"
-  #     File.copy(src_name, dest_name)
-  #   end
-  #   new_ss.save!
-  #   return new_ss
-  # end
+  def branch(new_pic)
+    new_ss = Snapshot.new({
+
+      riginal_png_width: self.original_png_width,
+      original_png_height: self.original_png_height,
+
+      original_png_blob: self.original_png_blob,
+      thumbnail_png_blob: self.thumbnail_png_blob,
+      display_png_blob: self.display_png_blob,
+
+      cell_size: self.cell_size,
+      picture: new_pic
+    })
+    new_ss.save!
+    return new_ss
+  end
 
 end
