@@ -2,8 +2,8 @@
 class CreateSnapshots < ActiveRecord::Migration
   def change
     create_table :snapshots do |t|
-      t.timestamps, null: :false
-      t.integer :picture_id, null: false
+      t.timestamps
+      t.integer :picture_id, null: false, index: true
       t.integer :cell_size, null: false
 
       t.integer :original_png_width, null: false

@@ -31,12 +31,17 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.integer  "user_id"
   end
 
+  add_index "galleries", ["user_id"], name: "index_galleries_on_user_id", using: :btree
+
   create_table "palette_colors", force: :cascade do |t|
     t.integer  "palette_id"
     t.integer  "color_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "palette_colors", ["color_id"], name: "index_palette_colors_on_color_id", using: :btree
+  add_index "palette_colors", ["palette_id"], name: "index_palette_colors_on_palette_id", using: :btree
 
   create_table "palettes", force: :cascade do |t|
     t.datetime "created_at"
@@ -54,6 +59,9 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.string   "name"
   end
 
+  add_index "pictures", ["gallery_id"], name: "index_pictures_on_gallery_id", using: :btree
+  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
+
   create_table "snapshots", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,6 +73,8 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.binary   "thumbnail_png_blob",  null: false
     t.binary   "display_png_blob",    null: false
   end
+
+  add_index "snapshots", ["picture_id"], name: "index_snapshots_on_picture_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
