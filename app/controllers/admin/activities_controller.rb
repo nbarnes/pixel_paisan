@@ -1,1 +1,5 @@
-activities_controller.rb
+module Admin
+  class ActivitiesController < ApplicationController
+
+  end
+end
