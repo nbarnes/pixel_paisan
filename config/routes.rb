@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+   resources :users
+  end
+
+
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   root 'front_page#welcome'

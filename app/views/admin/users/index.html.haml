@@ -1,0 +1,21 @@
+- @users.each do |user|
+  = user.name
+  %br
+  = "Created on: #{user.created_at.strftime('%m/%d/%Y')}"
+  %br
+  Picture count:
+  - @picture_counts.each_pair do |user_id, pictures_count|
+    - if user_id == user.id
+      = pictures_count
+    - else
+      = 0
+  %br
+  Snapshot count:
+  - @snapshot_counts.each_pair do |user_id, snapshot_count|
+    - if user_id == user.id
+      = snapshot_count
+    - else
+      = 0
+  %br
+
+  %br
