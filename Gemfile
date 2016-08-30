@@ -1,10 +1,11 @@
 
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 gem 'rails', '~> 4.2'
 
 gem 'pg'
+gem 'scenic'
 
 gem 'sass-rails'
 gem 'uglifier'
@@ -20,22 +21,16 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
 gem 'rmagick', require: 'RMagick'
-gem 'fog'
-gem 'asset_sync'
 
 gem 'devise' # authentication
 gem 'figaro'
 gem 'simple_form'
-
-# gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :production do
   gem 'rails_12factor' # for Heroku
 end
 
 group :test, :development do
-  gem 'jasmine-rails'
-  gem 'jasmine-jquery-rails'
   gem 'capybara-webkit'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
