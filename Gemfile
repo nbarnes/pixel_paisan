@@ -17,8 +17,6 @@ gem 'unicorn'
 
 gem 'jquery-rails'
 gem 'jquery-datatables-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
 
 gem 'chunky_png'
 gem 'rmagick', require: 'RMagick'
