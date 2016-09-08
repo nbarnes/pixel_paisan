@@ -1,6 +1,6 @@
 class Palette < ActiveRecord::Base
 
-  has_many :palette_colors, dependent: :destroy
+  has_many :palette_colors
   has_many :colors, through: :palette_colors
 
   belongs_to :user

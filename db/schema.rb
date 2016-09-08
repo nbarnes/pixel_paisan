@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "gallery_id"
+    t.integer  "snapshots_count"
     t.string   "name"
   end
 

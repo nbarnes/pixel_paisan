@@ -4,13 +4,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :palettes, dependent: :destroy
-  has_many :pictures, dependent: :destroy
-  has_many :galleries, dependent: :destroy
+  has_many :palettes
+  has_many :pictures
+  has_many :galleries
 
   validates :name, uniqueness: { case_sensitive: false }
 
   after_create :create_galleries
+
+  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
 
   def create_galleries
     galleries.create

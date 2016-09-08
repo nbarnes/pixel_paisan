@@ -5,9 +5,11 @@ class Picture < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :gallery
-  has_many :snapshots, dependent: :destroy
+  has_many :snapshots
 
   validates :user, :gallery, presence: true
+
+  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
 
   def current_version
     return snapshots.max do |a, b|

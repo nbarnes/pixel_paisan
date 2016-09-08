@@ -15,4 +15,5 @@
 //= require spectrum
 //= require jquery-readyselector
 //= require drawing
+//= require dataTables/jquery.dataTables
 //= require_tree .

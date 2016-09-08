@@ -5,7 +5,7 @@ ruby '2.2.2'
 gem 'rails', '~> 4.2'
 
 gem 'pg'
-gem 'scenic'
+gem 'groupdate'
 
 gem 'sass-rails'
 gem 'uglifier'
@@ -16,6 +16,7 @@ gem 'autoprefixer-rails'
 gem 'unicorn'
 
 gem 'jquery-rails'
+gem 'jquery-datatables-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
@@ -36,11 +37,13 @@ group :test, :development do
   gem 'pry-rails'
   gem 'rails_best_practices'
   gem 'quiet_assets'
+  gem 'bullet'
 end
 
 group :development do
   gem 'spring'
   gem 'brakeman', require: false
+  gem 'letter_opener'
 end
 
 group :test do

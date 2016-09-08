@@ -1,21 +1,37 @@
-- @users.each do |user|
-  = user.name
-  %br
-  = "Created on: #{user.created_at.strftime('%m/%d/%Y')}"
-  %br
-  Picture count:
-  - @picture_counts.each_pair do |user_id, pictures_count|
-    - if user_id == user.id
-      = pictures_count
-    - else
-      = 0
-  %br
-  Snapshot count:
-  - @snapshot_counts.each_pair do |user_id, snapshot_count|
-    - if user_id == user.id
-      = snapshot_count
-    - else
-      = 0
-  %br
 
-  %br
+%table#users_admin_table.display
+  %thead
+    %tr
+      %th Name
+      %th Account Created
+      %th Picture Count
+      %th Snapshot Count
+      %th Snapshots Last Week
+      %th Last Snapshot
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to user.name, admin_user_path(user)
+        %td
+          = user.created_at.strftime('%m/%d/%Y')
+        %td
+          - if @picture_counts.key? user.id
+            = @picture_counts[user.id]
+          - else
+            = 0
+        %td
+          - if @snapshot_counts.key? user.id
+            = @snapshot_counts[user.id]
+          - else
+            = 0
+        %td
+          - if @recent_snapshot_counts.key? user.id
+            = @recent_snapshot_counts[user.id]
+          - else
+            = 0
+        %td
+          - if @most_recently_saved_snapshots.key? user.id
+            = @most_recently_saved_snapshots[user.id].strftime('%m/%d/%Y')
+          - else
+            No snapshots

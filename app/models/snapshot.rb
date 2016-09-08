@@ -2,10 +2,12 @@ class Snapshot < ActiveRecord::Base
   include PngHelper
   include ImageUnavailable
 
-  belongs_to :picture, inverse_of: :snapshots
+  belongs_to :picture, inverse_of: :snapshots, counter_cache: true
 
   validates :picture, presence: true
   validates :cell_size, numericality: { less_than_or_equal_to: 50 }
+
+  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
 
   def initialize(opts = {})
 

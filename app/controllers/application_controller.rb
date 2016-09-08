@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
     return palettes
   end
 
+    private
+      def admin_authorize
+        redirect_to root_path unless current_user && current_user.admin?
+      end
+
 end

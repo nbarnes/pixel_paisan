@@ -1,19 +1,25 @@
 module Admin
   class UsersController < ApplicationController
 
-    before_action :authorize
+    before_action :admin_authorize
 
     def index
       @users = User.all
-      @picture_counts = Picture.joins("LEFT OUTER JOIN users on users.id = pictures.user_id").group("users.id").count("pictures.id")
-      @snapshot_counts = Snapshot.joins("LEFT OUTER JOIN pictures on pictures.id = snapshots.picture_id LEFT OUTER JOIN users on pictures.user_id = users.id").group("users.id").count("snapshots.id")
-      @last_snapshot_save = Snapshot.joins("LEFT JOIN pictures on pictures.id = snapshots.picture_id LEFT JOIN users on pictures.user_id = users.id").maximum(:created_at)
+      @picture_counts = User.joins(:pictures).group('users.id').count('pictures.id')
+      @snapshot_counts = Snapshot.joins(picture: :user).group("users.id").count('snapshots.id')
+      @most_recently_saved_snapshots = Snapshot.joins(picture: :user).group('users.id').maximum('snapshots.created_at')
+      @recent_snapshot_counts = Snapshot.joins(picture: :user).where('snapshots.created_at > ? AND snapshots.created_at < ?', Time.now.weeks_ago(1), Time.now).group("users.id").count("snapshots.id")
     end
 
-    private
-      def authorize
-        redirect_to root_path unless current_user && current_user.admin?
+    def show
+      @user = User.includes(:pictures).find(params[:id])
+      @pictures_count = @user.pictures.size
+      @snapshots_count = @user.pictures.inject(0) do |sum, picture|
+        sum + picture.snapshots.size
       end
+      @recent_snapshots_saved_count = Snapshot.created_between(Time.now.days_ago(6), Time.now).count
+      @recent_snapshots = Snapshot.joins(picture: :user).where(users: {id: params[:id]}).order(:created_at).limit 10
+    end
 
   end
 end
