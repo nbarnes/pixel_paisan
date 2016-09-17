@@ -22,6 +22,8 @@ Rails.application.routes.draw do
    resources :activities, only: [:index]
   end
 
+  get 'faq', to: 'faq#faq'
+
   root 'front_page#welcome'
 
   get '/*foo', to: redirect('/')

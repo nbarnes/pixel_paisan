@@ -2,7 +2,8 @@
 #painting_application_panel{data: {picture_id: @picture_id, user_logged_in: has_logged_in_user}}
 
   %span#picture_name_display> new_picture
-  %input{:type => 'button', :value => 'Change Name', :id => 'change_picture_name_button'}
+  %button#change_picture_name_button
+    Change Name
 
   %br
 
@@ -26,10 +27,10 @@
 
   %br
 
-  %input{:type => 'button', :value => 'Clear', :id => 'canvas_clear_button'}
-  %input{:type => 'button', :value => 'Undo', :id => 'undo_button'}
-  %input{:type => 'button', :value => 'Save Picture', :id => 'save_picture_button'}
-  %input{:type => 'button', :value => 'Create New', :id => 'create_new_button'}
+  %button#canvas_clear_button Clear
+  %button#undo_button Undo
+  %button#save_picture_button Save Picture
+  %button#create_new_button Create New
 
   %br
 

@@ -1,5 +1,6 @@
 module Admin
   class ActivitiesController < ApplicationController
+    layout "admin"
 
     before_action :admin_authorize
 
