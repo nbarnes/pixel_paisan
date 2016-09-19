@@ -5,7 +5,8 @@
     - if user_signed_in?
       = link_to 'My Pictures', gallery_path(current_user.galleries[0])
       = " - "
-    = link_to 'All Galleries', galleries_path
+      = link_to 'My Palettes', user_palettes_path(current_user)
+    // = link_to 'All Galleries', galleries_path
     - if user_signed_in?
       = " - "
       Logged in as

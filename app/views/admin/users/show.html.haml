@@ -10,7 +10,7 @@
 %br
 = "Snapshots last week: #{@recent_snapshots_saved_count}"
 %br
-= link_to "Gallery", gallery_path(@user.galleries.first)
+= link_to "Gallery", user_gallery_path(@user.galleries.first)
 %br
 Recent snapshots:
 %br

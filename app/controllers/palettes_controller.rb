@@ -1,10 +1,14 @@
 class PalettesController < ApplicationController
   include PalettesHelper
-  before_action :set_palette, only: [:show, :edit, :update, :destroy, :new_color, :return_json]
+  before_action :set_palette, except: [:index, :user_index, :new]
   respond_to :html
 
   def index
-    @palettes = Palette.all
+    @palettes = Palette.all.eager_load(:colors)
+  end
+
+  def user_index
+    @palettes = Palette.where(user_id: params[:user_id]).eager_load(:colors)
   end
 
   def show
@@ -40,12 +44,19 @@ class PalettesController < ApplicationController
     end
   end
 
-  def new_color
-    @color = Color.new
+  def create_color
+    @new_color = {r: params[:r], g: params[:g], b: params[:b]}
+    @palette.colors.push(@new_color) unless @palette.colors.include? @new_color
   end
 
-  def create_color
-    @color = Color.new(params[:color])
+  def delete_color
+    @color = Color.find(params[:id])
+    if @color.palette.user == current_user
+      @color.destroy
+      redirect_to palette_path
+    else
+      head :unauthorized
+    end
   end
 
   private

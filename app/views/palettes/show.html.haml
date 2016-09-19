@@ -10,7 +10,7 @@
       .color_and_delete_link_holder
         = render 'colors/color', color: color
         - if current_palette_owner
-          = render 'palettes/delete_palette_color_link', palette_color: PaletteColor.for(@palette, color)
+          = render 'palettes/delete_color_link', color: color
 
 %br
 
@@ -21,8 +21,9 @@
   = link_to 'Add New Color', new_color_palette_path, :id => 'new_color_link'
   :preserve
      |
-= link_to 'Back to Index', palettes_path
-- if current_palette_owner
+  = link_to 'Back to My Palettes', user_palettes_path(current_user)
   :preserve
      |
   = link_to 'Delete Palette', @palette, method: :delete, data: { confirm: 'Are you sure?' }
+- else
+  = link_to 'Back to Palettes', palettes_path

@@ -14,18 +14,20 @@ $ ->
 
 
     $("#add_new_color_button").click () ->
+      post_new_color_to_server($('#r_value_field').val(), $('#g_value_field').val(), $('#b_value_field').val())
       $.modal.close()
 
-    post_new_color_to_server = (color) ->
+    post_new_color_to_server = (r_val, g_val, b_val) ->
+      console.log('bob')
       palette_id = $( '#palette_selector option:selected' ).val()
       payload = {
         palette_id: palette_id,
-        r: color.toRgb().r,
-        g: color.toRgb().g,
-        b: color.toRgb().b,
+        r: r_val,
+        g: g_val,
+        b: b_val,
         a: 1
       }
-      $.ajax "/colors",
+      $.ajax "/palettes/#{palette_id}/create_color",
         type: 'POST'
         data: payload
         dataType: 'JSON'

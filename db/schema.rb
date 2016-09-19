@@ -16,15 +16,6 @@ ActiveRecord::Schema.define(version: 20141125225339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "colors", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "r"
-    t.integer  "g"
-    t.integer  "b"
-    t.float    "a"
-  end
-
   create_table "galleries", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -33,23 +24,16 @@ ActiveRecord::Schema.define(version: 20141125225339) do
 
   add_index "galleries", ["user_id"], name: "index_galleries_on_user_id", using: :btree
 
-  create_table "palette_colors", force: :cascade do |t|
-    t.integer  "palette_id"
-    t.integer  "color_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "palette_colors", ["color_id"], name: "index_palette_colors_on_color_id", using: :btree
-  add_index "palette_colors", ["palette_id"], name: "index_palette_colors_on_palette_id", using: :btree
-
   create_table "palettes", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.integer  "user_id",    null: false
     t.boolean  "is_default"
+    t.jsonb    "colors"
+    t.integer  "user_id",    null: false
   end
+
+  add_index "palettes", ["is_default"], name: "index_palettes_on_is_default", using: :btree
 
   create_table "pictures", force: :cascade do |t|
     t.datetime "created_at"

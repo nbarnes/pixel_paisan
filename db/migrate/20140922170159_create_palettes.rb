@@ -3,6 +3,8 @@ class CreatePalettes < ActiveRecord::Migration
     create_table :palettes do |t|
       t.timestamps
       t.string :name, null: :false
+      t.boolean :is_default, index: true
+      t.jsonb :colors
     end
   end
 end

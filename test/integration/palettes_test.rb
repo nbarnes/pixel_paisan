@@ -5,7 +5,7 @@ feature 'Palettes' do
 
   scenario 'Logged in user can create a palette' do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:tony).id)
     page.wont_have_content 'Steel Palette'
     click_on 'New Palette'
     fill_in 'Name', with: 'Steel Palette'
@@ -13,14 +13,9 @@ feature 'Palettes' do
     page.must_have_content 'Steel Palette'
   end
 
-  scenario 'Unauthenticated user cannot create a palette' do
-    visit palettes_path
-    page.wont_have_content 'New Palette'
-  end
-
   scenario 'As a palette owner, I can create new colors on the palette using the site view' do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:tony).id)
     click_on "tony's palette"
     click_on 'Add New Color'
     fill_in 'R', with: '25'
@@ -33,7 +28,7 @@ feature 'Palettes' do
 
   scenario 'As a palette owner, I can delete my palettes' do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:tony).id)
     click_on "tony's palette"
     click_on 'Delete Palette'
     page.must_have_content "Pallete 'tony's palette' was deleted."
@@ -42,7 +37,7 @@ feature 'Palettes' do
 
   scenario 'As a palette owner, I can remove colors from my palettes', js: true do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:tony).id)
     click_on "tony's palette"
     find('div div div', text: '128,128,255').find(:xpath, '..').click_on 'Remove Color'
     page.evaluate_script('window.confirm = function() { return true; }')
@@ -51,14 +46,14 @@ feature 'Palettes' do
 
   scenario 'As a non-owner, I cannot delete a palette' do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:rocket).id)
     click_on "rocket's first palette"
     page.wont_have_content 'Delete Palette'
   end
 
   scenario 'As a non-owner, I cannot remove a color from a palette' do
     login_user
-    visit palettes_path
+    visit user_palettes_path(users(:galactus).id)
     click_on "galactus' palette"
     page.wont_have_content 'Remove Color'
   end
@@ -69,7 +64,6 @@ feature 'Palettes' do
     page.must_have_css("option#tonys_palette")
     page.must_have_css("option#Gals_default_palette")
     page.wont_have_css("option#galactus_palette")
-
   end
 
 end

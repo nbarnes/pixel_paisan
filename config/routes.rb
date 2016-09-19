@@ -3,19 +3,22 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}, :path => "accounts"
 
-  resources :users
-  resources :pictures, only: [:show, :destroy, :create, :edit, :update]
-  resources :snapshots, only: [:show, :destroy]
-  resources :galleries, only: [:show, :index]
-  resources :colors, only: [:create, :index, :destroy]
-  resources :palette_colors, only: [:create, :destroy]
+  resources :users do
+    get 'palettes', to: 'palettes#user_index'
+    resources :palettes, except: [:show, :index]
+    resources :galleries, only: [:index], to: 'galleries#user_index'
+  end
 
-  resources :palettes do
+  resources :galleries, only: [:show, :index]
+  resources :palettes, only: [:show, :index] do
     member do
-      get 'new_color', as: 'new_color'
-      post 'create_color', to: 'colors#create', as: 'create_color'
+      post 'create_color', as: 'create_color'
+      delete 'delete_color', as: 'delete_color'
     end
   end
+
+  resources :pictures, only: [:show, :destroy, :create, :edit, :update]
+  resources :snapshots, only: [:show, :destroy]
 
   namespace :admin do
    resources :users, only: [:index, :show]

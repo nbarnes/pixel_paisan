@@ -1,25 +1,53 @@
 
+
+<% colors = [] %>
+<% vals = [0, 128, 255] %>
+<% vals.each do |r_val| %>
+  <% vals.each do |g_val| %>
+    <% vals.each do |b_val| %>
+      <% colors.push({r: r_val, b: b_val, g: g_val, a: 1}) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% palette1_colors = [] %>
+<% 0.upto(26) do |i| %>
+<%   palette1_colors.push(colors[i]) %>
+<% end %>
+<% palette1_colors_json = palette1_colors.to_json %>
+
+<% palette2_colors = [] %>
+<% 0.upto(8) do |i| %>
+<%   palette2_colors.push(colors[i*3]) %>
+<% end %>
+<% palette2_colors_json = palette2_colors.to_json %>
+
 palette1:
   name: galactus' palette
-  is_default: false
+  is_default: true
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
+  colors: <%= palette1_colors_json %>
 
 palette2:
   name: Gal's default palette
   is_default: true
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
+  colors: <%= palette2_colors_json %>
 
 palette3:
   name: tony's palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:tony) %>
+  colors: '[]'
 
 palette4:
   name: rocket's first palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>
+  colors: '[]'
 
 palette5:
   name: rocket's second palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>
+  colors: '[]'
