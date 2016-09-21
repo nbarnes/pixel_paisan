@@ -9,6 +9,11 @@ class ActiveSupport::TestCase
   fixtures :all
   Capybara.javascript_driver = :webkit
 
+  Capybara::Webkit.configure do |config|
+    config.allow_url("http://fonts.googleapis.com/css?family=Molengo")
+    config.allow_url("http://fonts.googleapis.com/css?family=Lekton")
+  end
+
   def login_admin
     visit root_path
     click_on 'Login'
