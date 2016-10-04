@@ -1,4 +1,4 @@
-$ ->
+ $ ->
   $('#painting_application_panel').ready ->
 
     $('#save_picture_button').click () ->

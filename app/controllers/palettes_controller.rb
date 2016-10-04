@@ -1,20 +1,19 @@
 class PalettesController < ApplicationController
   include PalettesHelper
-  before_action :set_palette, except: [:index, :user_index, :new]
+  before_action :set_palette, except: [:index, :user_index, :new, :create]
   respond_to :html
 
   def index
-    @palettes = Palette.all.eager_load(:colors)
+    @palettes = Palette.all
   end
 
   def user_index
-    @palettes = Palette.where(user_id: params[:user_id]).eager_load(:colors)
+    @palettes = Palette.where(user_id: params[:user_id])
   end
 
   def show
     respond_to do |format|
       format.html do
-        @palette_colors = PaletteColor.where(palette_id: @palette.id)
       end
       format.json do
       end
@@ -37,26 +36,42 @@ class PalettesController < ApplicationController
 
   def destroy
     if @palette.user == current_user
+      palette_name = @palette.name
       @palette.destroy
-      redirect_to palettes_path, notice: "Pallete '#{@palette.name}' was deleted."
+      redirect_to user_palettes_path(current_user), notice: "Palette '#{palette_name}' was deleted."
     else
       head :unauthorized
     end
+  end
+
+  def new_color
   end
 
   def create_color
-    @new_color = {r: params[:r], g: params[:g], b: params[:b]}
-    @palette.colors.push(@new_color) unless @palette.colors.include? @new_color
+    head :unauthorized unless current_palette_owner
+    @new_color = {r: params[:r].to_i, g: params[:g].to_i, b: params[:b].to_i, a: params[:a].to_i}
+    @palette.colors << @new_color
+    @palette.save!
+
+    respond_to do |format|
+      format.html do
+        redirect_to @palette
+      end
+      format.json do
+        render :create_color
+      end
+    end
+
   end
 
   def delete_color
-    @color = Color.find(params[:id])
-    if @color.palette.user == current_user
-      @color.destroy
-      redirect_to palette_path
-    else
-      head :unauthorized
+    head :unauthorized unless current_palette_owner
+    removed_color = ({'r' => params[:r].to_i, 'g' => params[:g].to_i, 'b' => params[:b].to_i, 'a' => 1})
+    @palette.colors.reject! do |color|
+      color == removed_color
     end
+    @palette.save!
+    redirect_to @palette
   end
 
   private

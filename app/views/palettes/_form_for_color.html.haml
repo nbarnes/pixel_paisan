@@ -1,6 +1,12 @@
-= simple_form_for @color, url: create_color_palette_path, method: 'post' do |f|
-  = f.input :r
-  = f.input :g
-  = f.input :b
-  = f.hidden_field :a, value: '1'
-  = f.button :submit
+= form_tag create_color_palette_path, method: 'post' do |f|
+  = label_tag :r, 'R:'
+  = text_field_tag :r
+  %br
+  = label_tag :g, 'G:'
+  = text_field_tag :g
+  %br
+  = label_tag :b, 'B:'
+  = text_field_tag :b
+  %br
+  = hidden_field_tag :a, '1'
+  = submit_tag 'Create Color'

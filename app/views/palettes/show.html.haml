@@ -8,13 +8,11 @@
   - if @palette.colors
     - @palette.colors.each do |color|
       .color_and_delete_link_holder
-        = render 'colors/color', color: color
+        = render 'color_bubble', color: color
         - if current_palette_owner
           = render 'palettes/delete_color_link', color: color
 
 %br
-
-#color_form
 %br
 
 - if current_palette_owner

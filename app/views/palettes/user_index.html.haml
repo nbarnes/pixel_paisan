@@ -11,14 +11,11 @@
   %h1
     = link_to palette.name, palette_path(palette)
 
-  - if palette.colors
-    .colors_block.clearfix
-      - palette.colors.each do |color|
-        .color_entry{ :style => "background: rgb(#{color.r},#{color.g},#{color.b})" }
+  = render 'palette_colors_blocks', palette: palette
 
   %br
   %br
 %br
 %br
 - if user_signed_in?
-  = link_to 'New Palette', new_user_palette_path
+  = link_to 'New Palette', new_palette_path

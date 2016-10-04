@@ -5,13 +5,14 @@ Rails.application.routes.draw do
 
   resources :users do
     get 'palettes', to: 'palettes#user_index'
-    resources :palettes, except: [:show, :index]
+    resources :palettes, except: [:show, :index, :create, :new, :destroy]
     resources :galleries, only: [:index], to: 'galleries#user_index'
   end
 
-  resources :galleries, only: [:show, :index]
-  resources :palettes, only: [:show, :index] do
+  resources :galleries, only: [:show, :index, :create]
+  resources :palettes, only: [:show, :index, :create, :new, :destroy] do
     member do
+      get 'new_color', as: 'new_color'
       post 'create_color', as: 'create_color'
       delete 'delete_color', as: 'delete_color'
     end
