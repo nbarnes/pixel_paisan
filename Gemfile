@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'jquery-datatables-rails'
 
 gem 'chunky_png'
-gem 'rmagick', require: 'RMagick'
+gem 'rmagick', require: 'rmagick'
 
 gem 'devise' # authentication
 gem 'figaro'

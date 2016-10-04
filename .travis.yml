@@ -1,6 +1,8 @@
 language: ruby
 rvm:
 - 2.2.2
+addons:
+  postgresql: "9.5"
 script:
 - psql -c 'create database pixel_paisan_test_postgres;' -U postgres
 - RAILS_ENV=test bundle exec rake db:migrate --trace
