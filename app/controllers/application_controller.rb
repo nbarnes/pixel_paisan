@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
     return palettes
   end
 
+  def validate_rgba(rgba)
+    return false unless rgba.is_a? Hash
+    return false unless (%w(r g b a) - rgba.keys).empty?
+    return false unless rgba.values.all? { |val| /[0-9]/ === val.to_s }
+    return false unless rgba.values.all? { |val| val.to_i.between? 0, 255 }
+    return true
+  end
+
     private
       def admin_authorize
         redirect_to root_path unless current_user && current_user.admin?

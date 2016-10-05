@@ -40,6 +40,7 @@ class Picture < ActiveRecord::Base
   end
 
   def add_snapshot(params)
+
     snapshot = Snapshot.new({pixels: params[:pixels], cell_size: params[:cell_size], picture: self})
     snapshot.save!
   end

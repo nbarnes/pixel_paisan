@@ -48,8 +48,9 @@ class PalettesController < ApplicationController
   end
 
   def create_color
-    head :unauthorized unless current_palette_owner
-    @new_color = {r: params[:r].to_i, g: params[:g].to_i, b: params[:b].to_i, a: params[:a].to_i}
+    head :unauthorized and return unless current_palette_owner
+    @new_color = {'r' => params[:r], 'g' => params[:g], 'b' => params[:b], 'a' => params[:a]}
+    head :bad_request and return unless validate_rgba @new_color
     @palette.colors << @new_color
     @palette.save!
 
@@ -65,8 +66,9 @@ class PalettesController < ApplicationController
   end
 
   def delete_color
-    head :unauthorized unless current_palette_owner
-    removed_color = ({'r' => params[:r].to_i, 'g' => params[:g].to_i, 'b' => params[:b].to_i, 'a' => 1})
+    head :unauthorized and return unless current_palette_owner
+    removed_color = ({'r' => params[:r], 'g' => params[:g], 'b' => params[:b], 'a' => '1'})
+    head :bad_request and return unless validate_rgba removed_color
     @palette.colors.reject! do |color|
       color == removed_color
     end
