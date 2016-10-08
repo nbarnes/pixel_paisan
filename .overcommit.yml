@@ -23,6 +23,8 @@ PreCommit:
     on_warn: fail # Treat all warnings as failures
   HamlLint:
     enabled: true
+  CoffeeLint:
+    enabled: true
 
 CommitMsg:
   TextWidth:

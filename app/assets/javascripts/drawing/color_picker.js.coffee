@@ -14,7 +14,9 @@ $ ->
 
 
     $("#add_new_color_button").click () ->
-      post_new_color_to_server($('#r_value_field').val(), $('#g_value_field').val(), $('#b_value_field').val())
+      post_new_color_to_server($('#r_value_field').val(),
+                               $('#g_value_field').val(),
+                               $('#b_value_field').val())
       $.modal.close()
 
     post_new_color_to_server = (r_val, g_val, b_val) ->

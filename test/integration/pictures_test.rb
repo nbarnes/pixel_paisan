@@ -28,4 +28,7 @@ feature 'Pictures' do
   scenario "as an unauthenticated user, I am promted to login or register to branch other people's pictures" do
   end
 
+  scenario 'as a picture owner, I can change the name of a picture' do
+  end
+
 end

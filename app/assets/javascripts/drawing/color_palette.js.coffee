@@ -22,11 +22,11 @@ $ ->
       $('#color_picker_opener').visible(palette['current_user_is_owner'])
 
     window.add_color_to_palette = (color) ->
-        color_button = $('.templates .color_button').clone()
-        color_button.attr('id', "color_button_r#{color.r}g#{color.g}b#{color.b}")
-        color_button.css('background', "rgb(#{color.r},#{color.g},#{color.b})")
-        color_button.bind 'click', get_click_handler(color)
-        $('#palette_colors').append(color_button)
+      color_button = $('.templates .color_button').clone()
+      color_button.attr('id', "color_button_r#{color.r}g#{color.g}b#{color.b}")
+      color_button.css('background', "rgb(#{color.r},#{color.g},#{color.b})")
+      color_button.bind 'click', get_click_handler(color)
+      $('#palette_colors').append(color_button)
 
     get_click_handler = (color) ->
       ->
@@ -43,9 +43,9 @@ $ ->
         hex = fillStyle.slice(1)
         bigint = parseInt(hex, 16)
 
-        color.r = (bigint & 0xff0000) >> 16;
-        color.g = (bigint & 0x00ff00) >> 8;
-        color.b = bigint & 0x0000ff;
+        color.r = (bigint & 0xff0000) >> 16
+        color.g = (bigint & 0x00ff00) >> 8
+        color.b = bigint & 0x0000ff
 
         color.a = 1
       else if fillStyle.charAt(0) == "r"

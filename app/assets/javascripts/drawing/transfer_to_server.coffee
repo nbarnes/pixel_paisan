@@ -1,4 +1,4 @@
- $ ->
+$ ->
   $('#painting_application_panel').ready ->
 
     $('#save_picture_button').click () ->
@@ -9,7 +9,8 @@
         show_modal_pane('log_in_to_save_pane')
 
     $('#change_picture_name_button').click (e) ->
-      new_picture_name = window.prompt('Enter a new name for your picture', '').replace(/[^a-zA-Z0-9_]/gi, '')
+      new_picture_name = window.prompt('Enter a new name for your picture', '').
+                         replace(/[^a-zA-Z0-9_]/gi, '')
       if not new_picture_name
         new_picture_name = 'unnamed_picture'
       if picture_id == undefined
@@ -21,23 +22,23 @@
         patch_picture_name( payload )
 
     save_picture_to_server = () ->
-        $("#editor_modal_container").modal({overlayClose: false})
-        show_modal_pane('picture_saving_pane')
-        window.saving_picture_modal_timeout = setTimeout ( ->
-          show_modal_pane('upload_timeout_pane')
-          set_modal_closable()
-          ), 300000
-        payload = canvas_to_json()
-        payload.name = $('#picture_name_display').html()
-        # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
-        payload.cell_size = $('#cell_size_field').val()
-        payload.picture_id = picture_id
-        if picture_id == undefined
-          # console.log('POSTing picture')
-          post_image(payload)
-        else
-          # console.log('PATCHing picture')
-          patch_image(payload)
+      $("#editor_modal_container").modal({overlayClose: false})
+      show_modal_pane('picture_saving_pane')
+      window.saving_picture_modal_timeout = setTimeout ( ->
+        show_modal_pane('upload_timeout_pane')
+        set_modal_closable()
+        ), 300000
+      payload = canvas_to_json()
+      payload.name = $('#picture_name_display').html()
+      # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
+      payload.cell_size = $('#cell_size_field').val()
+      payload.picture_id = picture_id
+      if picture_id == undefined
+        # console.log('POSTing picture')
+        post_image(payload)
+      else
+        # console.log('PATCHing picture')
+        patch_image(payload)
 
     canvas_to_json = () ->
       image = {}
