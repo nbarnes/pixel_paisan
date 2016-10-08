@@ -1,6 +1,6 @@
 
 .thumbnail_entry
   = link_to gallery_path(gallery) do
-    = image_tag gallery.thumbnail.to_data_url, class: "picture_thumbnail"
+    = image_tag gallery.thumbnail.to_data_url, class: 'picture_thumbnail'
     %br
     #{gallery.user.display_name}'s pictures

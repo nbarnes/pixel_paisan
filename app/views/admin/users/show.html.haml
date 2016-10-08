@@ -2,15 +2,15 @@
 %br
 = @user.email
 %br
-= "Account created at #{@user.created_at.strftime('%m/%d/%Y')}"
+Account created at #{@user.created_at.strftime('%m/%d/%Y')}
 %br
-= "Pictures count: #{@pictures_count}"
+Pictures count: #{@pictures_count}
 %br
-= "Snapshots count: #{@snapshots_count}"
+Snapshots count: #{@snapshots_count}
 %br
-= "Snapshots last week: #{@recent_snapshots_saved_count}"
+Snapshots last week: #{@recent_snapshots_saved_count}
 %br
-= link_to "Gallery", user_gallery_path(@user.galleries.first)
+= link_to 'Gallery', user_gallery_path(@user.galleries.first)
 %br
 Recent snapshots:
 %br

@@ -1,4 +1,6 @@
 
 .remove_color_link
-  - color_identifier = {r: color['r'], g: color['g'], b: color['b'], a: color['a']}
-  = link_to 'Remove Color', delete_color_palette_path(color_identifier), method: :delete, data: { confirm: 'Are you sure?' }
+  - color_identifier = { r: color['r'], g: color['g'], b: color['b'], a: color['a'] }
+  = link_to 'Remove Color', delete_color_palette_path(color_identifier),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' }

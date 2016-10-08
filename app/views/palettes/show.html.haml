@@ -16,7 +16,7 @@
 %br
 
 - if current_palette_owner
-  = link_to 'Add New Color', new_color_palette_path, :id => 'new_color_link'
+  = link_to 'Add New Color', new_color_palette_path, id: 'new_color_link'
   :preserve
      |
   = link_to 'Back to My Palettes', user_palettes_path(current_user)

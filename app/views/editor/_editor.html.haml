@@ -1,5 +1,5 @@
 
-#painting_application_panel{data: {picture_id: @picture_id, user_logged_in: user_logged_in?}}
+#painting_application_panel{ data: { picture_id: @picture_id, user_logged_in: user_logged_in? } }
 
   %span#picture_name_display> new_picture
   %button#change_picture_name_button
@@ -19,11 +19,11 @@
 
   %span
     Canvas Size
-    %input{:type => 'text', :value => '20', :id => 'canvas_size_in_cells_field'}
+    %input#canvas_size_in_cells_field{ type: 'text', value: '20' }
 
   %span
     Cell Size
-    %input{:type => 'text', :value => '20', :id => 'cell_size_field'}
+    %input#cell_size_field{ type: 'text', value: '20' }
 
   %br
 
@@ -36,7 +36,7 @@
 
   = render 'editor/palette'
 
-  %canvas#painting_canvas{:width => 500, :height => 500}
+  %canvas#painting_canvas{ width: 500, height: 500 }
 
   %br
 
@@ -50,6 +50,5 @@
       It is taking a long time to communicate with the Pixel Paisan server to save your picture. Your internet connection may have been interrupted. Click anywhere to close this window.
     #picture_upload_error_pane.modal_content_pane
       An error occured while uploading the picture.
-
     #log_in_to_save_pane.modal_content_pane
       You must be logged in to save your work.

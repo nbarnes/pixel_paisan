@@ -1,27 +1,27 @@
 - content_for :navbar do
   #navbar
     = link_to 'Editor', root_path
-    = " - "
+    = ' - '
     - if user_signed_in?
       = link_to 'My Pictures', gallery_path(current_user.galleries[0])
-      = " - "
+      = ' - '
       = link_to 'My Palettes', user_palettes_path(current_user)
     // = link_to 'All Galleries', galleries_path
     - if user_signed_in?
-      = " - "
+      = ' - '
       Logged in as
-      %strong #{current_user.email}
-      = " - "
+      %strong= current_user.email
+      = ' - '
       = link_to 'Edit profile', edit_user_registration_path
-      = " - "
+      = ' - '
       = link_to 'Logout', destroy_user_session_path, method: :delete
     - else
-      = " - "
+      = ' - '
       = link_to 'Sign up', new_user_registration_path
-      = " - "
+      = ' - '
       = link_to 'Login', new_user_session_path
 
-    = " - "
+    = ' - '
     = link_to 'FAQ', faq_path
 
 = render template: 'layouts/application'

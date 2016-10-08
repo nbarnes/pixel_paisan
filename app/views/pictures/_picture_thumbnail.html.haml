@@ -1,6 +1,6 @@
 
 .thumbnail_entry
   = link_to picture_path picture do
-    = image_tag picture.current_version.thumbnail_png.to_data_url, class: "picture_thumbnail"
+    = image_tag picture.current_version.thumbnail_png.to_data_url, class: 'picture_thumbnail'
     %br
     = picture.name

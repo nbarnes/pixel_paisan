@@ -2,7 +2,7 @@
   - @snapshots_created_daily.each do |datetime, count|
     %tr
       %td
-        = "#{datetime.strftime('%A')} the #{datetime.day.ordinalize}"
+        #{datetime.strftime('%A')} the #{datetime.day.ordinalize}
       %td
         = count
 %br
@@ -10,7 +10,7 @@
   - @snapshots_created_weekly.each do |datetime, count|
     %tr
       %td
-        = "#{datetime.strftime('%m/%d')}"
+        = datetime.strftime('%m/%d').to_s
       %td
         = count
 %br
@@ -18,6 +18,6 @@
   - @snapshots_created_monthly.each do |datetime, count|
     %tr
       %td
-        = "#{datetime.strftime('%B')}"
+        = datetime.strftime('%B').to_s
       %td
         = count
