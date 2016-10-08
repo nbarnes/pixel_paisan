@@ -16,13 +16,13 @@ feature 'Colors' do
     login_user
     visit root_path
     select("tony's palette")
-    page.wont_have_css("#color_button_r111g222b73")
+    page.wont_have_css('#color_button_r111g222b73')
     click_on 'color_picker_opener'
     fill_in 'r_value_field', with: '111'
     fill_in 'g_value_field', with: '222'
     fill_in 'b_value_field', with: '73'
     find('#add_new_color_button').click
-    page.must_have_css("#color_button_r111g222b73")
+    page.must_have_css('#color_button_r111g222b73')
   end
 
   scenario 'Color adder widget not displayed when viewing or using palettes I do not own', js: true do

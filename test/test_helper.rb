@@ -10,8 +10,8 @@ class ActiveSupport::TestCase
   Capybara.javascript_driver = :webkit
 
   Capybara::Webkit.configure do |config|
-    config.allow_url("http://fonts.googleapis.com/css?family=Molengo")
-    config.allow_url("http://fonts.googleapis.com/css?family=Lekton")
+    config.allow_url('http://fonts.googleapis.com/css?family=Molengo')
+    config.allow_url('http://fonts.googleapis.com/css?family=Lekton')
   end
 
   def login_admin

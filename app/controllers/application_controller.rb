@@ -2,27 +2,17 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  layout "layouts/user"
+  layout 'layouts/user'
 
   def user_palettes
     palettes = Palette.where(is_default: true)
-    if user_signed_in?
-      palettes.concat Palette.where(user_id: current_user.id)
-    end
+    palettes.concat Palette.where(user_id: current_user.id) if user_signed_in?
     return palettes
   end
 
-  def validate_rgba(rgba)
-    return false unless rgba.is_a? Hash
-    return false unless (%w(r g b a) - rgba.keys).empty?
-    return false unless rgba.values.all? { |val| /[0-9]/ === val.to_s }
-    return false unless rgba.values.all? { |val| val.to_i.between? 0, 255 }
-    return true
-  end
-
-    private
-      def admin_authorize
-        redirect_to root_path unless current_user && current_user.admin?
-      end
+  private
+    def admin_authorize
+      redirect_to root_path unless current_user && current_user.admin?
+    end
 
 end

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   after_create :create_galleries
 
-  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
+  scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
 
   def create_galleries
     galleries.create

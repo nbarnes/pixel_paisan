@@ -1,5 +1,5 @@
 class Snapshot < ActiveRecord::Base
-  include PngHelper
+  include PngHandler
   include ImageUnavailable
 
   belongs_to :picture, inverse_of: :snapshots, counter_cache: true
@@ -7,27 +7,25 @@ class Snapshot < ActiveRecord::Base
   validates :picture, presence: true
   validates :cell_size, numericality: { less_than_or_equal_to: 50 }
 
-  scope :created_between, lambda {|start_date, end_date| where(created_at: start_date..end_date)}
+  scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
 
   def initialize(opts = {})
-
     pixels = opts[:pixels]
 
     super opts.except! :pixels
 
-    if pixels
-      original_png = build_png(pixels)
-      thumbnail_png = get_resized_png(original_png, THUMBNAIL_SIZE)
-      display_png = get_resized_png(original_png, DISPLAY_SIZE)
+    return unless pixels
 
-      self.original_png_width = pixels.size
-      self.original_png_height = pixels[0].size
+    original_png = build_png(pixels)
+    thumbnail_png = get_resized_png(original_png, THUMBNAIL_SIZE)
+    display_png = get_resized_png(original_png, DISPLAY_SIZE)
 
-      self.original_png_blob = original_png.to_abgr_stream
-      self.thumbnail_png_blob = thumbnail_png.to_abgr_stream
-      self.display_png_blob = display_png.to_abgr_stream
-    end
+    self.original_png_width = pixels.size
+    self.original_png_height = pixels[0].size
 
+    self.original_png_blob = original_png.to_abgr_stream
+    self.thumbnail_png_blob = thumbnail_png.to_abgr_stream
+    self.display_png_blob = display_png.to_abgr_stream
   end
 
   def original_png
@@ -49,7 +47,7 @@ class Snapshot < ActiveRecord::Base
   def get_file(size_tag)
     file_path = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{size_tag}.png"
     make_pngs unless File.exist? file_path
-    return File.open( file_path ) { |io| image = ChunkyPNG::Image.from_io(io) }
+    return File.open(file_path) { |io| image = ChunkyPNG::Image.from_io(io) }
   end
 
   def make_pngs
@@ -80,18 +78,17 @@ class Snapshot < ActiveRecord::Base
   end
 
   def branch(new_pic)
-    new_ss = Snapshot.new({
+    new_ss = Snapshot.new(
+      riginal_png_width: original_png_width,
+      original_png_height: original_png_height,
 
-      riginal_png_width: self.original_png_width,
-      original_png_height: self.original_png_height,
+      original_png_blob: original_png_blob,
+      thumbnail_png_blob: thumbnail_png_blob,
+      display_png_blob: display_png_blob,
 
-      original_png_blob: self.original_png_blob,
-      thumbnail_png_blob: self.thumbnail_png_blob,
-      display_png_blob: self.display_png_blob,
-
-      cell_size: self.cell_size,
+      cell_size: cell_size,
       picture: new_pic
-    })
+    )
     new_ss.save!
     return new_ss
   end

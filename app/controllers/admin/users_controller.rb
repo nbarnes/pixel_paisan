@@ -1,15 +1,19 @@
 module Admin
   class UsersController < ApplicationController
-    layout "admin"
+    layout 'admin'
 
     before_action :admin_authorize
 
     def index
       @users = User.all
       @picture_counts = User.joins(:pictures).group('users.id').count('pictures.id')
-      @snapshot_counts = Snapshot.joins(picture: :user).group("users.id").count('snapshots.id')
+      @snapshot_counts = Snapshot.joins(picture: :user).group('users.id').count('snapshots.id')
       @most_recently_saved_snapshots = Snapshot.joins(picture: :user).group('users.id').maximum('snapshots.created_at')
-      @recent_snapshot_counts = Snapshot.joins(picture: :user).where('snapshots.created_at > ? AND snapshots.created_at < ?', Time.now.weeks_ago(1), Time.now).group("users.id").count("snapshots.id")
+      @recent_snapshot_counts = Snapshot
+                                .joins(picture: :user)
+                                .where('snapshots.created_at > ? AND snapshots.created_at < ?', Time.now.weeks_ago(1), Time.now)
+                                .group('users.id')
+                                .count('snapshots.id')
     end
 
     def show
@@ -19,7 +23,7 @@ module Admin
         sum + picture.snapshots.size
       end
       @recent_snapshots_saved_count = Snapshot.created_between(Time.now.days_ago(6), Time.now).count
-      @recent_snapshots = Snapshot.joins(picture: :user).where(users: {id: params[:id]}).order(:created_at).limit 10
+      @recent_snapshots = Snapshot.joins(picture: :user).where(users: { id: params[:id] }).order(:created_at).limit 10
     end
 
   end

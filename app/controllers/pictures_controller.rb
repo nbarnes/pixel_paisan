@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  include PixelValidation
 
   before_action :set_picture, only: [:show, :update, :destroy, :edit]
 
@@ -6,14 +7,15 @@ class PicturesController < ApplicationController
   end
 
   def destroy
-    head :unauthorized unless @picture.user == current_user
+    head :unauthorized && return unless @picture.user == current_user
     picture_gallery = @picture.gallery
     @picture.destroy
     redirect_to gallery_path(picture_gallery)
   end
 
   def create
-    head :unauthorized unless current_user
+    head :bad_request && return unless pixels_valid? params[:pixels]
+    head :unauthorized && return unless current_user
     picture = Picture.new
     picture.name = params[:name]
     picture.user_id = current_user.id
@@ -22,12 +24,11 @@ class PicturesController < ApplicationController
     picture.save!
 
     render json: {
-      message: "Picture creation success",
+      message: 'Picture creation success',
       status: 200,
       picture_id: picture.id,
       picture_name: picture.name
     }, status: 200
-
   end
 
   def edit
@@ -47,16 +48,16 @@ class PicturesController < ApplicationController
   end
 
   def update
-    head :unauthorized unless @picture.user == current_user
+    head :bad_request && return unless pixels_valid? params[:pixels]
+    head :unauthorized && return unless @picture.user == current_user
     @picture.name = params[:picture_name] if params[:picture_name]
     @picture.add_snapshot(params) if params[:pixels]
     @picture.save!
     render json: {
-      message: "Picture update success",
+      message: 'Picture update success',
       picture_name: @picture.name,
       status: 200
     }, status: 200
-
   end
 
   private

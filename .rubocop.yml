@@ -2,6 +2,7 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+
   Exclude:
     - 'db/schema.rb'
     - 'config/application.rb'
@@ -13,6 +14,7 @@ AllCops:
     - 'db/migrate/20141004030325_devise_create_users.rb'
     - 'config/**/*'
     - 'config.ru'
+    - 'Rakefile'
 
 Style/Documentation:
   Enabled: false
