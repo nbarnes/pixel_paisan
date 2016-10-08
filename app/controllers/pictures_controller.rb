@@ -48,10 +48,12 @@ class PicturesController < ApplicationController
   end
 
   def update
-    head :bad_request && return unless pixels_valid? params[:pixels]
     head :unauthorized && return unless @picture.user == current_user
     @picture.name = params[:picture_name] if params[:picture_name]
-    @picture.add_snapshot(params) if params[:pixels]
+    if params[:pixels]
+      head :bad_request && return unless pixels_valid? params[:pixels]
+      @picture.add_snapshot(params)
+    end
     @picture.save!
     render json: {
       message: 'Picture update success',
