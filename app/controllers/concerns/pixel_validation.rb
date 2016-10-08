@@ -5,8 +5,8 @@ module PixelValidation
     return false unless pixels.length < 500
     return false unless pixels[0].length < 500
 
-    pixels.each_with_index do |line, x|
-      line.each do |y|
+    pixels.each_with_index do |row, x|
+      row.each_index do |y|
         return false unless rgba_valid? pixels[x][y]
       end
     end

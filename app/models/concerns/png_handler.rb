@@ -8,8 +8,8 @@ module PngHandler
     png_dimension = pixels.size
     png = ChunkyPNG::Image.new(png_dimension, png_dimension, ChunkyPNG::Color::TRANSPARENT)
 
-    pixels.each_with_index do |line, x|
-      line.each do |y|
+    pixels.each_with_index do |row, x|
+      row.each_index do |y|
         png[x, y] = build_ChunkyPNG_color(pixels[x][y])
       end
     end
