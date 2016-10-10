@@ -23,9 +23,9 @@ class Snapshot < ActiveRecord::Base
     self.original_png_width = pixels.size
     self.original_png_height = pixels[0].size
 
-    self.original_png_blob = original_png.to_abgr_stream
-    self.thumbnail_png_blob = thumbnail_png.to_abgr_stream
-    self.display_png_blob = display_png.to_abgr_stream
+    self.original_png_blob = Base64.strict_encode64(original_png.to_abgr_stream).encode('UTF-8')
+    self.thumbnail_png_blob = Base64.strict_encode64(thumbnail_png.to_abgr_stream).encode('UTF-8')
+    self.display_png_blob = Base64.strict_encode64(display_png.to_abgr_stream).encode('UTF-8')
   end
 
   def original_png
@@ -51,9 +51,9 @@ class Snapshot < ActiveRecord::Base
   end
 
   def make_pngs
-    original_png = ChunkyPNG::Image.from_abgr_stream(original_png_width, original_png_height, original_png_blob)
-    thumbnail_png = ChunkyPNG::Image.from_abgr_stream(THUMBNAIL_SIZE, THUMBNAIL_SIZE, thumbnail_png_blob)
-    display_png = ChunkyPNG::Image.from_abgr_stream(DISPLAY_SIZE, DISPLAY_SIZE, display_png_blob)
+    original_png = ChunkyPNG::Image.from_abgr_stream(original_png_width, original_png_height, Base64.strict_decode64(original_png_blob.encode('ASCII-8BIT')))
+    thumbnail_png = ChunkyPNG::Image.from_abgr_stream(THUMBNAIL_SIZE, THUMBNAIL_SIZE, Base64.strict_decode64(thumbnail_png_blob.encode('ASCII-8BIT')))
+    display_png = ChunkyPNG::Image.from_abgr_stream(DISPLAY_SIZE, DISPLAY_SIZE, Base64.strict_decode64(display_png_blob.encode('ASCII-8BIT')))
 
     original_file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{ENV['ORIGINAL_SIZE_TAG']}.png"
     thumbnail_file_name = "#{ENV['PNG_STORE_DIR']}/#{file_prefix}#{ENV['THUMBNAIL_SIZE_TAG']}.png"
@@ -82,9 +82,9 @@ class Snapshot < ActiveRecord::Base
       riginal_png_width: original_png_width,
       original_png_height: original_png_height,
 
-      original_png_blob: original_png_blob,
-      thumbnail_png_blob: thumbnail_png_blob,
-      display_png_blob: display_png_blob,
+      original_png_abgr: original_png_abgr,
+      thumbnail_png_abgr: thumbnail_png_abgr,
+      display_png_abgr: display_png_abgr,
 
       cell_size: cell_size,
       picture: new_pic

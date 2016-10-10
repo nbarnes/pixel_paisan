@@ -1,0 +1,42 @@
+
+<%
+
+def get_resized_png(png, dimension)
+  resized_image = ChunkyPNG::RMagick.export(png).scale(dimension, dimension)
+  return ChunkyPNG::RMagick.import(resized_image)
+end
+
+png_path = 'test/test_pngs'
+file_name = 'snapshot1.png'
+
+original_png = File.open("#{png_path}/#{file_name}") { |io| ChunkyPNG::Image.from_io(io) }
+thumbnail_png = get_resized_png(original_png, 128)
+display_png = get_resized_png(original_png, 512)
+
+original_png_blob = original_png.to_abgr_stream
+thumbnail_png_blob = thumbnail_png.to_abgr_stream
+display_png_blob = display_png.to_abgr_stream
+
+encoded_original_png_blob = Base64.strict_encode64(original_png_blob).encode('UTF-8')
+encoded_thumbnail_png_blob = Base64.strict_encode64(thumbnail_png_blob).encode('UTF-8')
+encoded_display_png_blob = Base64.strict_encode64(display_png_blob).encode('UTF-8')
+
+display_png_blob == Base64.strict_decode64(encoded_display_png_blob.encode('ASCII-8BIT'))
+
+orig = original_png.to_blob
+
+raw = '\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\xFF\x00\x00\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF\x00\xFF\xFF\xFF'
+test_string = 'the quick brown fox'
+
+binding.pry
+
+%>
+
+snapshot1:
+  picture: picture01
+  cell_size: 25
+  original_png_width: 6
+  original_png_height: 6
+  original_png_blob: <%= encoded_original_png_blob %>
+  thumbnail_png_blob: <%= encoded_thumbnail_png_blob %>
+  display_png_blob: <%= encoded_display_png_blob %>

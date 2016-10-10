@@ -9,9 +9,9 @@ class CreateSnapshots < ActiveRecord::Migration
       t.integer :original_png_width, null: false
       t.integer :original_png_height, null: false
 
-      t.binary :original_png_blob, null: false
-      t.binary :thumbnail_png_blob, null: false
-      t.binary :display_png_blob, null: false
+      t.string :original_png_blob, null: false
+      t.string :thumbnail_png_blob, null: false
+      t.string :display_png_blob, null: false
     end
   end
 end

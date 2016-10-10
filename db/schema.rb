@@ -54,9 +54,9 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.integer  "cell_size",           null: false
     t.integer  "original_png_width",  null: false
     t.integer  "original_png_height", null: false
-    t.binary   "original_png_blob",   null: false
-    t.binary   "thumbnail_png_blob",  null: false
-    t.binary   "display_png_blob",    null: false
+    t.string   "original_png_blob",   null: false
+    t.string   "thumbnail_png_blob",  null: false
+    t.string   "display_png_blob",    null: false
   end
 
   add_index "snapshots", ["picture_id"], name: "index_snapshots_on_picture_id", using: :btree
