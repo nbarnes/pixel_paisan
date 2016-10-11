@@ -53,15 +53,11 @@ $ ->
       return image
 
     set_modal_closable = () ->
-      $("#picture_saved_modal").addClass('simplemodal-close')
+      $(".modal_container").addClass('simplemodal-close')
       $.modal.impl.o.overlayClose = true
       $.modal.impl.unbindEvents()
       $.modal.impl.bindEvents()
 
-    # 'dataType' is NOT flagging the data being sent, but rather
-    # flagging the expected data form response.  So, though we are
-    # sending JSON, we are expecting an HTML response (either 200
-    # ok or 500 internal_server_error otherwise empty headers)
     post_image = (payload) ->
       pixel_paisan_ajax(
         data: payload

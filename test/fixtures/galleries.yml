@@ -1,8 +1,8 @@
-gallery01:
+gal_gallery:
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
 
-gallery02:
+tony_gallery:
   user_id: <%= ActiveRecord::FixtureSet.identify(:tony) %>
 
-gallery03:
+rocket_gallery:
   user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>

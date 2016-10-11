@@ -1,5 +1,30 @@
 
-picture01:
-  name: 'new_picture'
+gal_picture01:
+  name: 'gal_picture01'
   user: galactus
-  gallery: gallery01
+  gallery: gal_gallery
+
+gal_picture02:
+  name: 'gal_picture02'
+  user: galactus
+  gallery: gal_gallery
+
+gal_picture03:
+  name: 'gal_picture03'
+  user: galactus
+  gallery: gal_gallery
+
+tony_picture01:
+  name: 'tony_picture01'
+  user: tony
+  gallery: tony_gallery
+
+rocket_picture01:
+  name: 'rocket_picture01'
+  user: rocket
+  gallery: rocket_gallery
+
+rocket_picture02:
+  name: 'rocket_picture02'
+  user: rocket
+  gallery: rocket_gallery

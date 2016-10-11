@@ -22,11 +22,25 @@ feature 'Galleries' do
   end
 
   scenario 'Gallery shows all pictures for a user' do
-    # having trouble loading pictures&snapshots as fixtures
+    visit galleries_path
+    click_on "Rocket Raccoon's pictures"
+
+    page.must_have_content 'rocket_picture01'
+    page.must_have_content 'rocket_picture02'
+    page.wont_have_content 'gal_picture01'
   end
 
-  scenario 'Gallery adds new pictures' do
-    # having trouble loading pictures&snapshots as fixtures
+  scenario 'Gallery adds new pictures', js: true do
+    login_user
+    visit root_path
+    click_on 'Create New'
+    accept_prompt with: 'My_new_picture' do
+      click_on 'Change Name'
+    end
+    click_on 'Save Picture'
+    find_by_id('picture_saved_pane').click
+    click_on 'My Pictures'
+    page.must_have_content 'My_new_picture'
   end
 
 end
