@@ -5,7 +5,7 @@ def get_resized_png(png, dimension)
 end
 
 def get_encoded_pngs(file_id)
-  png_path = 'test/test_pngs'
+  png_path = './test/test_pngs'
   file_name = "snapshot_#{file_id}.png"
 
   original_png = File.open("#{png_path}/#{file_name}") { |io| ChunkyPNG::Image.from_io(io) }
