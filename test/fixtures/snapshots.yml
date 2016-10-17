@@ -78,6 +78,34 @@ snapshot<%= char %>:
 <% end %>
 
 <%
+'i'.upto('n') do |char|
+  encoded_pngs = get_encoded_pngs(char)
+%>
+snapshot<%= char %>02:
+  picture: tony_picture02
+  cell_size: 25
+  original_png_width: 6
+  original_png_height: 6
+  original_png_blob: <%= encoded_pngs[:encoded_original] %>
+  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
+  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+<% end %>
+
+<%
+'k'.upto('o') do |char|
+  encoded_pngs = get_encoded_pngs(char)
+%>
+snapshot<%= char %>02:
+  picture: tony_picture03
+  cell_size: 25
+  original_png_width: 6
+  original_png_height: 6
+  original_png_blob: <%= encoded_pngs[:encoded_original] %>
+  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
+  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+<% end %>
+
+<%
 'm'.upto('q') do |char|
   encoded_pngs = get_encoded_pngs(char)
 %>

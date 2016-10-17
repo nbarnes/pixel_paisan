@@ -61,10 +61,3 @@ $ ->
         canvas_size_input_element.val(50)
       resize_canvas_element()
       redraw()
-
-    $('#canvas_size_in_cells_field').val('6')
-    $('#cell_size_field').val('25')
-    resize_canvas_element()
-    $('#palette_selector').trigger('change')
-    $("#painting_canvas").focus()
-    set_drawing_color({r: 255, g: 0, b: 0, a: 1})

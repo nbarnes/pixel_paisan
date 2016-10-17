@@ -16,4 +16,5 @@
 //= require jquery-readyselector
 //= require drawing
 //= require dataTables/jquery.dataTables
+//= require jquery.simplemodal.1.4.4.min
 //= require_tree .

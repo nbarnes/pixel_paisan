@@ -1,5 +1,4 @@
 class PalettesController < ApplicationController
-  include PalettesHelper
   include PixelValidation
   before_action :set_palette, except: [:index, :user_index, :new, :create]
   respond_to :html
@@ -49,7 +48,7 @@ class PalettesController < ApplicationController
   end
 
   def create_color
-    head :unauthorized && return unless current_palette_owner
+    head :unauthorized && return unless @palette.user_id == current_user.id
     @new_color = { 'r' => params[:r], 'g' => params[:g], 'b' => params[:b], 'a' => params[:a] }
     head :bad_request && return unless rgba_valid? @new_color
     @palette.colors << @new_color
@@ -66,7 +65,7 @@ class PalettesController < ApplicationController
   end
 
   def delete_color
-    head :unauthorized && return unless current_palette_owner
+    head :unauthorized && return unless @palette.user_id == current_user.id
     removed_color = { 'r' => params[:r], 'g' => params[:g], 'b' => params[:b], 'a' => '1' }
     head :bad_request && return unless rgba_valid? removed_color
     @palette.colors.reject! do |color|

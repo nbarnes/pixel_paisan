@@ -18,7 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures, only: [:show, :destroy, :create, :edit, :update]
+  resources :pictures, only: [:show, :destroy, :create, :update] do
+    member do
+      get 'editor', to: 'pictures#edit', as: 'edit'
+    end
+  end
+
   resources :snapshots, only: [:show, :destroy]
 
   namespace :admin do
@@ -26,10 +31,12 @@ Rails.application.routes.draw do
    resources :activities, only: [:index]
   end
 
-  get 'faq', to: 'faq#faq'
+  get 'editor', to: 'static_pages#editor'
 
-  root 'front_page#welcome'
+  get 'faq', to: 'static_pages#faq'
 
-  get '/*foo', to: redirect('/')
+  root to: redirect('/editor')
+
+  get '/*foo', to: redirect('/editor')
 
 end

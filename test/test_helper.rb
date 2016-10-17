@@ -4,10 +4,12 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
+require 'capybara/poltergeist'
 
 class ActiveSupport::TestCase
   fixtures :all
-  Capybara.javascript_driver = :webkit
+  # Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :poltergeist
 
   Capybara::Webkit.configure do |config|
     config.allow_url('http://fonts.googleapis.com/css?family=Molengo')

@@ -33,7 +33,7 @@ palette3_colors_json = palette3_colors.to_json
 
 palette1:
   name: galactus' palette
-  is_default: true
+  is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
   colors: <%= palette1_colors_json %>
 

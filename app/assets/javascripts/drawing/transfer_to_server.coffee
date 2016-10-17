@@ -19,7 +19,7 @@ $ ->
         payload = {}
         payload.picture_name = new_picture_name
         payload.picture_id = picture_id
-        patch_picture_name( payload )
+        patch_picture_name(payload)
 
     save_picture_to_server = () ->
       $("#editor_modal_container").modal({overlayClose: false})
@@ -64,7 +64,7 @@ $ ->
         url: '/pictures'
         verb: 'POST'
         success_callback: (data, textStatus, jqXHR) ->
-          console.log('AJAX POSTing of new image success')
+          # console.log('AJAX POSTing of new image success')
           show_modal_pane('picture_saved_pane')
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
@@ -106,7 +106,7 @@ $ ->
       )
 
     a_user_is_logged_in = () ->
-      return $('#painting_application_panel').data('user-logged-in')
+      return $('#painting_application_panel').data('user-id')
 
     show_modal_pane = (id_to_show) ->
       $('.modal_content_pane').hide()

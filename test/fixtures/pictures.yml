@@ -19,6 +19,16 @@ tony_picture01:
   user: tony
   gallery: tony_gallery
 
+tony_picture02:
+  name: 'tony_picture02'
+  user: tony
+  gallery: tony_gallery
+
+tony_picture03:
+  name: 'tony_picture03'
+  user: tony
+  gallery: tony_gallery
+
 rocket_picture01:
   name: 'rocket_picture01'
   user: rocket

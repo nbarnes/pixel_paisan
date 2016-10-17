@@ -11,4 +11,4 @@
 //= require ./drawing
 //= require ./mouse_event_handling
 //= require ./buttons
-//= require ./color_picker
+//= require ./onload

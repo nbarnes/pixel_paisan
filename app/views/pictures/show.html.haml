@@ -5,14 +5,11 @@
   .picture_name
     = @picture.name
     %br
+
+    = link_to 'Edit In Painter', edit_picture_path(@picture.id)
     - if @picture.user == current_user
-      = link_to 'Edit In Painter', edit_picture_path(@picture)
       = button_to 'Delete Image', { action: 'destroy', id: @picture.id },
           method: :delete, data: { confirm: 'Are you sure you want to destroy this picture?' }
-    - elsif user_signed_in?
-      = link_to 'Make your own copy and edit', edit_picture_path(@picture)
-
-
   - @picture.snapshots.reverse.each do |snapshot|
     = render 'snapshots/snapshot_thumbnail', snapshot: snapshot
 %br

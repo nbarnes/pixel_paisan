@@ -50,6 +50,7 @@ group :test do
   gem 'headhunter'
   gem 'simplecov'
   gem 'minitest-reporters'
+  gem 'poltergeist'
 end
 
 # Use unicorn as the app server

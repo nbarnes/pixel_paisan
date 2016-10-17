@@ -1,8 +1,12 @@
 
 module EditorHelper
 
-  def user_logged_in?
-    return current_user.nil? ? 0 : 1
+  def current_palette_owner
+    return user_signed_in? && (current_user.id == @palette.user_id)
+  end
+
+  def string_to_css_id(name)
+    return name.gsub(/( )/, '_').gsub(/(['"`])/, '')
   end
 
 end

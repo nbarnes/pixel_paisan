@@ -63,7 +63,7 @@ feature 'Palettes' do
     visit root_path
     page.must_have_css('option#tonys_palette')
     page.must_have_css('option#Gals_default_palette')
-    page.must_have_css('option#galactus_palette')
+    page.wont_have_css('option#galactus_palette')
     page.wont_have_css('option#rockets_palette')
   end
 
