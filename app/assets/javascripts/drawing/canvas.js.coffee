@@ -13,7 +13,8 @@ $ ->
       $('#canvas_size_in_cells_field').val()
 
     window.cell_size = () ->
-      $('#cell_size_field').val()
+      # +1 to size for drawing the grid
+      parseInt($('#cell_size_field').val()) + 1
 
     window.resize_canvas_element = ->
       resize_cell_matrix()
@@ -49,6 +50,9 @@ $ ->
       for x in [0...canvas_size_in_cells()]
         for y in [0...canvas_size_in_cells()]
           cells[x][y].redraw()
+
+    $('#draw_grid_checkbox').change () ->
+      redraw()
 
     $('#canvas_size_in_cells_field').change () ->
       handle_canvas_size_field_changed($('#canvas_size_in_cells_field'))

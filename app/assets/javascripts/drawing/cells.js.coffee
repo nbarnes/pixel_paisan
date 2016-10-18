@@ -37,12 +37,27 @@ $ ->
 
       fill_rect: ->
         color = get_drawing_color()
+
         target_x = cell_x_to_x ( @x )
         target_y = cell_y_to_y ( @y )
-        if color.a == 0
-          pp_context.clearRect(target_x, target_y, cell_size(), cell_size())
-        else if color.a > 0
+
+        debugger
+
+        if $('#draw_grid_checkbox')[0].checked
+          old_color = get_drawing_color()
+          set_drawing_color({r: 128, g: 128, b: 128, a: 1})
           pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
+          set_drawing_color(old_color)
+          if color.a == 0
+            pp_context.clearRect(target_x, target_y, cell_size() - 1, cell_size() - 1)
+          else if color.a > 0
+            pp_context.fillRect(target_x, target_y, cell_size() - 1, cell_size() - 1)
+        else
+          if color.a == 0
+            pp_context.clearRect(target_x, target_y, cell_size(), cell_size())
+          else if color.a > 0
+            pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
+
 
     cell_x_to_x = (cell_x) ->
       cell_x * cell_size()
