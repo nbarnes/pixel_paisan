@@ -46,6 +46,7 @@ feature 'Pictures' do
     accept_prompt with: 'renamed_picture' do
       click_on 'Change Name'
     end
+    sleep 2
     page.wont_have_content 'tony_picture01'
     page.must_have_content 'renamed_picture'
     visit picture_path(pictures(:tony_picture01).id)
