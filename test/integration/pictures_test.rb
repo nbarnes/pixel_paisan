@@ -40,7 +40,7 @@ feature 'Pictures' do
   # I haven't been able to make this test work on Travis CI. It seems to have having some sort of
   # JS script failure that I can't diagnose.
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
-  if ENV['ORIGINAL_SIZE_TAG'] != true
+  if ENV['TRAVIS'] != true
 
     scenario 'as a picture owner, I can change the name of a picture', js: true do
       login_user
