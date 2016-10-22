@@ -40,9 +40,9 @@ feature 'Pictures' do
   # I haven't been able to make this test work on Travis CI. It seems to have having some sort of
   # JS script failure that I can't diagnose.
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
-  if ENV['TRAVIS'] != true
 
-    scenario 'as a picture owner, I can change the name of a picture', js: true do
+  scenario 'as a picture owner, I can change the name of a picture', js: true do
+    unless ENV['TRAVIS'] == true
       login_user
       visit picture_path(pictures(:tony_picture01).id)
       page.must_have_content 'tony_picture01'
@@ -51,14 +51,12 @@ feature 'Pictures' do
       accept_prompt with: 'renamed_picture' do
         click_on 'Change Name'
       end
-      sleep 2
       page.wont_have_content 'tony_picture01'
       page.must_have_content 'renamed_picture'
       visit picture_path(pictures(:tony_picture01).id)
       page.wont_have_content 'tony_picture01'
       page.must_have_content 'renamed_picture'
     end
-
   end
 
 end
