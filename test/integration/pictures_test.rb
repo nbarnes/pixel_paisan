@@ -42,7 +42,9 @@ feature 'Pictures' do
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
 
   scenario 'as a picture owner, I can change the name of a picture', js: true do
-    unless ENV['EXCLUDE_TEST_ON_TRAVIS'] == true
+    puts 'outside'
+    if ENV['EXCLUDE_TEST_ON_TRAVIS'] == true
+      puts 'inside'
       login_user
       visit picture_path(pictures(:tony_picture01).id)
       page.must_have_content 'tony_picture01'
