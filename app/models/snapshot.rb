@@ -7,6 +7,8 @@ class Snapshot < ActiveRecord::Base
   validates :picture, presence: true
   validates :cell_size, numericality: { less_than_or_equal_to: 50 }
 
+  after_create :update_picture
+
   scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
 
   def initialize(opts = {})
@@ -91,6 +93,11 @@ class Snapshot < ActiveRecord::Base
     )
     new_ss.save!
     return new_ss
+  end
+
+  def update_picture
+    picture.snapshot_updated_at = created_at
+    picture.save!
   end
 
 end

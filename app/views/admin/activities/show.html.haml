@@ -1,0 +1,9 @@
+
+
+- @users.each do |user|
+  = user.name
+  %br
+%br
+
+- @pictures.each do |picture|
+  = render 'admin_picture_thumbnail', picture: picture

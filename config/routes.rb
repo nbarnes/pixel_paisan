@@ -27,9 +27,13 @@ Rails.application.routes.draw do
   resources :snapshots, only: [:show, :destroy]
 
   namespace :admin do
-   resources :users, only: [:index, :show]
-   resources :activities, only: [:index]
+    resources :users, only: [:index, :show]
+    resources :activities, only: [:index]
   end
+
+  get 'admin/activity/:period/:timestamp', to: 'admin/activities#show', as: 'admin_activity'
+
+  get 'admin', to: 'admin/activities#index'
 
   get 'editor', to: 'static_pages#editor'
 

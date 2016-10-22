@@ -8,9 +8,9 @@ Pictures count: #{@pictures_count}
 %br
 Snapshots count: #{@snapshots_count}
 %br
-Snapshots last week: #{@recent_snapshots_saved_count}
+Snapshots last week: #{@recent_snapshots_count}
 %br
-= link_to 'Gallery', user_gallery_path(@user.galleries.first)
+= link_to 'Gallery', user_galleries_path(@user.galleries.first)
 %br
 Recent snapshots:
 %br

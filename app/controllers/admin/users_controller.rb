@@ -22,7 +22,11 @@ module Admin
       @snapshots_count = @user.pictures.inject(0) do |sum, picture|
         sum + picture.snapshots.size
       end
-      @recent_snapshots_saved_count = Snapshot.created_between(Time.now.days_ago(6), Time.now).count
+      @recent_snapshots_count = Snapshot.joins(picture: :user)
+                                        .where(users: { id: params[:id] })
+                                        .order(:created_at)
+                                        .created_between(Time.now.days_ago(6), Time.now)
+                                        .count
       @recent_snapshots = Snapshot.joins(picture: :user).where(users: { id: params[:id] }).order(:created_at).limit 10
     end
 

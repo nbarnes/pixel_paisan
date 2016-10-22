@@ -3,38 +3,46 @@ gal_picture01:
   name: 'gal_picture01'
   user: galactus
   gallery: gal_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 gal_picture02:
   name: 'gal_picture02'
   user: galactus
   gallery: gal_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 gal_picture03:
   name: 'gal_picture03'
   user: galactus
   gallery: gal_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 tony_picture01:
   name: 'tony_picture01'
   user: tony
   gallery: tony_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 tony_picture02:
   name: 'tony_picture02'
   user: tony
   gallery: tony_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 tony_picture03:
   name: 'tony_picture03'
   user: tony
   gallery: tony_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 rocket_picture01:
   name: 'rocket_picture01'
   user: rocket
   gallery: rocket_gallery
+  snapshot_updated_at: <%= Time.now %>
 
 rocket_picture02:
   name: 'rocket_picture02'
   user: rocket
   gallery: rocket_gallery
+  snapshot_updated_at: <%= Time.now %>

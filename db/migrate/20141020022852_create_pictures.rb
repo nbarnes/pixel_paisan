@@ -5,6 +5,7 @@ class CreatePictures < ActiveRecord::Migration
       t.integer :user_id, index: true
       t.integer :gallery_id, index: true
       t.integer :snapshots_count
+      t.timestamp :snapshot_updated_at
       t.string :name
     end
   end
