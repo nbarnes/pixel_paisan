@@ -67,10 +67,10 @@ html_colors = [
 
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.create!(
-  name: 'Admin',
-  email: 'pixel.paisan@gmail.com',
-  password: 'p1x3l',
-  password_confirmation: 'p1x3l',
+  name: ENV['ADMIN_NAME'],
+  email: ENV['ADMIN_EMAIL'],
+  password: ENV['ADMIN_PASSWORD'],
+  password_confirmation: ENV['ADMIN_PASSWORD'],
   role: 'admin'
 )
 puts 'New user created: ' << user.name
