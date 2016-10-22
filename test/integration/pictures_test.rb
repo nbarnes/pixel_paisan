@@ -43,7 +43,8 @@ feature 'Pictures' do
 
   scenario 'as a picture owner, I can change the name of a picture', js: true do
     puts 'outside'
-    unless ENV['EXCLUDE_TEST_ON_TRAVIS'] == 'true'
+    puts ENV['EXCLUDE_TEST_ON_TRAVIS']
+    if ENV['ON_TRAVIS'] != 'true'
       puts 'inside'
       login_user
       visit picture_path(pictures(:tony_picture01).id)
