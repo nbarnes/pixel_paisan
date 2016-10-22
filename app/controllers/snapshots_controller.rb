@@ -1,5 +1,4 @@
 class SnapshotsController < ApplicationController
-  include PngHelper
 
   before_action :set_snapshot, only: [:show, :destroy]
 
