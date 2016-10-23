@@ -1,7 +1,9 @@
 
-
+Users created
+= @time_identifier
+%br
 - @users.each do |user|
-  = user.name
+  = link_to user.name, admin_user_path(user)
   %br
 %br
 
