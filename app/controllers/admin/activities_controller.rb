@@ -27,7 +27,7 @@ module Admin
     end
 
     def show
-      @timestamp = params[:timestamp].to_time
+      timestamp = params[:timestamp].to_time
       if params[:period] == 'month'
         @users = User.where(created_at: timestamp.beginning_of_month..timestamp.end_of_month)
         @pictures = Picture.where(snapshot_updated_at: timestamp.beginning_of_month..timestamp.end_of_month).includes(:snapshots, :user)
