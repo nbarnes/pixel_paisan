@@ -1,11 +1,13 @@
 
-Users created
-= @time_identifier
+%strong Users created
+%strong= @time_identifier
 %br
 - @users.each do |user|
   = link_to user.name, admin_user_path(user)
   %br
 %br
 
+%strong Updated pictures:
+%br
 - @pictures.each do |picture|
   = render 'admin_picture_thumbnail', picture: picture
