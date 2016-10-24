@@ -1,15 +1,29 @@
 
 .display_entry
   = image_tag @picture.current_version.display_png.to_data_url, class: 'picture_display'
-  %br
-  .picture_name
-    = @picture.name
+
+  .picture_info
+    Picture name: #{@picture.name}
+    %br
+    Width: #{@picture.current_version.original_png.width}
+    %br
+    Height: #{@picture.current_version.original_png.height}
+
+    %br
+    %br
+    = link_to 'Download at original size', picture_path(@picture.id, format: :png, size: :original)
+    %br
+    = link_to 'Download at display size (512 x 512)', picture_path(@picture.id, format: :png, size: :display)
+    %br
+    = link_to 'Download at thumbnail size (128 x 128)', picture_path(@picture.id, format: :png, size: :thumbnail)
     %br
 
-    = link_to 'Edit In Painter', edit_picture_path(@picture.id)
+    %br
+    = link_to 'Edit Picture In Painter', edit_picture_path(@picture.id)
     - if @picture.user == current_user
-      = button_to 'Delete Image', { action: 'destroy', id: @picture.id },
+      = button_to 'Delete Picture', { action: 'destroy', id: @picture.id },
           method: :delete, data: { confirm: 'Are you sure you want to destroy this picture?' }
+  .clearfix
   - @picture.snapshots.reverse.each do |snapshot|
     = render 'snapshots/snapshot_thumbnail', snapshot: snapshot
 %br

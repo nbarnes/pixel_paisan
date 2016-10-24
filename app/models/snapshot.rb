@@ -30,6 +30,16 @@ class Snapshot < ActiveRecord::Base
     self.display_png_blob = Base64.strict_encode64(display_png.to_abgr_stream)
   end
 
+  def get_png(size)
+    png = original_png
+    if size == 'display'
+      png = display_png
+    elsif size == 'thumbnail'
+      png = thumbnail_png
+    end
+    return png
+  end
+
   def original_png
     get_file(ENV['ORIGINAL_SIZE_TAG'])
   end

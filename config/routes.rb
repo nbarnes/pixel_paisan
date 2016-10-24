@@ -18,8 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures, only: [:show, :destroy, :create, :update] do
+  resources :pictures, only: [:destroy, :create, :update] do
     member do
+      get '(/:size)', to: 'pictures#show'
       get 'editor', to: 'pictures#edit', as: 'edit'
     end
   end

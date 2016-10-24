@@ -7,6 +7,10 @@ class PicturesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.json { render json: @picture.editor_json }
+      format.png do
+        head :bad_request && return unless @picture
+        send_data @picture.current_version.get_png(params[:size]), type: 'image/png', disposition: 'inline'
+      end
     end
   end
 
