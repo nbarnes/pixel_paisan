@@ -61,7 +61,7 @@ $ ->
       handle_canvas_size_field_changed($('#cell_size_field'))
 
     handle_canvas_size_field_changed = (canvas_size_input_element) ->
-      if canvas_size_input_element.val() > 50
-        canvas_size_input_element.val(50)
+      if canvas_size_input_element.val() > 400
+        canvas_size_input_element.val(400)
       resize_canvas_element()
       redraw()
