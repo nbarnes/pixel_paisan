@@ -14,11 +14,14 @@
 
     %br
     %br
-    = link_to 'Download at original size', picture_path(@picture.id, format: :png, size: :original)
+    = link_to 'Download at original size',
+      picture_path(@picture.id, format: :png, size: :original)
     %br
-    = link_to 'Download at display size (512 x 512)', picture_path(@picture.id, format: :png, size: :display)
+    = link_to 'Download at display size (512 x 512)',
+      picture_path(@picture.id, format: :png, size: :display)
     %br
-    = link_to 'Download at thumbnail size (128 x 128)', picture_path(@picture.id, format: :png, size: :thumbnail)
+    = link_to 'Download at thumbnail size (128 x 128)',
+      picture_path(@picture.id, format: :png, size: :thumbnail)
     %br
 
     %br
