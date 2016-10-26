@@ -33,7 +33,7 @@ feature 'Admin' do
     page.must_have_content 'Rocket Raccoon'
     page.must_have_content 'Tony Stark'
     page.must_have_content 'gal_picture01'
-    page.must_have_content 'tony_picture02'
+    page.must_have_content 'tony_picture03'
     page.must_have_content 'rocket_picture01'
   end
 
