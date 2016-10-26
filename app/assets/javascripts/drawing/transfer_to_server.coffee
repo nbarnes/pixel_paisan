@@ -1,4 +1,18 @@
 $ ->
+
+  $('#display_entry').ready ->
+
+    $('#change_picture_name_button').click (e) ->
+      new_picture_name = window.prompt('Enter a new name for your picture', '').
+                         replace(/[^a-zA-Z0-9_]/gi, '')
+      if not new_picture_name
+        new_picture_name = 'unnamed_picture'
+      payload = {}
+      payload.picture_name = new_picture_name
+      payload.picture_id = picture_id
+      patch_picture_name(payload)
+
+
   $('#painting_application_panel').ready ->
 
     $('#save_picture_button').click () ->
@@ -93,23 +107,23 @@ $ ->
           clearTimeout(saving_picture_modal_timeout)
       )
 
-    patch_picture_name = (payload) ->
-      pixel_paisan_ajax(
-        data: payload
-        url: "/pictures/#{payload.picture_id}"
-        verb: 'PATCH'
-        success_callback: (data, textStatus, jqXHR) ->
-          # console.log('AJAX PATCHing of picture name success')
-          $('#picture_name_display').html(data.picture_name)
-        error_callback: (jqXHR, textStatus, errorThrown) ->
-          console.log('AJAX PATCHing of picture name error')
-      )
-
     a_user_is_logged_in = () ->
       return $('#painting_application_panel').data('user-id')
 
     show_modal_pane = (id_to_show) ->
       $('.modal_content_pane').hide()
       $('#' + id_to_show).show()
+
+  patch_picture_name = (payload) ->
+    pixel_paisan_ajax(
+      data: payload
+      url: "/pictures/#{payload.picture_id}"
+      verb: 'PATCH'
+      success_callback: (data, textStatus, jqXHR) ->
+        # console.log('AJAX PATCHing of picture name success')
+        $('#picture_name_display').html(data.picture_name)
+      error_callback: (jqXHR, textStatus, errorThrown) ->
+        console.log('AJAX PATCHing of picture name error')
+    )
 
 

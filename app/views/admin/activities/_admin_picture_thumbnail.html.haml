@@ -5,4 +5,4 @@
   %br
   = link_to "User: #{picture.user.email}", admin_user_path(picture.user.id)
   %br
-  = link_to "Picture: #{picture.name}", @picture
+  = link_to "Picture: #{picture.name}", show_picture_path(picture)

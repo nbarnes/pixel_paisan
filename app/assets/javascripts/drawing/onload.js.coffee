@@ -12,3 +12,6 @@ $ ->
       retrieve_picture_from_server(picture_id)
 
     $("#painting_canvas").focus()
+
+  $('#display_entry').ready ->
+    window.picture_id = $('#display_entry').data('picture-id')

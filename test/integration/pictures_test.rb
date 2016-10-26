@@ -21,9 +21,9 @@ feature 'Pictures' do
   scenario 'As a picture owner, I can delete my pictures' do
     login_user
     visit gallery_path(galleries(:tony_gallery).id)
-    click_on 'tony_picture02'
+    click_on 'tony_picture03'
     click_on 'Delete Picture'
-    page.wont_have_content 'tony_picture02'
+    page.wont_have_content 'tony_picture03'
   end
 
   scenario "a non-owner user, I cannot delete other people's pictures" do
@@ -42,7 +42,7 @@ feature 'Pictures' do
   # JS script failure that I can't diagnose.
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
 
-  scenario 'as a picture owner, I can change the name of a picture', js: true do
+  scenario 'as a picture owner, I can change the name of a picture via the editor', js: true do
     if ENV['ON_TRAVIS'] != 'true'
       login_user
       visit picture_path(pictures(:tony_picture01).id)
@@ -57,6 +57,22 @@ feature 'Pictures' do
       visit picture_path(pictures(:tony_picture01).id)
       page.wont_have_content 'tony_picture01'
       page.must_have_content 'renamed_picture'
+    end
+  end
+
+  scenario 'as a picture owner, I can change the name of a picture via picture display', js: true do
+    if ENV['ON_TRAVIS'] != 'true'
+      login_user
+      visit show_picture_path(pictures(:tony_picture02).id)
+      page.must_have_content 'tony_picture02'
+      accept_prompt with: 'renamed_picture02' do
+        click_on 'Change Name'
+      end
+      page.wont_have_content 'tony_picture02'
+      page.must_have_content 'renamed_picture02'
+      visit show_picture_path(pictures(:tony_picture02).id)
+      page.wont_have_content 'tony_picture02'
+      page.must_have_content 'renamed_picture02'
     end
   end
 

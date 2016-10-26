@@ -5,7 +5,10 @@ class PicturesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html {}
+      format.html do
+        @picture_id = @picture.id
+        @current_user_id = current_user.try(:id)
+      end
       format.json { render json: @picture.editor_json }
       format.png do
         head :bad_request && return unless @picture

@@ -1,9 +1,12 @@
 
-.display_entry
+#display_entry{ data: { picture_id: @picture_id } }
   = image_tag @picture.current_version.display_png.to_data_url, class: 'picture_display'
 
   .picture_info
-    Picture name: #{@picture.name}
+    %span Picture name:
+    %span#picture_name_display #{@picture.name}
+    - if @current_user_id == @picture.user.id
+      %button#change_picture_name_button Change Name
     %br
     Width: #{@picture.current_version.original_png.width}
     %br
