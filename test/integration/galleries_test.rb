@@ -38,7 +38,8 @@ feature 'Galleries' do
       click_on 'Change Name'
     end
     click_on 'Save Picture'
-    find_by_id('picture_saved_pane').click
+    sleep 5
+    page.execute_script('$.modal.close();')
     click_on 'My Pictures'
     page.must_have_content 'My_new_picture'
   end

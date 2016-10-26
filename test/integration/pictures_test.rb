@@ -12,7 +12,8 @@ feature 'Pictures' do
     end
     page.must_have_content 'image_new'
     click_on 'Save Picture'
-    find_by_id('picture_saved_pane').click
+    sleep 5
+    page.execute_script('$.modal.close();')
     click_on 'My Pictures'
     page.must_have_content 'image_new'
   end
@@ -21,7 +22,7 @@ feature 'Pictures' do
     login_user
     visit gallery_path(galleries(:tony_gallery).id)
     click_on 'tony_picture02'
-    click_on 'Delete Image'
+    click_on 'Delete Picture'
     page.wont_have_content 'tony_picture02'
   end
 
@@ -46,7 +47,7 @@ feature 'Pictures' do
       login_user
       visit picture_path(pictures(:tony_picture01).id)
       page.must_have_content 'tony_picture01'
-      click_on 'Edit In Painter'
+      click_on 'Edit Picture In Painter'
       page.must_have_content 'tony_picture01'
       accept_prompt with: 'renamed_picture' do
         click_on 'Change Name'

@@ -15,20 +15,20 @@ feature 'Admin' do
     login_admin
     visit admin_user_path users(:tony).id
     page.must_have_content 'iron_man@stark.com'
-    page.must_have_content Time.now.strftime('%m/%d/%Y')
+    page.must_have_content Time.now.utc.strftime('%m/%d/%Y')
     page.must_have_css '.picture_thumbnail'
   end
 
   scenario 'Activities index displays correctly' do
     login_admin
     visit admin_activities_path
-    page.must_have_content "#{Time.now.strftime('%A')} the #{Time.now.day.ordinalize}"
+    page.must_have_content "#{Time.now.utc.strftime('%A')} the #{Time.now.utc.day.ordinalize}"
   end
 
   scenario 'Activities show displays correctly' do
     login_admin
-    visit admin_activity_path 'day', Time.now
-    page.must_have_content "#{Time.now.strftime('%A')} the #{Time.now.day.ordinalize}"
+    visit admin_activity_path 'day', Time.now.utc
+    page.must_have_content "#{Time.now.utc.strftime('%A')} the #{Time.now.utc.day.ordinalize}"
     page.must_have_content 'Galactus the World Devourer'
     page.must_have_content 'Rocket Raccoon'
     page.must_have_content 'Tony Stark'
