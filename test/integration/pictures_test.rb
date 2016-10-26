@@ -38,7 +38,7 @@ feature 'Pictures' do
   scenario "as an unauthenticated user, I am promted to login or register to branch other people's pictures" do
   end
 
-  # I haven't been able to make this test work on Travis CI. It seems to have having some sort of
+  # I haven't been able to make these tests work on Travis CI. They seem to be having some sort of
   # JS script failure that I can't diagnose.
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
 

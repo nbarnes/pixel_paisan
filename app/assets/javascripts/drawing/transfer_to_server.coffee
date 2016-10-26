@@ -4,14 +4,14 @@ $ ->
 
     $('#change_picture_name_button').click (e) ->
       new_picture_name = window.prompt('Enter a new name for your picture', '').
-                         replace(/[^a-zA-Z0-9_]/gi, '')
+                         replace(/\ /g, '_').
+                         replace(/[^\w\s]/g, '')
       if not new_picture_name
         new_picture_name = 'unnamed_picture'
       payload = {}
       payload.picture_name = new_picture_name
       payload.picture_id = picture_id
       patch_picture_name(payload)
-
 
   $('#painting_application_panel').ready ->
 

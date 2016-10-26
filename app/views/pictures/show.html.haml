@@ -4,7 +4,7 @@
 
   .picture_info
     %span Picture name:
-    %span#picture_name_display @picture.name
+    %span#picture_name_display #{@picture.name}
     - if @current_user_id == @picture.user.id
       %button#change_picture_name_button Change Name
     %br
