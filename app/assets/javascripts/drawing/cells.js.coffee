@@ -41,8 +41,6 @@ $ ->
         target_x = cell_x_to_x ( @x )
         target_y = cell_y_to_y ( @y )
 
-        debugger
-
         if $('#draw_grid_checkbox')[0].checked
           old_color = get_drawing_color()
           set_drawing_color({r: 128, g: 128, b: 128, a: 1})
