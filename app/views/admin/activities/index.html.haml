@@ -9,7 +9,7 @@
   - @created_daily.each_with_index do |counts, index|
     %tr
       %td
-        = link_to "#{counts[0].strftime('%A')} the #{counts[0].day.ordinalize}", admin_activity_path(:day, Date.current.days_ago(index))
+        = link_to "#{counts[0].strftime('%A')} the #{counts[0].day.ordinalize}", admin_activity_path(:day, counts[0])
       %td
         = counts[1]
       %td
@@ -26,7 +26,7 @@
   - @created_weekly.each_with_index do |counts, index|
     %tr
       %td
-        = link_to counts[0].strftime('%m/%d'), admin_activity_path(:week, Date.current.weeks_ago(index))
+        = link_to counts[0].strftime('%m/%d'), admin_activity_path(:week, counts[0])
       %td
         = counts[1]
       %td
@@ -43,7 +43,7 @@
   - @created_monthly.each_with_index do |counts, index|
     %tr
       %td
-        = link_to counts[0].strftime('%B'), admin_activity_path(:month, Date.current.months_ago(index))
+        = link_to counts[0].strftime('%B'), admin_activity_path(:month, counts[0])
       %td
         = counts[1]
       %td

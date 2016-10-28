@@ -1,7 +1,7 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $('#canvas_size_in_cells_field').val('200')
+    $('#canvas_size_in_cells_field').val('100')
     $('#cell_size_field').val('4')
     resize_canvas_element()
 

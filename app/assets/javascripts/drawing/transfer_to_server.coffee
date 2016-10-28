@@ -1,11 +1,13 @@
 $ ->
 
+  massage_picture_name = (raw_name) ->
+    return raw_name.replace(/\ /g, '_').replace(/[^\w\s]/g, '')
+
   $('#display_entry').ready ->
 
     $('#change_picture_name_button').click (e) ->
-      new_picture_name = window.prompt('Enter a new name for your picture', '').
-                         replace(/\ /g, '_').
-                         replace(/[^\w\s]/g, '')
+      new_picture_name = window.prompt('Enter a new name for your picture', '')
+      new_picture_name = massage_picture_name new_picture_name
       if not new_picture_name
         new_picture_name = 'unnamed_picture'
       payload = {}
@@ -23,8 +25,8 @@ $ ->
         show_modal_pane('log_in_to_save_pane')
 
     $('#change_picture_name_button').click (e) ->
-      new_picture_name = window.prompt('Enter a new name for your picture', '').
-                         replace(/[^a-zA-Z0-9_]/gi, '')
+      new_picture_name = window.prompt('Enter a new name for your picture', '')
+      new_picture_name = massage_picture_name new_picture_name
       if not new_picture_name
         new_picture_name = 'unnamed_picture'
       if picture_id == undefined

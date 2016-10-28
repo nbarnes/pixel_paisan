@@ -5,16 +5,15 @@ module Admin
     before_action :admin_authorize
 
     def index
-      now = Time.now
       Groupdate.time_zone = 'UTC'
 
       users_created_daily = User.group_by_day(:created_at, last: 7).count
       users_created_weekly = User.group_by_week(:created_at, last: 4).count
       users_created_monthly = User.group_by_month(:created_at, last: 6).count
 
-      snapshots_created_daily = Snapshot.group_by_day(:created_at, range: now.days_ago(6)..now).count
-      snapshots_created_weekly = Snapshot.group_by_week(:created_at, range: now.weeks_ago(3)..now).count
-      snapshots_created_monthly = Snapshot.group_by_month(:created_at, range: now.months_ago(5)..now).count
+      snapshots_created_daily = Snapshot.group_by_day(:created_at, last: 7).count
+      snapshots_created_weekly = Snapshot.group_by_week(:created_at, last: 4).count
+      snapshots_created_monthly = Snapshot.group_by_month(:created_at, last: 6).count
 
       @created_daily = users_created_daily.map do |users_count|
         [users_count.first, users_count.last, snapshots_created_daily[users_count.first]]
