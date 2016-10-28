@@ -6,7 +6,7 @@
       Users Created
     %th
       Snapshots Created
-  - @created_daily.each_with_index do |counts, index|
+  - @created_daily.each do |counts|
     %tr
       %td
         = link_to "#{counts[0].strftime('%A')} the #{counts[0].day.ordinalize}", admin_activity_path(:day, counts[0])
@@ -23,7 +23,7 @@
       Users Created
     %th
       Snapshots Created
-  - @created_weekly.each_with_index do |counts, index|
+  - @created_weekly.each do |counts|
     %tr
       %td
         = link_to counts[0].strftime('%m/%d'), admin_activity_path(:week, counts[0])
@@ -40,7 +40,7 @@
       Users Created
     %th
       Snapshots Created
-  - @created_monthly.each_with_index do |counts, index|
+  - @created_monthly.each do |counts|
     %tr
       %td
         = link_to counts[0].strftime('%B'), admin_activity_path(:month, counts[0])
