@@ -18,12 +18,15 @@ $ ->
     $('#palette_selector').change (e) ->
       $('.palette_colors_set').hide()
       selected_palette_id = $( '#palette_selector option:selected' ).val()
-      if palette_sets[selected_palette_id]
-        palette_sets[selected_palette_id].show()
-        palette_sets[selected_palette_id].find('.color_button').first().click()
+      palette_color_set = palette_sets[selected_palette_id]
+      if palette_color_set
+        palette_color_set.show()
+        palette_color_set.find('.color_button').first().click()
+        $('#color_picker_opener').visible(!palette_color_set.data('is-default-palette'))
       else
         $.getJSON "/palettes/#{selected_palette_id}", (data) ->
           load_palette(data)
+          $('#color_picker_opener').visible(!data['is_default_palette'])
           palette_sets[selected_palette_id].find('.color_button').first().click()
 
     load_palette = (palette) ->
@@ -31,7 +34,7 @@ $ ->
       for i in [0...palette.colors.length]
         color = palette.colors[i]
         add_color_to_palette(color, palette_colors_set)
-      $('#color_picker_opener').visible(palette['current_user_is_owner'])
+      palette_colors_set.data('is-default-palette', palette['is_default_palette'])
       palette_colors_set.appendTo($('#palette_colors_wrapper'))
       palette_sets[palette.id] = palette_colors_set
 

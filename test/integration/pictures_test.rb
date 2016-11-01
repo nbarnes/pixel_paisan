@@ -5,7 +5,7 @@ feature 'Pictures' do
 
   scenario 'as an authenticated user, new pictures I save go to my gallery', js: true do
     login_user
-    visit root_path
+    visit editor_path
     click_on 'Create New'
     accept_prompt with: 'image_new' do
       click_on 'Change Name'

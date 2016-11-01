@@ -44,6 +44,17 @@ feature 'Palettes' do
     page.wont_have_content '128,128,255'
   end
 
+  scenario 'I cannot add colors to a default palette via the editor', js: true do
+    login_user
+    visit editor_path
+    find('#palette_selector').value.must_equal palettes(:palette2).id.to_s
+    page.wont_have_css '#color_picker_opener'
+    select "tony's palette", from: 'palette_selector'
+    page.must_have_css '#color_picker_opener'
+    select "Gal's default palette", from: 'palette_selector'
+    page.wont_have_css '#color_picker_opener'
+  end
+
   scenario 'As a non-owner, I cannot delete a palette' do
     login_user
     visit user_palettes_path(users(:rocket).id)
@@ -60,7 +71,7 @@ feature 'Palettes' do
 
   scenario 'As a site user, I can load any of the default palettes and my own owned ones', js: true do
     login_user
-    visit root_path
+    visit editor_path
     page.must_have_css('option#tonys_palette')
     page.must_have_css('option#Gals_default_palette')
     page.wont_have_css('option#galactus_palette')

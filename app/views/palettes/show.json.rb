@@ -2,7 +2,7 @@
 {
   name: @palette.name,
   id: @palette.id,
-  current_user_is_owner: current_user == @palette.user,
+  is_default_palette: (@palette.is_default ? 1 : 0),
   colors: @palette.colors
 
 }.to_json
