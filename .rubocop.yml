@@ -38,3 +38,7 @@ Style/EmptyLinesAroundBlockBody:
 
 Style/RedundantReturn:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/integration/*'
