@@ -36,7 +36,7 @@ $ ->
         # console.log(jqXHR.getAllResponseHeaders())
         error_callback(jqXHR, textStatus, errorThrown)
 
-  window.show_modal_pane = (id_to_showm, closeable) ->
+  window.show_modal_pane = (id_to_show, closeable) ->
     $('#editor_modal_container').modal({overlayClose: closeable})
     $('.modal_content_pane').hide()
     $('#' + id_to_show).show()
