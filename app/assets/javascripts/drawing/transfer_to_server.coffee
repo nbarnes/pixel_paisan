@@ -21,8 +21,7 @@ $ ->
       if a_user_is_logged_in()
         save_picture_to_server()
       else
-        $('#editor_modal_container').modal({overlayClose: true})
-        show_modal_pane('log_in_to_save_pane')
+        show_modal_pane('log_in_to_save_pane', true)
 
     $('#change_picture_name_button').click (e) ->
       new_picture_name = window.prompt('Enter a new name for your picture', '')
@@ -38,10 +37,9 @@ $ ->
         patch_picture_name(payload)
 
     save_picture_to_server = () ->
-      $("#editor_modal_container").modal({overlayClose: false})
-      show_modal_pane('picture_saving_pane')
+      show_modal_pane('picture_saving_pane', false)
       window.saving_picture_modal_timeout = setTimeout ( ->
-        show_modal_pane('upload_timeout_pane')
+        show_modal_pane('upload_timeout_pane', true)
         set_modal_closable()
         ), 300000
       payload = canvas_to_json()
@@ -81,13 +79,13 @@ $ ->
         verb: 'POST'
         success_callback: (data, textStatus, jqXHR) ->
           # console.log('AJAX POSTing of new image success')
-          show_modal_pane('picture_saved_pane')
+          show_modal_pane('picture_saved_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
           window.picture_id = data.picture_id
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX POSTing of new image failure')
-          show_modal_pane('picture_upload_error_pane')
+          show_modal_pane('picture_upload_error_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
       )
@@ -99,22 +97,18 @@ $ ->
         verb: 'PATCH'
         success_callback: (data, textStatus, jqXHR) ->
           # console.log('AJAX PATCHing of existing image success')
-          show_modal_pane('picture_saved_pane')
+          show_modal_pane('picture_saved_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX PATCHing of existing image failure')
-          show_modal_pane('picture_upload_error_pane')
+          show_modal_pane('picture_upload_error_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
       )
 
     a_user_is_logged_in = () ->
       return $('#painting_application_panel').data('user-id')
-
-    show_modal_pane = (id_to_show) ->
-      $('.modal_content_pane').hide()
-      $('#' + id_to_show).show()
 
   patch_picture_name = (payload) ->
     pixel_paisan_ajax(

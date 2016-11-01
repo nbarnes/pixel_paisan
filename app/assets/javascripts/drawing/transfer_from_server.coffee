@@ -25,13 +25,17 @@ $ ->
     # 'dataType' is NOT flagging the data being sent, but rather
     # flagging the expected data response type.
     window.retrieve_picture_from_server = (picture_id) ->
+      show_modal_pane('retrieving_picture_pane', false)
       pixel_paisan_ajax
         url: "/pictures/#{picture_id}",
         verb: 'GET'
         success_callback: (data, textStatus, jqXHR) ->
           # console.log('AJAX get of picture data success')
+          $.modal.close()
           import_image(data)
         error_callback: (jqXHR, textStatus, errorThrown) ->
+          show_modal_pane('picture_retrieval_failure_pane', true)
+          set_modal_closeable
           console.log('AJAX get of picture data failure')
           console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
           console.log("#{textStatus}")
