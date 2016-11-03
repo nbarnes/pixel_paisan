@@ -29,6 +29,7 @@ class PicturesController < ApplicationController
     head :unauthorized && return unless current_user
     picture = Picture.new
     picture.name = params[:name]
+    picture.palette_id = params[:palette_id]
     picture.user_id = current_user.id
     picture.gallery = current_user.galleries[0]
     picture.add_snapshot(params) if params[:pixels]
@@ -56,6 +57,7 @@ class PicturesController < ApplicationController
   def update
     head :unauthorized && return unless @picture.user == current_user
     @picture.name = params[:picture_name] if params[:picture_name]
+    @picture.palette_id = params[:palette_id] if params[:palette_id]
     if params[:pixels]
       head :bad_request && return unless pixels_valid? params[:pixels]
       @picture.add_snapshot(params)

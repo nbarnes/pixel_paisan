@@ -31,31 +31,31 @@ palette3_colors_json = palette3_colors.to_json
 
 %>
 
-palette1:
+gals_palette:
   name: galactus' palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
   colors: <%= palette1_colors_json %>
 
-palette2:
+gals_default_palette:
   name: Gal's default palette
   is_default: true
   user_id: <%= ActiveRecord::FixtureSet.identify(:galactus) %>
   colors: <%= palette2_colors_json %>
 
-palette3:
+tonys_palette:
   name: tony's palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:tony) %>
   colors: <%= palette3_colors_json %>
 
-palette4:
+rockets_palette1:
   name: rocket's first palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>
   colors: <%= palette2_colors_json %>
 
-palette5:
+rockets_palette2:
   name: rocket's second palette
   is_default: false
   user_id: <%= ActiveRecord::FixtureSet.identify(:rocket) %>

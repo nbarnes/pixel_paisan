@@ -32,7 +32,7 @@ feature 'Galleries' do
 
   scenario 'Gallery adds new pictures', js: true do
     login_user
-    visit root_path
+    visit editor_path
     click_on 'Create New'
     accept_prompt with: 'My_new_picture' do
       click_on 'Change Name'

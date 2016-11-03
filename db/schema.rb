@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125225339) do
+ActiveRecord::Schema.define(version: 20161102230331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20141125225339) do
     t.integer  "snapshots_count"
     t.datetime "snapshot_updated_at"
     t.string   "name"
+    t.integer  "palette_id"
   end
 
   add_index "pictures", ["gallery_id"], name: "index_pictures_on_gallery_id", using: :btree

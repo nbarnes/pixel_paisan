@@ -47,7 +47,7 @@ feature 'Palettes' do
   scenario 'I cannot add colors to a default palette via the editor', js: true do
     login_user
     visit editor_path
-    find('#palette_selector').value.must_equal palettes(:palette2).id.to_s
+    find('#palette_selector').value.must_equal palettes(:gals_default_palette).id.to_s
     page.wont_have_css '#color_picker_opener'
     select "tony's palette", from: 'palette_selector'
     page.must_have_css '#color_picker_opener'

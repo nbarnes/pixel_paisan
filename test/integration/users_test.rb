@@ -5,7 +5,7 @@ feature 'Users' do
 
   scenario 'existing account successfully logged in' do
     # Given an existing user
-    visit root_path
+    visit editor_path
     click_on 'Login'
     fill_in 'Email', with: users(:galactus).email
     fill_in 'Password', with: 'password'
@@ -18,7 +18,7 @@ feature 'Users' do
   end
 
   scenario 'create new account' do
-    visit root_path
+    visit editor_path
     click_on 'Sign up'
     fill_in 'Email', with: 'srogers@usa.gov'
     fill_in 'user_password', with: 'password'
@@ -32,7 +32,7 @@ feature 'Users' do
 
   scenario 'sign in and out' do
     # Given an existing user
-    visit root_path
+    visit editor_path
     click_on 'Login'
     fill_in 'Email', with: users(:galactus).email
     fill_in 'Password', with: 'password'

@@ -7,6 +7,7 @@ require 'minitest/rails/capybara'
 require 'capybara/poltergeist'
 
 class ActiveSupport::TestCase
+  self.use_transactional_fixtures = true
   fixtures :all
   # Capybara.javascript_driver = :webkit
   Capybara.javascript_driver = :poltergeist
@@ -17,7 +18,7 @@ class ActiveSupport::TestCase
   end
 
   def login_admin
-    visit root_path
+    visit editor_path
     click_on 'Login'
     fill_in 'Email', with: users(:galactus).email
     fill_in 'Password', with: 'password'
@@ -25,7 +26,7 @@ class ActiveSupport::TestCase
   end
 
   def login_user
-    visit root_path
+    visit editor_path
     click_on 'Login'
     fill_in 'Email', with: users(:tony).email
     fill_in 'Password', with: 'password'

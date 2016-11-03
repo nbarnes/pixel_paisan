@@ -76,4 +76,10 @@ feature 'Pictures' do
     end
   end
 
+  scenario 'associated palettes are loaded in the editor when a picture is', js: true do
+    login_user
+    visit edit_picture_path(pictures(:tony_picture01).id)
+    find('#palette_selector').value.must_equal palettes(:tonys_palette).id.to_s
+  end
+
 end

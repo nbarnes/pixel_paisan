@@ -4,45 +4,53 @@ gal_picture01:
   user: galactus
   gallery: gal_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:gals_palette) %>
 
 gal_picture02:
   name: 'gal_picture02'
   user: galactus
   gallery: gal_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:gals_default_palette) %>
 
 gal_picture03:
   name: 'gal_picture03'
   user: galactus
   gallery: gal_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:gals_palette) %>
 
 tony_picture01:
   name: 'tony_picture01'
   user: tony
   gallery: tony_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:tonys_palette) %>
 
 tony_picture02:
   name: 'tony_picture02'
   user: tony
   gallery: tony_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:gals_default_palette) %>
 
 tony_picture03:
   name: 'tony_picture03'
   user: tony
   gallery: tony_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:tonys_palette) %>
 
 rocket_picture01:
   name: 'rocket_picture01'
   user: rocket
   gallery: rocket_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:rockets_palette1) %>
 
 rocket_picture02:
   name: 'rocket_picture02'
   user: rocket
   gallery: rocket_gallery
   snapshot_updated_at: <%= Time.now %>
+  palette_id: <%= ActiveRecord::FixtureSet.identify(:rockets_palette2) %>
