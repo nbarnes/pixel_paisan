@@ -35,6 +35,18 @@ $ ->
         @my_color = get_drawing_color()
         this.fill_rect()
 
+      draw_dithered_square: (target_x, target_y, cell_size) ->
+        old_color = get_drawing_color()
+        set_drawing_color({r: 64, g: 64, b: 64, a: 1})
+        pp_context.fillRect(target_x, target_y, cell_size, cell_size)
+
+        for x in [0...cell_size]
+          for y in [0...cell_size]
+            if ((x + y) % 2) == 0
+              pp_context.clearRect((target_x + x), (target_y + y), 1, 1)
+
+        set_drawing_color(old_color)
+
       fill_rect: ->
         color = get_drawing_color()
 
@@ -47,14 +59,16 @@ $ ->
           pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
           set_drawing_color(old_color)
           if color.a == 0
-            pp_context.clearRect(target_x, target_y, cell_size() - 1, cell_size() - 1)
+            this.draw_dithered_square(target_x, target_y, cell_size() - 1)
           else if color.a > 0
             pp_context.fillRect(target_x, target_y, cell_size() - 1, cell_size() - 1)
         else
           if color.a == 0
-            pp_context.clearRect(target_x, target_y, cell_size(), cell_size())
+            this.draw_dithered_square(target_x, target_y, cell_size())
           else if color.a > 0
             pp_context.fillRect(target_x, target_y, cell_size(), cell_size())
+
+
 
 
     cell_x_to_x = (cell_x) ->
