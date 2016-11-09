@@ -11,6 +11,7 @@ $ ->
     if picture_id?
       retrieve_picture_from_server(picture_id)
 
+    reset_drawing()
     $("#painting_canvas").focus()
 
   $('#display_entry').ready ->

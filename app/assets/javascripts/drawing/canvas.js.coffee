@@ -37,7 +37,7 @@ $ ->
       for x in [0...cells.length]
         for y in [0...cells.length]
           cells[x][y].clear()
-      change_canvas_attrs($('#painting_canvas').attr('width'))
+          cells[x][y].redraw()
 
     # resizing / blanking the canvas also resets the fillStyle, so we
     # have to store the color for a moment and then reset it
