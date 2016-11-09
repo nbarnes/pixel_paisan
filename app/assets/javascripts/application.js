@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require spectrum
-//= require jquery-readyselector
-//= require drawing
-//= require dataTables/jquery.dataTables
 //= require jquery.simplemodal.1.4.4.min
+//= require jquery-readyselector
+//= require dataTables/jquery.dataTables
+//= require drawing
 //= require_tree .
