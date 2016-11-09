@@ -57,13 +57,11 @@ $ ->
     canvas_to_json = () ->
       image = {}
       image.pixels = []
-
       for x in [0...canvas_size_in_cells()]
         image.pixels.push( [] )
         for y in [0...canvas_size_in_cells()]
           cell = cells[x][y]
           image.pixels[x].push(cell.my_color)
-
       return image
 
     set_modal_closable = () ->
@@ -121,5 +119,17 @@ $ ->
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX PATCHing of picture name error')
     )
+
+  patch_associated_palette = (payload) ->
+    pixel_paisan_ajax(
+      data: payload
+      url: "/pictures/#{payload.picture_id}"
+      verb: 'PATCH'
+      success_callback: (data, textStatus, jqXHR) ->
+        console.log('AJAX PATCHing of associated palette success')
+      error_callback: (jqXHR, textStatus, errorThrown) ->
+        console.log('AJAX PATCHing of associated palette error')
+    )
+
 
 
