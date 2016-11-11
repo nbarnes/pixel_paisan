@@ -7,7 +7,7 @@ $ ->
       resize_canvas_element()
       $('#picture_name_display').html(data.picture_name)
       window.picture_id = data.picture_id
-      $('#palette_selector').val(data.palette_id)
+      $('#palette_selector ').val(data.palette_id).change()
       import_image_data(data.image_data)
 
     get_dimension = (image) ->

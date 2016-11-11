@@ -47,6 +47,7 @@ $ ->
       # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
       payload.cell_size = $('#cell_size_field').val()
       payload.picture_id = picture_id
+      payload.palette_id = $('#palette_selector').val()
       if picture_id == undefined
         # console.log('POSTing picture')
         post_image(payload)
@@ -118,17 +119,6 @@ $ ->
         $('#picture_name_display').html(data.picture_name)
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX PATCHing of picture name error')
-    )
-
-  patch_associated_palette = (payload) ->
-    pixel_paisan_ajax(
-      data: payload
-      url: "/pictures/#{payload.picture_id}"
-      verb: 'PATCH'
-      success_callback: (data, textStatus, jqXHR) ->
-        console.log('AJAX PATCHing of associated palette success')
-      error_callback: (jqXHR, textStatus, errorThrown) ->
-        console.log('AJAX PATCHing of associated palette error')
     )
 
 
