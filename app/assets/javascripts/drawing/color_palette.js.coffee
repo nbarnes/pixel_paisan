@@ -3,7 +3,7 @@ $ ->
     palette_sets = {}
 
     set_erase = (r, g, b, a, composite) ->
-      set_drawing_color( {r: 255, g: 255, b: 255, a: 0} )
+      set_selected_color( {r: 255, g: 255, b: 255, a: 0} )
 
     window.set_drawing_color = (color) ->
       pp_context.fillStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, #{color.a})"
@@ -11,6 +11,12 @@ $ ->
     window.get_drawing_color = () ->
       color = fillStyle_into_color(pp_context.fillStyle)
       return color
+
+    window.set_selected_color = (color) ->
+      old_color = fillStyle_into_color(pp_context.fillStyle)
+      set_drawing_color(color)
+      $('#current_color_pane').css('background', "rgb(#{color.r},#{color.g},#{color.b})")
+      $('#previous_color_pane').css('background', "rgb(#{old_color.r},#{old_color.g},#{old_color.b})")
 
     $('#erase_button').click (e) ->
       set_erase()
@@ -47,7 +53,7 @@ $ ->
 
     get_click_handler = (color) ->
       ->
-        set_drawing_color(color)
+        set_selected_color(color)
 
     $("#color_picker_opener").click () ->
       $("#color_picker_modal").modal({overlayClose: true})
