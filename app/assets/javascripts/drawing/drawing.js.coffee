@@ -1,10 +1,10 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    window.trigger_cell = (canvas_x, canvas_y) ->
+    window.paint_cell = (canvas_x, canvas_y) ->
       target_cell = get_cell(canvas_x, canvas_y)
       if target_cell != null
-        target_cell.trigger()
+        target_cell.paint_on()
       else
         return null
 

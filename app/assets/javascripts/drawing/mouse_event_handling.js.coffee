@@ -10,7 +10,7 @@ $ ->
       old_mouse_location = e
       x = mouse_loc.x(e)
       y = mouse_loc.y(e)
-      undo_action = trigger_cell(x, y)
+      undo_action = paint_cell(x, y)
       if undo_action != null
         undo_block.push( undo_action )
 
@@ -79,7 +79,7 @@ $ ->
           fraction += delta_y
           current_x += slope_x
 
-          undo_action = trigger_cell(current_x, current_y)
+          undo_action = paint_cell(current_x, current_y)
           if undo_action != null
             undo_block.push( undo_action )
 
@@ -92,6 +92,6 @@ $ ->
           fraction += delta_x
           current_y += slope_y
 
-          undo_action = trigger_cell(current_x, current_y)
+          undo_action = paint_cell(current_x, current_y)
           if undo_action != null
             undo_block.push( undo_action )

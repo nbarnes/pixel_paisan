@@ -5,7 +5,7 @@ $ ->
       constructor: (@x, @y) ->
         @my_color = {r: 255, g: 255, b: 255, a: 0}
 
-      trigger: ->
+      paint_on: ->
         old_color = @my_color
         @my_color = get_drawing_color()
         this.fill_rect()

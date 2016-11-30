@@ -44,7 +44,7 @@ $ ->
     change_canvas_attrs = (new_size) ->
       old_color = get_drawing_color()
       $('#painting_canvas').attr({width: new_size, height: new_size})
-      set_drawing_color = old_color
+      set_drawing_color(old_color)
 
     redraw = ->
       for x in [0...canvas_size_in_cells()]

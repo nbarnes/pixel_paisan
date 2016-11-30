@@ -2,9 +2,6 @@ $ ->
   $('#painting_application_panel').ready ->
     palette_sets = {}
 
-    set_erase = (r, g, b, a, composite) ->
-      set_selected_color( {r: 255, g: 255, b: 255, a: 0} )
-
     window.set_drawing_color = (color) ->
       pp_context.fillStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, #{color.a})"
 
@@ -12,14 +9,8 @@ $ ->
       color = fillStyle_into_color(pp_context.fillStyle)
       return color
 
-    window.set_selected_color = (color) ->
-      old_color = fillStyle_into_color(pp_context.fillStyle)
-      set_drawing_color(color)
-      $('#current_color_pane').css('background', "rgb(#{color.r},#{color.g},#{color.b})")
-      $('#previous_color_pane').css('background', "rgb(#{old_color.r},#{old_color.g},#{old_color.b})")
-
     $('#erase_button').click (e) ->
-      set_erase()
+      ColorSelection.set_current_color( {r: 255, g: 255, b: 255, a: 0} )
 
     $('#palette_selector').change (e) ->
       $('.palette_colors_set').hide()
@@ -53,7 +44,11 @@ $ ->
 
     get_click_handler = (color) ->
       ->
-        set_selected_color(color)
+        ColorSelection.set_current_color(color)
+
+    $("#previous_color_pane").click () ->
+      console.log('bob')
+      ColorSelection.set_current_color(ColorSelection.get_previous_color())
 
     $("#color_picker_opener").click () ->
       $("#color_picker_modal").modal({overlayClose: true})
