@@ -2,13 +2,6 @@ $ ->
   $('#painting_application_panel').ready ->
     palette_sets = {}
 
-    window.set_drawing_color = (color) ->
-      pp_context.fillStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, #{color.a})"
-
-    window.get_drawing_color = () ->
-      color = fillStyle_into_color(pp_context.fillStyle)
-      return color
-
     $('#erase_button').click (e) ->
       ColorSelection.set_current_color( {r: 255, g: 255, b: 255, a: 0} )
 

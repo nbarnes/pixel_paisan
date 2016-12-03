@@ -10,7 +10,7 @@ $ ->
       old_mouse_location = e
       x = mouse_loc.x(e)
       y = mouse_loc.y(e)
-      undo_action = paint_cell(x, y)
+      undo_action = Drawing.paint_cell(x, y)
       if undo_action != null
         undo_block.push( undo_action )
 
@@ -23,7 +23,7 @@ $ ->
       if old_mouse_location != null
         old_x = mouse_loc.x(old_mouse_location)
         old_y = mouse_loc.y(old_mouse_location)
-        redraw_cell(old_x, old_y)
+        Drawing.redraw_cell(old_x, old_y)
 
     mouseup_or_mouseleave = () ->
       my_mouse_down = false
@@ -46,8 +46,8 @@ $ ->
         if my_mouse_down
           brensenham_line_algorithm(old_x, old_y, new_x, new_y)
         else
-          redraw_cell(old_x, old_y)
-          draw_cursor(new_x, new_y)
+          Drawing.redraw_cell(old_x, old_y)
+          Drawing.draw_cursor(new_x, new_y)
 
     brensenham_line_algorithm = (start_x, start_y, end_x, end_y) ->
 
@@ -79,7 +79,7 @@ $ ->
           fraction += delta_y
           current_x += slope_x
 
-          undo_action = paint_cell(current_x, current_y)
+          undo_action = Drawing.paint_cell(current_x, current_y)
           if undo_action != null
             undo_block.push( undo_action )
 
@@ -92,6 +92,6 @@ $ ->
           fraction += delta_x
           current_y += slope_y
 
-          undo_action = paint_cell(current_x, current_y)
+          undo_action = Drawing.paint_cell(current_x, current_y)
           if undo_action != null
             undo_block.push( undo_action )

@@ -19,7 +19,7 @@ $ ->
     window.resize_canvas_element = ->
       resize_cell_matrix()
       new_size = canvas_size_in_cells() * cell_size()
-      change_canvas_attrs(new_size)
+      $('#painting_canvas').attr({width: new_size, height: new_size})
       $('#painting_canvas').width(new_size)
       $('#painting_canvas').height(new_size)
       $('#canvas_width').text($('#painting_canvas').width())
@@ -38,13 +38,6 @@ $ ->
         for y in [0...cells.length]
           cells[x][y].clear()
           cells[x][y].redraw()
-
-    # resizing / blanking the canvas also resets the fillStyle, so we
-    # have to store the color for a moment and then reset it
-    change_canvas_attrs = (new_size) ->
-      old_color = get_drawing_color()
-      $('#painting_canvas').attr({width: new_size, height: new_size})
-      set_drawing_color(old_color)
 
     redraw = ->
       for x in [0...canvas_size_in_cells()]

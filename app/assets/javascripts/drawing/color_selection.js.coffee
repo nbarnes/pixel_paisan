@@ -11,7 +11,6 @@ window.ColorSelection = (->
   set_current_color = (new_color) ->
     set_previous_color(current_color)
     current_color = new_color
-    pp_context.fillStyle = "rgba(#{new_color.r}, #{new_color.g}, #{new_color.b}, #{new_color.a})"
     $('#current_color_pane').css('background', "rgb(#{new_color.r},#{new_color.g},#{new_color.b})")
 
   set_previous_color = (new_color) ->
