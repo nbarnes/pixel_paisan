@@ -41,7 +41,6 @@ $ ->
         ColorSelection.set_current_color(color)
 
     $("#previous_color_pane").click () ->
-      console.log('bob')
       ColorSelection.set_current_color(ColorSelection.get_previous_color())
 
     $("#color_picker_opener").click () ->
