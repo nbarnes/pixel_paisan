@@ -17,8 +17,10 @@ $ ->
         $.getJSON "/palettes/#{selected_palette_id}", (data) ->
           load_palette(data)
           $('#color_picker_opener').visible(!data['is_default_palette'])
-          palette_sets[selected_palette_id].find('.color_button')[1].click()
-          palette_sets[selected_palette_id].find('.color_button')[0].click()
+          if palette_sets[selected_palette_id].find('.color_button')[1]
+            palette_sets[selected_palette_id].find('.color_button')[1].click()
+          if palette_sets[selected_palette_id].find('.color_button')[0]
+            palette_sets[selected_palette_id].find('.color_button')[0].click()
 
     load_palette = (palette) ->
       palette_colors_set = $('<div/>', { 'class':'palette_colors_set' })
