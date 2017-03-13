@@ -25,3 +25,6 @@
 aws_test_strings.rb
 
 public/assets/
+
+.DS_Store
+*/.DS_Store
