@@ -52,6 +52,3 @@ group :test do
   gem 'minitest-reporters'
   gem 'poltergeist'
 end
-
-# Use unicorn as the app server
-# gem 'unicorn'
