@@ -2,12 +2,14 @@
 $('#painting_application_panel').ready ->
   window.Drawing = (->
 
+    drawing_context = document.getElementById('painting_canvas').getContext("2d")
+
     paint_rect = (canvas_x, canvas_y, size, color) ->
-      pp_context.fillStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, #{color.a})"
+      drawing_context.fillStyle = "rgba(#{color.r}, #{color.g}, #{color.b}, #{color.a})"
       if color.a == 0
-        pp_context.clearRect(canvas_x, canvas_y, size, size)
+        drawing_context.clearRect(canvas_x, canvas_y, size, size)
       else
-        pp_context.fillRect(canvas_x, canvas_y, size, size)
+        drawing_context.fillRect(canvas_x, canvas_y, size, size)
 
     dither_rect = (canvas_x, canvas_y, size) ->
       for x in [0...size]

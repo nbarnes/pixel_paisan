@@ -1,6 +1,10 @@
 $ ->
   $('#painting_application_panel').ready ->
 
+    mouse_loc =
+      x: (e) -> e.pageX - $('#painting_canvas').offset().left
+      y: (e) -> e.pageY - $('#painting_canvas').offset().top
+
     my_mouse_down = false
     old_mouse_location = null
     undo_block = []

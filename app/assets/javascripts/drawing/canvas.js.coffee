@@ -2,11 +2,6 @@ $ ->
   $('#painting_application_panel').ready ->
 
     window.picture_id = undefined
-    window.pp_context = document.getElementById('painting_canvas').getContext("2d")
-
-    window.mouse_loc =
-      x: (e) -> e.pageX - $('#painting_canvas').offset().left
-      y: (e) -> e.pageY - $('#painting_canvas').offset().top
     window.cells = new Array
 
     window.canvas_size_in_cells = () ->
