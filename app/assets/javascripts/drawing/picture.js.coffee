@@ -1,0 +1,29 @@
+window.Picture = (->
+
+  cells = {}
+  palette_id =
+
+  get_current_color = ->
+    current_color
+  get_previous_color = ->
+    previous_color
+
+  set_current_color = (new_color) ->
+    return if colors_equal new_color, current_color
+    set_previous_color(current_color)
+    current_color = new_color
+    $('#current_color_pane').css('background', "rgb(#{new_color.r},#{new_color.g},#{new_color.b})")
+
+  set_previous_color = (new_color) ->
+    previous_color = new_color
+    $('#previous_color_pane').css('background',
+                                  "rgb(#{previous_color.r},#{previous_color.g},#{previous_color.b})")
+
+  return {
+    get_current_color: get_current_color
+    get_previous_color: get_previous_color
+    set_current_color: set_current_color
+    set_previous_color: set_previous_color
+  }
+
+)()

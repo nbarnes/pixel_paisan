@@ -29,7 +29,7 @@ $ ->
       if not new_picture_name
         new_picture_name = 'unnamed_picture'
       if picture_id == undefined
-        $('#picture_name_display').html(new_picture_name)
+        $('#tool_bar_file_element').html(new_picture_name)
       else
         payload = {}
         payload.picture_name = new_picture_name
@@ -43,7 +43,7 @@ $ ->
         set_modal_closable()
         ), 300000
       payload = canvas_to_json()
-      payload.name = $('#picture_name_display').html()
+      payload.name = $('#tool_bar_file_element').html()
       # console.log("Packing payload for image transfer to server; picture_id = #{picture_id}")
       payload.cell_size = $('#cell_size_field').val()
       payload.picture_id = picture_id
@@ -116,7 +116,7 @@ $ ->
       verb: 'PATCH'
       success_callback: (data, textStatus, jqXHR) ->
         # console.log('AJAX PATCHing of picture name success')
-        $('#picture_name_display').html(data.picture_name)
+        $('#tool_bar_file_element').html(data.picture_name)
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX PATCHing of picture name error')
     )
