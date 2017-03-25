@@ -5,6 +5,7 @@ class Picture < ActiveRecord::Base
   has_many :snapshots
 
   validates :user, :gallery, presence: true
+  validates_format_of :name, with: /\A[a-z0-9_]+\z/i
 
   scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
 

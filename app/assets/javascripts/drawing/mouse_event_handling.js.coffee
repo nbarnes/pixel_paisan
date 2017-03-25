@@ -14,25 +14,25 @@ $ ->
       old_mouse_location = e
       x = mouse_loc.x(e)
       y = mouse_loc.y(e)
-      undo_action = Drawing.paint_cell(x, y)
-      if undo_action != null
+      undo_action = Painter.paint_cell(x, y)
+      if undo_action != undefined
         undo_block.push( undo_action )
 
     $('body').mouseup (e) ->
-      mouseup_or_mouseleave()
+      mouse_depart()
 
     $('#painting_canvas').mouseleave (e) ->
-      mouseup_or_mouseleave()
+      mouse_depart()
       # remove cursor from canvas if the mouse leaves
       if old_mouse_location != null
         old_x = mouse_loc.x(old_mouse_location)
         old_y = mouse_loc.y(old_mouse_location)
-        Drawing.redraw_cell(old_x, old_y)
+        Painter.remove_cursor(old_x, old_y)
 
-    mouseup_or_mouseleave = () ->
+    mouse_depart = () ->
       my_mouse_down = false
       if undo_block.length != 0
-        undo_stack.push( undo_block )
+        Painter.add_undo_block(undo_block)
       undo_block = []
       return true
 
@@ -50,8 +50,8 @@ $ ->
         if my_mouse_down
           brensenham_line_algorithm(old_x, old_y, new_x, new_y)
         else
-          Drawing.redraw_cell(old_x, old_y)
-          Drawing.draw_cursor(new_x, new_y)
+          Painter.remove_cursor(old_x, old_y)
+          Painter.draw_cursor(new_x, new_y)
 
     brensenham_line_algorithm = (start_x, start_y, end_x, end_y) ->
 
@@ -83,8 +83,8 @@ $ ->
           fraction += delta_y
           current_x += slope_x
 
-          undo_action = Drawing.paint_cell(current_x, current_y)
-          if undo_action != null
+          undo_action = Painter.paint_cell(current_x, current_y)
+          if undo_action != undefined
             undo_block.push( undo_action )
 
       else
@@ -96,6 +96,6 @@ $ ->
           fraction += delta_x
           current_y += slope_y
 
-          undo_action = Drawing.paint_cell(current_x, current_y)
-          if undo_action != null
+          undo_action = Painter.paint_cell(current_x, current_y)
+          if undo_action != undefined
             undo_block.push( undo_action )

@@ -8,16 +8,6 @@
 
   %br
 
-  %span#painting_canvas_size_display
-    Current canvas size: x
-    %span#painting_canvas_width
-      0
-    , y
-    %span#painting_canvas_height
-      0
-
-  %br
-
   %span
     Canvas Size
     %input#canvas_size_in_cells_field{ type: 'text', value: '20' }
@@ -39,7 +29,7 @@
 
   = render 'editor/palette'
 
-  %canvas#painting_canvas{ width: 500, height: 500 }
+  %canvas#painting_canvas{ width: 360, height: 360 }
 
   %br
 

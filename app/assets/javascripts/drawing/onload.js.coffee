@@ -1,18 +1,13 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $('#canvas_size_in_cells_field').val('100')
-    $('#cell_size_field').val('4')
-    resize_canvas_element()
+    Picture.set_dimension(15);
+    Picture.set_cell_size(24);
 
-    $('#palette_selector').trigger('change')
+    Picture.set_picture_id($('#painting_application_panel').data('picture-id'))
 
-    picture_id = $('#painting_application_panel').data('picture-id')
-    if picture_id?
-      retrieve_picture_from_server(picture_id)
+    Painter.paint_canvas()
 
-    reset_drawing()
+    Palettes.palette_selector_changed()
+
     $("#painting_canvas").focus()
-
-  $('#display_entry').ready ->
-    window.picture_id = $('#display_entry').data('picture-id')
