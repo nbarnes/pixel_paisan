@@ -9,7 +9,7 @@ $('#display_entry').ready ->
     if not new_picture_name
       new_picture_name = 'unnamed_picture'
     payload = {}
-    payload.picture_name = new_picture_name
+    payload.name = new_picture_name
     payload.picture_id = picture_id
     $.ajax "/pictures/#{picture_id}",
       type: 'PATCH',

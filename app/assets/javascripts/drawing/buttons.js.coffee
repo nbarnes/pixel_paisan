@@ -35,13 +35,7 @@ $ ->
       new_picture_name = massage_picture_name new_picture_name
       if not new_picture_name
         set_picture_name_display('unnamed_picture')
-      if Picture.get_picture_id() == undefined
-        set_picture_name_display(new_picture_name)
-      else
-        ColdStorage.store_picture(PackingTape.pack_for_picture_name_change(Picture))
-
-    set_picture_name_display = (picture_name) ->
-      $('#tool_bar_file_element').html("#{picture_name} &#x25bc")
+      Picture.set_name(new_picture_name)
 
     $('#erase_button').click (e) ->
       ColorSelection.set_current_color( {r: 255, g: 255, b: 255, a: 0} )

@@ -56,7 +56,7 @@ class PicturesController < ApplicationController
 
   def update
     head :unauthorized && return unless @picture.user == current_user
-    @picture.name = params[:picture_name] if params[:picture_name]
+    @picture.name = params[:name] if params[:name]
     @picture.palette_id = params[:palette_id] if params[:palette_id]
     if params[:pixels]
       head :bad_request && return unless pixels_valid? params[:pixels]

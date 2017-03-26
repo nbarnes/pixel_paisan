@@ -59,6 +59,7 @@ $('#painting_application_panel').ready ->
       # if name != new_name
       #   ColdStorage.store_picture(PackingTape.pack_for_picture_name_change(this))
       name = new_name
+      $('#tool_bar_file_element').html("#{name} &#x25bc")
 
     new_picture = ->
       clear()
@@ -74,8 +75,8 @@ $('#painting_application_panel').ready ->
     import_picture_data = (data) ->
       set_cell_size(data.cell_size)
       set_dimension(data.image_data.length)
+      set_name(data.picture_name)
       palette_id = data.palette_id
-      name = data.picture_name
       picture_id = data.picture_id
       for x in [0...dimension]
         for y in [0...dimension]
