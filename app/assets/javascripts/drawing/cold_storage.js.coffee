@@ -13,7 +13,7 @@ $('#painting_application_panel').ready ->
         url = '/pictures'
       else
         verb = 'PATCH'
-        url = "/pictures/#{serialized_picture.picture_id}"
+        url = "/pictures/#{serialized_picture.id}"
 
       do_ajax(
         data: serialized_picture
@@ -24,7 +24,8 @@ $('#painting_application_panel').ready ->
           show_modal_pane('picture_saved_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
-          Picture.set_picture_id(data.picture_id)
+          unless serialized_picture.id # if we're saving an entirely new picture, the id will be undefined
+            Picture.set_picture_id(data.picture_id) # so we set the new id into Picture
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX transmission of image failure')
           show_modal_pane('picture_upload_error_pane', true)
@@ -40,10 +41,10 @@ $('#painting_application_panel').ready ->
         success_callback: (data, textStatus, jqXHR) ->
           # console.log('AJAX get of picture data success')
           $.modal.close()
-          PackingTape.import_image(data)
+          PackingTape.import_picture(data)
         error_callback: (jqXHR, textStatus, errorThrown) ->
           show_modal_pane('picture_retrieval_failure_pane', true)
-          set_modal_closeable
+          set_modal_closeable()
           console.log('AJAX get of picture data failure')
       )
 

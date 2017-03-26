@@ -3,11 +3,11 @@ $ ->
 
     $('#canvas_clear_button').click (e) ->
       Picture.clear()
-      Painter.paint_canvas()
+      Painter.paint_canvas(Picture)
 
     $('#create_new_button').click (e) ->
       Picture.new_picture()
-      Painter.paint_canvas()
+      Painter.paint_canvas(Picture)
       history.pushState(null, null, '/editor')
 
     $('#draw_grid_checkbox').change () ->
@@ -19,7 +19,7 @@ $ ->
       else
         $('#painting_canvas').css('border-bottom-width', '1px')
         $('#painting_canvas').css('border-right-width', '1px')
-      Painter.paint_canvas()
+      Painter.paint_canvas(Picture)
 
     $('#undo_button').click () ->
       Painter.undo()

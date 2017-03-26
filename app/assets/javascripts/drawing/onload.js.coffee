@@ -1,13 +1,15 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    Picture.set_dimension(15);
-    Picture.set_cell_size(24);
+    picture_id = $('#painting_application_panel').data('picture-id')
 
-    Picture.set_picture_id($('#painting_application_panel').data('picture-id'))
-
-    Painter.paint_canvas()
-
-    Palettes.palette_selector_changed()
+    if picture_id
+      Picture.set_picture_id(picture_id)
+    else
+      Picture.set_dimension(25)
+      Picture.set_cell_size(14)
+      Canvas.resize_canvas_element(Picture.get_dimension(), Picture.get_cell_size())
+      Painter.paint_canvas(Picture)
+      Palettes.palette_selector_changed()
 
     $("#painting_canvas").focus()

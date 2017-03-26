@@ -4,13 +4,26 @@ $('#painting_application_panel').ready ->
     palette_elements = {}
 
     palette_selector_changed = ->
-      $('.palette').hide()
       palette_id = $( '#palette_selector option:selected' ).val()
+      Picture.set_palette_id(palette_id)
+      show_palette(palette_id)
+
+    show_palette = (palette_id) ->
+      $('.palette').hide()
       palette_element = palette_elements[palette_id]
       if palette_element
-        show_palette_element(palette_element)
+        show_palette_element(palette_element, palette_id)
       else
         ColdStorage.get_palette(palette_id)
+
+    show_palette_element = (palette_element, palette_id) ->
+      palette_element.show()
+      $("select#palette_selector option[value='#{palette_id}']").prop('selected', true)
+      $('#color_picker_opener').visible(!palette_element.data('is-default-palette'))
+      if palette_element.find('.color_button')[1]
+        palette_element.find('.color_button')[1].click()
+      if palette_element.find('.color_button')[0]
+        palette_element.find('.color_button')[0].click()
 
     create_palette_element = (palette_data) ->
       palette_element = $('<div/>', { 'class':'palette' })
@@ -22,16 +35,9 @@ $('#painting_application_panel').ready ->
       palette_elements[palette_data.id] = palette_element
       return palette_element
 
-    show_palette_element = (palette_element) ->
-      palette_element.show()
-      $('#color_picker_opener').visible(!palette_element.data('is-default-palette'))
-      if palette_element.find('.color_button')[1]
-        palette_element.find('.color_button')[1].click()
-      if palette_element.find('.color_button')[0]
-        palette_element.find('.color_button')[0].click()
-
     import_palette = (palette_data) ->
-      show_palette_element(create_palette_element(palette_data))
+      create_palette_element(palette_data)
+      show_palette(palette_data.id)
 
     add_color_button_to_palette = (color, palette_id) ->
       palette_element = palette_elements[palette_id]
@@ -58,6 +64,7 @@ $('#painting_application_panel').ready ->
       palette_selector_changed: palette_selector_changed
       add_color_button_to_palette: add_color_button_to_palette
       add_new_color_to_palette: add_new_color_to_palette
+      show_palette: show_palette
     }
 
   )()

@@ -34,14 +34,11 @@ feature 'Galleries' do
     login_user
     visit editor_path
     click_on 'Create New'
-    accept_prompt with: 'My_new_picture' do
-      click_on 'Change Name'
-    end
     click_on 'Save Picture'
     sleep 5
     page.execute_script('$.modal.close();')
     click_on 'My Pictures'
-    page.must_have_content 'My_new_picture'
+    page.must_have_content 'new_picture'
   end
 
 end

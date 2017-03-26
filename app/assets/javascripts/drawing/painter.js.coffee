@@ -62,13 +62,13 @@ $('#painting_application_panel').ready ->
       else
         Canvas.paint_rect(target_x, target_y, Picture.get_cell_size(), color)
 
-    paint_canvas = ->
-      dimension = Picture.get_dimension()
+    paint_canvas = (picture) ->
+      dimension = picture.get_dimension()
       for x in [0...dimension]
         for y in [0...dimension]
-          cell = Picture.get_cell(x, y)
-          cell_size = Picture.get_cell_size()
-          draw_cell(x, y, cell_size, cell.get_color())
+          color = picture.get_cell(x, y).get_color()
+          cell_size = picture.get_cell_size()
+          draw_cell(x, y, cell_size, color)
 
     return {
       add_undo_block: add_undo_block

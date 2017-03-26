@@ -5,8 +5,8 @@ $('#painting_application_panel').ready ->
     palette_id = undefined
     picture_id = undefined
     name = 'new_picture'
-    dimension = 15
-    cell_size = 24
+    dimension = 0
+    cell_size = 0
 
     resize_cell_matrix = (dimension) ->
       for x in [0...dimension]
@@ -28,21 +28,21 @@ $('#painting_application_panel').ready ->
     set_dimension = (new_dimension) ->
       dimension = new_dimension
       resize_cell_matrix(dimension)
-      Canvas.resize_canvas_element()
+      Canvas.resize_canvas_element(dimension, cell_size)
 
     get_cell_size = ->
       return cell_size
 
     set_cell_size = (new_cell_size) ->
       cell_size = new_cell_size
-      Canvas.resize_canvas_element()
+      Canvas.resize_canvas_element(dimension, cell_size)
 
     get_palette_id = ->
       return palette_id
 
     set_palette_id = (new_palette_id) ->
-      if (palette_id != new_palette_id) && picture_id # only try to update the associated palette if the picture is already persisted
-        ColdStorage.store_picture(PackingTape.pack_for_picture_pallete_update(this))
+      # if (palette_id != new_palette_id) && picture_id # only try to update the associated palette if the picture is already persisted
+      #   ColdStorage.store_picture(PackingTape.pack_for_palette_change(this))
       palette_id = new_palette_id
 
     get_picture_id = ->
@@ -50,17 +50,19 @@ $('#painting_application_panel').ready ->
 
     set_picture_id = (new_picture_id) ->
       picture_id = new_picture_id
+      ColdStorage.get_picture(picture_id)
 
     get_name = ->
       return name
 
     set_name = (new_name) ->
-      if name != new_name
-        ColdStorage.store_picture(PackingTape.pack_for_picture_name_update(this))
+      # if name != new_name
+      #   ColdStorage.store_picture(PackingTape.pack_for_picture_name_change(this))
       name = new_name
 
     new_picture = ->
       clear()
+      Canvas.resize_canvas_element(dimension, cell_size)
       picture_id = undefined
       name = 'new_picture'
 
@@ -69,20 +71,21 @@ $('#painting_application_panel').ready ->
         for y in [0...cells.length]
           cells[x][y].clear()
 
-    import_picture_data = (picture_data) ->
+    import_picture_data = (data) ->
       set_cell_size(data.cell_size)
       set_dimension(data.image_data.length)
+      palette_id = data.palette_id
       name = data.picture_name
       picture_id = data.picture_id
-      palette_id = data.palette_id
       for x in [0...dimension]
         for y in [0...dimension]
-          r = image_data[x][y].r
-          g = image_data[x][y].g
-          b = image_data[x][y].b
-          a = image_data[x][y].a
+          r = data.image_data[x][y].r
+          g = data.image_data[x][y].g
+          b = data.image_data[x][y].b
+          a = data.image_data[x][y].a
           cells[x][y].import({r: r, g: g, b: b, a: a})
-      paint_canvas()
+      Painter.paint_canvas(this)
+      Palettes.show_palette(palette_id)
 
     return {
       get_cell: get_cell

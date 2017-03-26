@@ -19,6 +19,12 @@ $ ->
     $('.modal_content_pane').hide()
     $('#' + id_to_show).show()
 
+  window.set_modal_closable = () ->
+    $(".modal_container").addClass('simplemodal-close')
+    $.modal.impl.o.overlayClose = true
+    $.modal.impl.unbindEvents()
+    $.modal.impl.bindEvents()
+
   window.colors_equal = (foo, bar) ->
     if foo.r == bar.r
       if foo.g == bar.g

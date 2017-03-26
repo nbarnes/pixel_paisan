@@ -4,8 +4,8 @@ $('#painting_application_panel').ready ->
 
     drawing_context = document.getElementById('painting_canvas').getContext("2d")
 
-    resize_canvas_element = ->
-      new_size = Picture.get_dimension() * Picture.get_cell_size()
+    resize_canvas_element = (dimension, cell_size) ->
+      new_size = dimension * cell_size
       $('#painting_canvas').attr({width: new_size, height: new_size})
       $('#painting_canvas').width(new_size)
       $('#painting_canvas').height(new_size)

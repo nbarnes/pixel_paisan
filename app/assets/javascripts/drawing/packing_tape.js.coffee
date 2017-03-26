@@ -32,7 +32,7 @@ $('#painting_application_panel').ready ->
       }
 
     import_picture = (data) ->
-      Picture.import_image_data(data.image_data)
+      Picture.import_picture_data(data)
 
     pack_pixels = (picture) ->
       pixels = []
