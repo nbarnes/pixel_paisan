@@ -29,8 +29,8 @@ $('#painting_application_panel').ready ->
     get_draw_grid = ->
       return draw_grid
 
-    set_draw_grid = (new_should_draw_grid) ->
-      draw_grid = new_should_draw_grid
+    toggle_draw_grid = ->
+      draw_grid = !draw_grid
 
     draw_cursor = (canvas_x, canvas_y) ->
       cell_coordinates = get_cell_coordinates(canvas_x, canvas_y)
@@ -75,7 +75,7 @@ $('#painting_application_panel').ready ->
       undo: undo
       redo: redo
       get_draw_grid: get_draw_grid
-      set_draw_grid: set_draw_grid
+      toggle_draw_grid: toggle_draw_grid
       draw_cursor: draw_cursor
       remove_cursor: remove_cursor
       paint_cell: paint_cell

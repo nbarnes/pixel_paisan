@@ -32,19 +32,3 @@ $('#painting_application_panel').ready ->
   leave_menu_mode = ->
     in_menu_mode = false
     $('.dropdown_element').addClass('hidden')
-
-  $('#new_picture_option').click ->
-    Picture.new_picture()
-    Painter.paint_canvas(Picture)
-    history.pushState(null, null, '/editor')
-
-  $('#save_picture_option').click ->
-    if a_user_is_logged_in()
-      ColdStorage.store_picture(PackingTape.pack_for_picture(Picture))
-    else
-      show_modal_pane('log_in_to_save_pane', true)
-
-  $('#rename_picture_option').click ->
-    new_picture_name = window.prompt('Enter a new name for your picture', '')
-    new_picture_name = massage_picture_name new_picture_name
-    Picture.set_name(new_picture_name)

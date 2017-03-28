@@ -52,8 +52,8 @@ $ ->
   #     color.a = parseFloat(rgb_string[3])
   #   return color
 
-  window.a_user_is_logged_in = () ->
-    return $('#painting_application_panel').data('user-id')
-
   window.massage_picture_name = (raw_name) ->
     return raw_name.replace(/\ /g, '_').replace(/[^\w\s]/g, '')
+
+  window.a_user_is_logged_in = ->
+    return $('#painting_application_panel').data('user-id')

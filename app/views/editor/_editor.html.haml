@@ -5,26 +5,11 @@
 
   %br
 
-  %span
-    Canvas Size
-    %input#canvas_size_in_cells_field{ type: 'text', value: '20' }
-
-  %span
-    Cell Size
-    %input#cell_size_field{ type: 'text', value: '20' }
-
-  %br
-
-  %button#canvas_clear_button Clear
-  %button#undo_button Undo
-  %label Draw Grid
-  %input#draw_grid_checkbox{ type: 'checkbox' }
-
-  %br
-
   = render 'editor/palette'
 
-  %canvas#painting_canvas{ width: 360, height: 360 }
+  #canvas_holder
+    %canvas#painting_canvas{ width: 360, height: 360 }
+    #canvas_dimension_display
 
   %br
 

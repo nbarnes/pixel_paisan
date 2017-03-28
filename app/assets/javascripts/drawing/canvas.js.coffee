@@ -9,6 +9,9 @@ $('#painting_application_panel').ready ->
       $('#painting_canvas').attr({width: new_size, height: new_size})
       $('#painting_canvas').width(new_size)
       $('#painting_canvas').height(new_size)
+      $('#canvas_holder').width(new_size)
+      $('#canvas_dimension_display').text("#{dimension}x#{dimension}, pixel size #{cell_size}px")
+      Painter.paint_canvas(Picture)
 
     paint_rect = (canvas_x, canvas_y, size, color) ->
       if color.a == 0

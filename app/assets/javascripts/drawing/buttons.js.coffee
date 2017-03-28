@@ -1,26 +1,6 @@
 $ ->
   $('#painting_application_panel').ready ->
 
-    $('#canvas_clear_button').click (e) ->
-      Picture.clear()
-      Painter.paint_canvas(Picture)
-
-    $('#draw_grid_checkbox').change () ->
-      grid_checked = $('#draw_grid_checkbox')[0].checked
-      Painter.set_draw_grid(grid_checked)
-      if grid_checked
-        $('#painting_canvas').css('border-bottom-width', '0')
-        $('#painting_canvas').css('border-right-width', '0')
-      else
-        $('#painting_canvas').css('border-bottom-width', '1px')
-        $('#painting_canvas').css('border-right-width', '1px')
-      Painter.paint_canvas(Picture)
-
-    $('#undo_button').click () ->
-      Painter.undo()
-
-    $('#save_picture_button').click () ->
-
     $('#erase_button').click (e) ->
       ColorSelection.set_current_color( {r: 255, g: 255, b: 255, a: 0} )
 

@@ -1,7 +1,7 @@
 $('#painting_application_panel').ready ->
   window.Picture = (->
 
-    cells = [[]]
+    cells = []
     palette_id = undefined
     picture_id = undefined
     name = 'new_picture'
@@ -62,9 +62,9 @@ $('#painting_application_panel').ready ->
 
     new_picture = ->
       clear()
-      Canvas.resize_canvas_element(dimension, cell_size)
       picture_id = undefined
-      name = 'new_picture'
+      set_name('new_picture')
+      Painter.paint_canvas(this)
 
     clear = ->
       for x in [0...cells.length]
