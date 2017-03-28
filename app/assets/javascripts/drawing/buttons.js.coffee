@@ -5,11 +5,6 @@ $ ->
       Picture.clear()
       Painter.paint_canvas(Picture)
 
-    $('#create_new_button').click (e) ->
-      Picture.new_picture()
-      Painter.paint_canvas(Picture)
-      history.pushState(null, null, '/editor')
-
     $('#draw_grid_checkbox').change () ->
       grid_checked = $('#draw_grid_checkbox')[0].checked
       Painter.set_draw_grid(grid_checked)
@@ -25,17 +20,6 @@ $ ->
       Painter.undo()
 
     $('#save_picture_button').click () ->
-      if a_user_is_logged_in()
-        ColdStorage.store_picture(PackingTape.pack_for_picture(Picture))
-      else
-        show_modal_pane('log_in_to_save_pane', true)
-
-    $('#change_picture_name_button').click (e) ->
-      new_picture_name = window.prompt('Enter a new name for your picture', '')
-      new_picture_name = massage_picture_name new_picture_name
-      if not new_picture_name
-        set_picture_name_display('unnamed_picture')
-      Picture.set_name(new_picture_name)
 
     $('#erase_button').click (e) ->
       ColorSelection.set_current_color( {r: 255, g: 255, b: 255, a: 0} )

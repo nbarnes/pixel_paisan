@@ -1,32 +1,40 @@
 
 #tool_bar
   #tool_bar_file_element.tool_bar_element
-    new_picture &#x25bc
+    .tool_bar_title
+      new_picture &#x25bc
     #file_tools_dropdown.dropdown_element.hidden
-      new
-      %br
-      save
-      %br
-      rename
+      #new_picture_option.dropdown_option
+        new
+      #save_picture_option.dropdown_option
+        save
+      #rename_picture_option.dropdown_option
+        rename
   #tool_bar_edit_element.tool_bar_element
-    Edit &#x25bc
+    .tool_bar_title
+      Edit &#x25bc
     #edit_tools_dropdown.dropdown_element.hidden
-      clear
-      %br
-      undo
-      %br
-      redo
+      .dropdown_option
+        clear
+      .dropdown_option
+        undo
+      .dropdown_option
+        redo
   #tool_bar_view_element.tool_bar_element
-    View &#x25bc
+    .tool_bar_title
+      View &#x25bc
     #view_tools_dropdown.dropdown_element.hidden
-      canvas size
-      %br
-      cell size
+      .dropdown_option
+        canvas size
+      .dropdown_option
+        cell size
   #tool_bar_tools_element.tool_bar_element
-    Tools &#x25bc
+    .tool_bar_title
+      Tools &#x25bc
     #tool_tools_dropdown.dropdown_element.hidden
-      palette
-      %br
-      flood fill
-      %br
-      selection
+      .dropdown_option
+        palette
+      .dropdown_option
+        flood fill
+      .dropdown_option
+        selection

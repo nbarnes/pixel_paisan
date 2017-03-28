@@ -50,7 +50,6 @@ $('#painting_application_panel').ready ->
 
     set_picture_id = (new_picture_id) ->
       picture_id = new_picture_id
-      ColdStorage.get_picture(picture_id)
 
     get_name = ->
       return name
@@ -59,7 +58,7 @@ $('#painting_application_panel').ready ->
       # if name != new_name
       #   ColdStorage.store_picture(PackingTape.pack_for_picture_name_change(this))
       name = new_name
-      $('#tool_bar_file_element').html("#{name} &#x25bc")
+      $('#tool_bar_file_element .tool_bar_title').html("#{name} &#x25bc")
 
     new_picture = ->
       clear()

@@ -7,14 +7,12 @@ $('#painting_application_panel').ready ->
         show_modal_pane('upload_timeout_pane', true)
         set_modal_closable()
         ), 300000
-
       if serialized_picture.id == undefined
         verb = 'POST'
         url = '/pictures'
       else
         verb = 'PATCH'
         url = "/pictures/#{serialized_picture.id}"
-
       do_ajax(
         data: serialized_picture
         url: url
@@ -24,8 +22,6 @@ $('#painting_application_panel').ready ->
           show_modal_pane('picture_saved_pane', true)
           set_modal_closable()
           clearTimeout(saving_picture_modal_timeout)
-          unless serialized_picture.id # if we're saving an entirely new picture, the id will be undefined
-            Picture.set_picture_id(data.picture_id) # so we set the new id into Picture
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX transmission of image failure')
           show_modal_pane('picture_upload_error_pane', true)

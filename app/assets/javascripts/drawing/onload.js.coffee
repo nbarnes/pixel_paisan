@@ -4,7 +4,7 @@ $ ->
     picture_id = $('#painting_application_panel').data('picture-id')
 
     if picture_id
-      Picture.set_picture_id(picture_id)
+      ColdStorage.get_picture(picture_id)
     else
       Picture.set_dimension(25)
       Picture.set_cell_size(14)
