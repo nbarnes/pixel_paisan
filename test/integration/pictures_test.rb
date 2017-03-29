@@ -6,16 +6,14 @@ feature 'Pictures' do
   scenario 'as an authenticated user, new pictures I save go to my gallery', js: true do
     login_user
     visit editor_path
-    click_on 'Create New'
-    accept_prompt with: 'image_new' do
-      click_on 'Change Name'
-    end
-    page.must_have_content 'image_new'
-    click_on 'Save Picture'
+    find('#tool_bar_file_element').click
+    find('#new_picture_option').click
+    find('#tool_bar_file_element').click
+    find('#save_picture_option').click
     sleep 5
     page.execute_script('$.modal.close();')
     click_on 'My Pictures'
-    page.must_have_content 'image_new'
+    page.must_have_content 'new_picture'
   end
 
   scenario 'As a picture owner, I can delete my pictures' do
@@ -49,9 +47,14 @@ feature 'Pictures' do
       page.must_have_content 'tony_picture01'
       click_on 'Edit Picture In Painter'
       page.must_have_content 'tony_picture01'
+
+      find('#tool_bar_file_element').click
       accept_prompt with: 'renamed_picture' do
-        click_on 'Change Name'
+        find('#rename_picture_option').click
       end
+      find('#tool_bar_file_element').click
+      find('#save_picture_option').click
+
       page.wont_have_content 'tony_picture01'
       page.must_have_content 'renamed_picture'
       visit picture_path(pictures(:tony_picture01).id)
