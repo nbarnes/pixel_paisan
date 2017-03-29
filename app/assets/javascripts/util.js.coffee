@@ -55,5 +55,8 @@ $ ->
   window.massage_picture_name = (raw_name) ->
     return raw_name.replace(/\ /g, '_').replace(/[^\w\s]/g, '')
 
+  window.massage_to_number = (raw_string) ->
+    return raw_string.replace(/\D/g, '')
+
   window.a_user_is_logged_in = ->
     return $('#painting_application_panel').data('user-id')

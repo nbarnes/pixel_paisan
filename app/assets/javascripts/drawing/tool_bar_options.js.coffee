@@ -27,11 +27,19 @@ $('#painting_application_panel').ready ->
     Painter.undo()
 
   $('#redo_option').click ->
+    console.log('TODO')
 
-  $('#canvas_diemsnion_option').click ->
+  $('#canvas_dimension_option').click ->
+    new_dimension = massage_to_number(window.prompt('Enter a new size for your picture', '50'))
+    if new_dimension > 100 || new_dimension < 2
+      new_dimension = 100
+    Picture.set_dimension(new_dimension)
 
   $('#cell_size_option').click ->
-
+    new_cell_size = massage_to_number(window.prompt('Enter a new pixel size for your picture', '10'))
+    if new_cell_size > 30 || new_cell_size < 1
+      new_cell_size = 30
+    Picture.set_cell_size(new_cell_size)
 
   $('#draw_grid_option').click ->
     Painter.toggle_draw_grid()
@@ -42,3 +50,6 @@ $('#painting_application_panel').ready ->
       $('#painting_canvas').css('border-bottom-width', '1px')
       $('#painting_canvas').css('border-right-width', '1px')
     Painter.paint_canvas(Picture)
+
+  $('#dither_transparency_option').click ->
+    console.log('TODO')
