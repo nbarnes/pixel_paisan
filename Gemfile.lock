@@ -122,6 +122,10 @@ GEM
       launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    magic_lamp (1.8.1)
+      method_source
+      rails (>= 4.0.0)
+      rake
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
@@ -250,6 +254,10 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sysexits (1.2.0)
+    teaspoon (1.1.5)
+      railties (>= 3.2.5, < 6)
+    teaspoon-jasmine (2.3.4)
+      teaspoon (>= 1.0.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
@@ -289,6 +297,7 @@ DEPENDENCIES
   jquery-datatables-rails
   jquery-rails
   letter_opener
+  magic_lamp
   minitest-rails-capybara
   minitest-reporters
   pg
@@ -304,6 +313,7 @@ DEPENDENCIES
   simple_form
   simplecov
   spring
+  teaspoon-jasmine
   uglifier
   unicorn
 

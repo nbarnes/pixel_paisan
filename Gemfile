@@ -36,6 +36,8 @@ group :test, :development do
   gem 'rails_best_practices'
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'teaspoon-jasmine'
+  gem 'magic_lamp'
 end
 
 group :development do
