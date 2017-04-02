@@ -7,6 +7,7 @@ script:
 - psql -c 'create database pixel_paisan_test_postgres;' -U postgres
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 - xvfb-run bundle exec rake
+- rake teaspoon
 bundler_args: --binstubs=./bundler_stubs
 env:
   - ON_TRAVIS = 'true'

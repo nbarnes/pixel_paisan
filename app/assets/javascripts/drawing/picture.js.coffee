@@ -19,8 +19,6 @@ window.Picture = (->
   get_cell = (x, y) ->
     if x < dimension and y < dimension
       return cells[x][y]
-    else
-      return undefined
 
   get_dimension = ->
     return dimension
@@ -41,8 +39,6 @@ window.Picture = (->
     return palette_id
 
   set_palette_id = (new_palette_id) ->
-    # if (palette_id != new_palette_id) && picture_id # only try to update the associated palette if the picture is already persisted
-    #   ColdStorage.store_picture(PackingTape.pack_for_palette_change(this))
     palette_id = new_palette_id
 
   get_picture_id = ->
