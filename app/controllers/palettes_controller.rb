@@ -66,7 +66,7 @@ class PalettesController < ApplicationController
 
   def delete_color
     head :unauthorized && return unless @palette.user_id == current_user.id
-    removed_color = { 'r' => params[:r], 'g' => params[:g], 'b' => params[:b], 'a' => '1' }
+    removed_color = { 'r' => params[:r].to_i, 'g' => params[:g].to_i, 'b' => params[:b].to_i, 'a' => 1 }
     head :bad_request && return unless rgba_valid? removed_color
     @palette.colors.reject! do |color|
       color == removed_color

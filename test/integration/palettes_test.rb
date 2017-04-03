@@ -41,7 +41,7 @@ feature 'Palettes' do
     click_on "tony's palette"
     find('div div div', text: '128,0,0').find(:xpath, '..').click_on 'Remove Color'
     page.evaluate_script('window.confirm = function() { return true; }')
-    page.wont_have_content '128,128,255'
+    page.wont_have_content '128,0,0'
   end
 
   scenario 'I cannot add colors to a default palette via the editor', js: true do
