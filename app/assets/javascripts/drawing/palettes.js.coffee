@@ -49,7 +49,7 @@ window.Palettes = (->
     color_button = $('<div/>', { 'class':'color_button' })
     color_button.attr('id', "color_button_r#{color.r}g#{color.g}b#{color.b}")
     color_button.css('background', "rgb(#{color.r},#{color.g},#{color.b})")
-    color_button.bind 'click', get_click_handler(color)
+    color_button.click get_click_handler(color)
     palette_element.append(color_button)
 
   add_new_color_to_palette = (r_val, g_val, b_val) ->
