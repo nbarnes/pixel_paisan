@@ -20,10 +20,12 @@ window.Palettes = (->
     palette_element.show()
     $("select#palette_selector option[value='#{palette_id}']").prop('selected', true)
     $('#color_picker_opener').visible(!palette_element.data('is-default-palette'))
-    if palette_element.find('.color_button')[1]
-      palette_element.find('.color_button')[1].click()
-    if palette_element.find('.color_button')[0]
-      palette_element.find('.color_button')[0].click()
+    second_color_button = palette_element.find('.color_button')[1]
+    if second_color_button?
+      second_color_button.click()
+    first_color_button = palette_element.find('.color_button')[0]
+    if first_color_button?
+      first_color_button.click()
 
   create_palette_element = (palette_data) ->
     palette_element = $('<div/>', { 'class':'palette' })

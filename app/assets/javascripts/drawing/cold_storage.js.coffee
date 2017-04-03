@@ -86,10 +86,10 @@ window.ColdStorage = (->
         # console.log(jqXHR.getAllResponseHeaders())
         success_callback(data, textStatus, jqXHR)
       error: (jqXHR, textStatus, errorThrown) ->
-        # console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-        # console.log("#{textStatus}")
-        # console.log("#{errorThrown}")
-        # console.log(jqXHR.getAllResponseHeaders())
+        console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
+        console.log("#{textStatus}")
+        console.log("#{errorThrown}")
+        console.log(jqXHR.getAllResponseHeaders())
         error_callback(jqXHR, textStatus, errorThrown)
 
   return {
