@@ -1,12 +1,14 @@
 $ ->
   $('#painting_application_panel').ready ->
 
+    window.canvas_interaction_mode = 'draw'
+
     mouse_loc =
       x: (e) -> e.pageX - $('#painting_canvas').offset().left
       y: (e) -> e.pageY - $('#painting_canvas').offset().top
 
     my_mouse_down = false
-    old_mouse_location = null
+    old_mouse_location = undefined
     undo_block = []
 
     $('#painting_canvas').mousedown (e) ->
@@ -14,9 +16,13 @@ $ ->
       old_mouse_location = e
       x = mouse_loc.x(e)
       y = mouse_loc.y(e)
-      undo_action = Painter.paint_cell(x, y)
-      if undo_action != undefined
-        undo_block.push( undo_action )
+      if canvas_interaction_mode == 'draw'
+        undo_action = Painter.paint_cell(x, y)
+        if undo_action != undefined
+          undo_block.push( undo_action )
+      else if canvas_interaction_mode == 'select'
+        console.log('start drawing selection box')
+        # start drawing selection box
 
     $('body').mouseup (e) ->
       mouse_depart()
@@ -24,7 +30,7 @@ $ ->
     $('#painting_canvas').mouseleave (e) ->
       mouse_depart()
       # remove cursor from canvas if the mouse leaves
-      if old_mouse_location != null
+      if old_mouse_location != undefined
         old_x = mouse_loc.x(old_mouse_location)
         old_y = mouse_loc.y(old_mouse_location)
         Painter.remove_cursor(old_x, old_y)
@@ -37,7 +43,7 @@ $ ->
       return true
 
     $('#painting_canvas').mousemove (e) ->
-      if old_mouse_location != null
+      if old_mouse_location != undefined
 
         old_x = mouse_loc.x(old_mouse_location)
         old_y = mouse_loc.y(old_mouse_location)

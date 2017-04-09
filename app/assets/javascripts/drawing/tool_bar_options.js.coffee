@@ -53,3 +53,6 @@ $ ->
 
     $('#dither_transparency_option').click ->
       console.log('TODO')
+
+    $('#selection_tool_option').click ->
+      canvas_interaction_mode = 'select'
