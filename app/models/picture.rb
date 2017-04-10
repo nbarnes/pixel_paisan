@@ -39,8 +39,24 @@ class Picture < ActiveRecord::Base
   end
 
   def add_snapshot(params)
-    snapshot = Snapshot.new(pixels: params[:pixels], cell_size: params[:cell_size], picture: self)
-    snapshot.save!
+    unless pixels_equal(params[:pixels], current_version.pixels)
+      snapshot = Snapshot.new(pixels: params[:pixels], cell_size: params[:cell_size], picture: self)
+      snapshot.save!
+    end
+  end
+
+  def pixels_equal(foo, bar)
+    pixels_are_equal = true
+    foo.each_with_index do |row, x|
+      row.each_with_index do |column, y|
+        pixels_are_equal = pixel_equal(foo[x][y], bar[x][y])
+      end
+    end
+    return pixels_are_equal
+  end
+
+  def pixel_equal(x, y)
+    {r: x['r'].to_i, g: x['g'].to_i, b: x['b'].to_i, a: x['a'].to_i} == {r: y['r'].to_i, g: y['g'].to_i, b: y['b'].to_i, a: y['a'].to_i}
   end
 
 end
