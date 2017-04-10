@@ -5,24 +5,23 @@ ruby '2.2.2'
 gem 'rails', '~> 4.2'
 
 gem 'pg'
-gem 'groupdate'
 
-gem 'sass-rails'
-gem 'uglifier'
+gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'haml'
-gem 'autoprefixer-rails'
+gem 'jquery-datatables-rails'
+gem 'jquery-rails'
+gem 'sass-rails'
+gem 'uglifier'
 
 gem 'unicorn'
-
-gem 'jquery-rails'
-gem 'jquery-datatables-rails'
 
 gem 'chunky_png'
 gem 'rmagick', require: 'rmagick'
 
 gem 'devise' # authentication
 gem 'figaro'
+gem 'groupdate'
 gem 'simple_form'
 
 group :production do
@@ -30,27 +29,27 @@ group :production do
 end
 
 group :test, :development do
+  gem 'bullet'
   gem 'capybara-webkit'
+  gem 'magic_lamp'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
-  gem 'rails_best_practices'
   gem 'quiet_assets'
-  gem 'bullet'
+  gem 'rails_best_practices'
   gem 'teaspoon-jasmine'
-  gem 'magic_lamp'
 end
 
 group :development do
-  gem 'spring'
   gem 'brakeman', require: false
+  gem 'haml-lint', require: false
   gem 'letter_opener'
   gem 'rubocop', require: false
-  gem 'haml-lint', require: false
+  gem 'spring'
 end
 
 group :test do
   gem 'headhunter'
-  gem 'simplecov'
   gem 'minitest-reporters'
   gem 'poltergeist'
+  gem 'simplecov'
 end

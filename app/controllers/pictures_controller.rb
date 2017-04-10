@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
   include PixelValidation
 
-  before_action :set_picture, only: [:show, :update, :destroy, :edit]
+  before_action :set_picture, only: %i(show update destroy edit)
 
   def show
     respond_to do |format|

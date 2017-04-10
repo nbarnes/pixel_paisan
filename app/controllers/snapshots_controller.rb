@@ -1,9 +1,8 @@
 class SnapshotsController < ApplicationController
 
-  before_action :set_snapshot, only: [:show, :destroy]
+  before_action :set_snapshot, only: %i(show destroy)
 
-  def show
-  end
+  def show; end
 
   def destroy
     head :unauthorized unless @snapshot.picture.user == current_user

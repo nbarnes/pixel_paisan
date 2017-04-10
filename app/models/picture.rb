@@ -7,12 +7,10 @@ class Picture < ActiveRecord::Base
   validates :user, :gallery, presence: true
   validates_format_of :name, with: /\A[a-z0-9_]+\z/i
 
-  scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
+  scope :created_between, ->(start_date, end_date) { where(created_at: start_date..end_date) }
 
   def current_version
-    return snapshots.max do |a, b|
-      a.created_at <=> b.created_at
-    end
+    return snapshots.max_by(&:created_at)
   end
 
   def editor_json
@@ -39,16 +37,18 @@ class Picture < ActiveRecord::Base
   end
 
   def add_snapshot(params)
+    # rubocop:disable Style/GuardClause
     unless pixels_equal(params[:pixels], current_version.pixels)
       snapshot = Snapshot.new(pixels: params[:pixels], cell_size: params[:cell_size], picture: self)
       snapshot.save!
     end
+    # rubocop:enable Style/GuardClause
   end
 
   def pixels_equal(foo, bar)
     pixels_are_equal = true
     foo.each_with_index do |row, x|
-      row.each_with_index do |column, y|
+      row.each_with_index do |_column, y|
         pixels_are_equal = pixel_equal(foo[x][y], bar[x][y])
       end
     end
@@ -56,7 +56,8 @@ class Picture < ActiveRecord::Base
   end
 
   def pixel_equal(x, y)
-    {r: x['r'].to_i, g: x['g'].to_i, b: x['b'].to_i, a: x['a'].to_i} == {r: y['r'].to_i, g: y['g'].to_i, b: y['b'].to_i, a: y['a'].to_i}
+    { r: x['r'].to_i, g: x['g'].to_i, b: x['b'].to_i, a: x['a'].to_i } ==
+      { r: y['r'].to_i, g: y['g'].to_i, b: y['b'].to_i, a: y['a'].to_i }
   end
 
 end

@@ -9,7 +9,7 @@ class Snapshot < ActiveRecord::Base
 
   after_create :update_picture
 
-  scope :created_between, -> (start_date, end_date) { where(created_at: start_date..end_date) }
+  scope :created_between, ->(start_date, end_date) { where(created_at: start_date..end_date) }
 
   def original_png
     get_file('original')

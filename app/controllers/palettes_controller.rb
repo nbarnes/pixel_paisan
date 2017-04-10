@@ -1,6 +1,6 @@
 class PalettesController < ApplicationController
   include PixelValidation
-  before_action :set_palette, except: [:index, :user_index, :new, :create]
+  before_action :set_palette, except: %i(index user_index new create)
   respond_to :html
 
   def index
@@ -44,8 +44,7 @@ class PalettesController < ApplicationController
     end
   end
 
-  def new_color
-  end
+  def new_color; end
 
   def create_color
     head :unauthorized && return unless @palette.user_id == current_user.id

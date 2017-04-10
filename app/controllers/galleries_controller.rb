@@ -9,8 +9,7 @@ class GalleriesController < ApplicationController
     @galleries = Gallery.where(user_id: params[:user_id]).eager_load(:user, pictures: :snapshots).all
   end
 
-  def show
-  end
+  def show; end
 
   private
     def set_gallery

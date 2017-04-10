@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# rubocop:disable Style/SpaceAroundOperators
 # rubocop:disable Style/ExtraSpacing
 perler_colors = [
   { 'r' =>  0,   'g' =>  0,   'b' =>  0,   'a' =>  1 },
@@ -66,7 +65,6 @@ html_colors = [
   { 'r' =>  255, 'g' =>  255, 'b' =>  255, 'a' =>  1 },
   { 'r' =>  255, 'g' =>  255, 'b' =>    0, 'a' =>  1 }
 ]
-# rubocop:enable Style/SpaceAroundOperators
 # rubocop:enable Style/ExtraSpacing
 
 puts 'SETTING UP DEFAULT USER LOGIN'

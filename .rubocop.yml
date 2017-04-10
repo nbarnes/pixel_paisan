@@ -17,6 +17,7 @@ AllCops:
     - 'config/**/*'
     - 'config.ru'
     - 'Rakefile'
+    - 'spec/teaspoon_env.rb'
 
 Style/Documentation:
   Enabled: false

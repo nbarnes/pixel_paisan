@@ -8,7 +8,6 @@ class StaticPagesController < ApplicationController
     @picture_id = params[:picture_id]
   end
 
-  def faq
-  end
+  def faq; end
 
 end
