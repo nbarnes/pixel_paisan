@@ -38,7 +38,7 @@ class Picture < ActiveRecord::Base
 
   def add_snapshot(params)
     # rubocop:disable Style/GuardClause
-    unless pixels_equal(params[:pixels], current_version.pixels)
+    unless current_version && pixels_equal(params[:pixels], current_version.pixels)
       snapshot = Snapshot.new(pixels: params[:pixels], cell_size: params[:cell_size], picture: self)
       snapshot.save!
     end
@@ -46,13 +46,12 @@ class Picture < ActiveRecord::Base
   end
 
   def pixels_equal(foo, bar)
-    pixels_are_equal = true
     foo.each_with_index do |row, x|
       row.each_with_index do |_column, y|
-        pixels_are_equal = pixel_equal(foo[x][y], bar[x][y])
+        return false unless pixel_equal(foo[x][y], bar[x][y])
       end
     end
-    return pixels_are_equal
+    return true
   end
 
   def pixel_equal(x, y)
