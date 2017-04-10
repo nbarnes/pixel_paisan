@@ -18,7 +18,7 @@ module PngHandler
   end
 
   def build_ChunkyPNG_color(rgba_obj)
-    alpha = alpha_as_255(rgba_obj['a'])
+    alpha = alpha_as_255(rgba_obj['a']).round
     ChunkyPNG::Color.rgba(rgba_obj['r'], rgba_obj['g'], rgba_obj['b'], alpha)
   end
 

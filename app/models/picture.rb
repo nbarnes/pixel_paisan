@@ -21,7 +21,7 @@ class Picture < ActiveRecord::Base
     json[:picture_name] = name
     json[:cell_size] = snapshot.cell_size
     json[:picture_id] = id
-    json[:image_data] = snapshot.image_json
+    json[:pixels] = snapshot.pixels
     json[:palette_id] = palette_id
     return json
   end

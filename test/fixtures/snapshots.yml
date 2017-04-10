@@ -1,137 +1,105 @@
 <%
-def get_resized_png(png, dimension)
-  resized_image = ChunkyPNG::RMagick.export(png).scale(dimension, dimension)
-  return ChunkyPNG::RMagick.import(resized_image)
+def get_pixels(file_id)
+  png_path = Rails.root.join('test/fixtures/fixture_pngs')
+  file_name = "snapshot_#{file_id}.png"
+  png = File.open("#{png_path}/#{file_name}") { |io| ChunkyPNG::Image.from_io(io) }
+  pixels = []
+  dimension = png.height
+  dimension.times do |x|
+    pixels.push []
+    dimension.times do |y|
+      pixels[x][y] = extract_ChunkyPNG_color(png.pixels[(dimension * y + x)])
+    end
+  end
+  return pixels
 end
 
-def get_encoded_pngs(file_id)
+def extract_ChunkyPNG_color(color)
+  alpha = alpha_as_0_1(ChunkyPNG::Color.a(color))
+  return { r: ChunkyPNG::Color.r(color), g: ChunkyPNG::Color.g(color), b: ChunkyPNG::Color.b(color), a: alpha }
+end
 
-  png_path = Rails.root.join('test/test_pngs')
-  file_name = "snapshot_#{file_id}.png"
-
-  original_png = File.open("#{png_path}/#{file_name}") { |io| ChunkyPNG::Image.from_io(io) }
-
-  # original_png = File.open(File.expand_path("./test/test_pngs/snapshot_#{file_id}.png", File.dirname(__FILE__))) { |io| ChunkyPNG::Image.from_io(io) }
-  thumbnail_png = get_resized_png(original_png, 128)
-  display_png = get_resized_png(original_png, 512)
-
-  return { encoded_original: Base64.strict_encode64(original_png.to_abgr_stream),
-           encoded_thumbnail: Base64.strict_encode64(thumbnail_png.to_abgr_stream),
-           encoded_display: Base64.strict_encode64(display_png.to_abgr_stream)
-  }
+def alpha_as_0_1(a255)
+  return a255 / 255.0
 end
 %>
 
 <%
 0.upto(2) do |i|
-  i = i + 1
-  encoded_pngs = get_encoded_pngs(i)
+  pixels = get_pixels(i)
 %>
 snapshot<%= i %>:
   picture: gal_picture01
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 3.upto(4) do |i|
-  i = i + 1
-  encoded_pngs = get_encoded_pngs(i)
+  pixels = get_pixels(i)
 %>
 snapshot<%= i %>:
   picture: gal_picture02
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'a'.upto('e') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>:
   picture: gal_picture03
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'f'.upto('l') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>:
   picture: tony_picture01
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'i'.upto('n') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>02:
   picture: tony_picture02
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'k'.upto('o') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>02:
   picture: tony_picture03
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'm'.upto('q') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>:
   picture: rocket_picture01
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>
 
 <%
 'r'.upto('z') do |char|
-  encoded_pngs = get_encoded_pngs(char)
+  pixels = get_pixels(char)
 %>
 snapshot<%= char %>:
   picture: rocket_picture02
   cell_size: 25
-  original_png_width: 6
-  original_png_height: 6
-  original_png_blob: <%= encoded_pngs[:encoded_original] %>
-  thumbnail_png_blob: <%= encoded_pngs[:encoded_thumbnail] %>
-  display_png_blob: <%= encoded_pngs[:encoded_display] %>
+  pixels: <%= pixels.to_json %>
 <% end %>

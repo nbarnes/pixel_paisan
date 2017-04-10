@@ -52,13 +52,9 @@ ActiveRecord::Schema.define(version: 20161102230331) do
   create_table "snapshots", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "picture_id",          null: false
-    t.integer  "cell_size",           null: false
-    t.integer  "original_png_width",  null: false
-    t.integer  "original_png_height", null: false
-    t.string   "original_png_blob",   null: false
-    t.string   "thumbnail_png_blob",  null: false
-    t.string   "display_png_blob",    null: false
+    t.integer  "picture_id", null: false
+    t.integer  "cell_size",  null: false
+    t.jsonb    "pixels",     null: false
   end
 
   add_index "snapshots", ["picture_id"], name: "index_snapshots_on_picture_id", using: :btree

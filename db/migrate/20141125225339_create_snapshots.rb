@@ -6,12 +6,7 @@ class CreateSnapshots < ActiveRecord::Migration
       t.integer :picture_id, null: false, index: true
       t.integer :cell_size, null: false
 
-      t.integer :original_png_width, null: false
-      t.integer :original_png_height, null: false
-
-      t.string :original_png_blob, null: false
-      t.string :thumbnail_png_blob, null: false
-      t.string :display_png_blob, null: false
+      t.jsonb :pixels, null: false
     end
   end
 end

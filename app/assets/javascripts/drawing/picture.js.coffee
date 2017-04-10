@@ -69,16 +69,16 @@ window.Picture = (->
 
   import_picture_data = (data) ->
     set_cell_size(data.cell_size)
-    set_dimension(data.image_data.length)
+    set_dimension(data.pixels.length)
     set_name(data.picture_name)
     palette_id = data.palette_id
     picture_id = data.picture_id
     for x in [0...dimension]
       for y in [0...dimension]
-        r = data.image_data[x][y].r
-        g = data.image_data[x][y].g
-        b = data.image_data[x][y].b
-        a = data.image_data[x][y].a
+        r = data.pixels[x][y].r
+        g = data.pixels[x][y].g
+        b = data.pixels[x][y].b
+        a = data.pixels[x][y].a
         cells[x][y].import({r: r, g: g, b: b, a: a})
     Painter.paint_canvas(this)
     Palettes.show_palette(palette_id)
