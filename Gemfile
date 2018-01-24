@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '~> 4.2'
 
-gem 'pg'
+gem 'pg', '~> 0.15' # Rails does not yet support pg 1.0.0+ as of 1-24-18
 
 gem 'autoprefixer-rails'
 gem 'coffee-rails'
