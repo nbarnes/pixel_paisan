@@ -5,7 +5,7 @@ class SnapshotsController < ApplicationController
   def show; end
 
   def destroy
-    head :unauthorized unless @snapshot.picture.user == current_user
+    (head :unauthorized) unless @snapshot.picture.user == current_user
     picture = @snapshot.picture
     @snapshot.destroy
     redirect_to picture

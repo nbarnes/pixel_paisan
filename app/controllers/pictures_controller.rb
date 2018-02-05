@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   include PixelValidation
+  include StringValidation
 
   before_action :set_picture, only: %i(show update destroy edit)
 
@@ -11,24 +12,25 @@ class PicturesController < ApplicationController
       end
       format.json { render json: @picture.editor_json }
       format.png do
-        head :bad_request && return unless @picture
+        (head :bad_request) && return unless @picture
         send_data @picture.current_version.get_png(params[:size]), type: 'image/png', disposition: 'inline'
       end
     end
   end
 
   def destroy
-    head :unauthorized && return unless @picture.user == current_user
+    (head :unauthorized) && return unless @picture.user == current_user
     picture_gallery = @picture.gallery
     @picture.destroy
     redirect_to gallery_path(picture_gallery)
   end
 
   def create
-    head :bad_request && return unless pixels_valid? params[:pixels]
-    head :unauthorized && return unless current_user
+    (head :bad_request) && return unless pixels_valid? params[:pixels]
+    (head :unauthorized) && return unless current_user
+
     picture = Picture.new
-    picture.name = params[:name]
+    picture.name = massage_name params[:name]
     picture.palette_id = params[:palette_id]
     picture.user_id = current_user.id
     picture.gallery = current_user.galleries[0]
@@ -55,11 +57,11 @@ class PicturesController < ApplicationController
   end
 
   def update
-    head :unauthorized && return unless @picture.user == current_user
-    @picture.name = params[:name] if params[:name]
+    (head :unauthorized) && return unless @picture.user == current_user
+    @picture.name = massage_name(params[:name]) if params[:name]
     @picture.palette_id = params[:palette_id] if params[:palette_id]
     if params[:pixels]
-      head :bad_request && return unless pixels_valid? params[:pixels]
+      (head :bad_request) && return unless pixels_valid? params[:pixels]
       @picture.add_snapshot(params)
     end
     @picture.save!

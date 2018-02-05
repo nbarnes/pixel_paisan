@@ -51,8 +51,6 @@ window.Picture = (->
     return name
 
   set_name = (new_name) ->
-    # if name != new_name
-    #   ColdStorage.store_picture(PackingTape.pack_for_picture_name_change(this))
     name = new_name
     $('#tool_bar_file_element .tool_bar_title').html("#{name} &#x25bc")
 

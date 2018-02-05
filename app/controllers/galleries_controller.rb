@@ -5,10 +5,6 @@ class GalleriesController < ApplicationController
     @galleries = Gallery.eager_load(:user, pictures: :snapshots).all
   end
 
-  def user_index
-    @galleries = Gallery.where(user_id: params[:user_id]).eager_load(:user, pictures: :snapshots).all
-  end
-
   def show; end
 
   private
