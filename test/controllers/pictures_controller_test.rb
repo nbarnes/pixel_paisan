@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'test_pixels_helper'
 
 class PicturesControllerTest < ActionController::TestCase
   setup do
@@ -26,26 +27,42 @@ class PicturesControllerTest < ActionController::TestCase
 
   test "create" do
     sign_in users(:galactus)
-
     post :create,
       pixels: valid_pixels,
       name: 'new_picture',
       palette_id: palettes(:gals_default_palette).id,
       cell_size: 20
-
     assert_response :success
   end
 
   test "create with invalid characters in name" do
     sign_in users(:galactus)
-
     post :create,
       pixels: valid_pixels,
       name: 'new pic^^tu re',
       palette_id: palettes(:gals_default_palette).id,
       cell_size: 20
-
     assert_response :success
+  end
+
+  test "create with invalid pixel color values" do
+    sign_in users(:galactus)
+    post :create,
+      pixels: invalid_pixels_color_range,
+      name: 'invalid_picture',
+      palette_id: palettes(:gals_default_palette).id,
+      cell_size: 20
+    assert_response :bad_request
+  end
+
+  test "create with invalid canvas dimensions" do
+    sign_in users(:galactus)
+    post :create,
+      pixels: invalid_pixels_canvas_dimension,
+      name: 'invalid_picture',
+      palette_id: palettes(:gals_default_palette).id,
+      cell_size: 20
+    assert_response :bad_request
   end
 
   # test "edit" do
@@ -53,80 +70,31 @@ class PicturesControllerTest < ActionController::TestCase
   #   assert_response :success
   # end
 
-  # test "update" do
-  #   get :edit, id: @picture
-  #   assert_response :success
-  # end
+  test "update" do
+    sign_in users(:galactus)
+    previous_snapshot_count = @picture.snapshots.size
+    post :update,
+      id: @picture,
+      pixels: valid_pixels,
+      name: 'valid_update',
+      palette_id: palettes(:gals_default_palette).id,
+      cell_size: 20
+    @picture.reload
+    @picture.snapshots.reload
+    assert @picture.name == 'valid_update'
+    assert @picture.palette_id == palettes(:gals_default_palette).id
+    assert @picture.snapshots.size == (previous_snapshot_count + 1)
+    assert_response :success
+  end
 
-  # test "update with canvas size change" do
-  #   get :edit, id: @picture
-  #   assert_response :success
-  # end
-
-end
-
-def valid_pixels
-  return [
-    [
-      {
-        r: 100,
-        g: 150,
-        b: 200,
-        a: 1
-      },
-      {
-        r: 200,
-        g: 75,
-        b: 50,
-        a: 1
-      },
-      {
-        r: 80,
-        g: 42,
-        b: 49,
-        a: 125
-      }
-    ],
-    [
-      {
-        r: 100,
-        g: 150,
-        b: 200,
-        a: 1
-      },
-      {
-        r: 200,
-        g: 75,
-        b: 50,
-        a: 1
-      },
-      {
-        r: 80,
-        g: 42,
-        b: 49,
-        a: 125
-      }
-    ],
-    [
-      {
-        r: 100,
-        g: 150,
-        b: 200,
-        a: 1
-      },
-      {
-        r: 200,
-        g: 75,
-        b: 50,
-        a: 1
-      },
-      {
-        r: 80,
-        g: 42,
-        b: 49,
-        a: 125
-      }
-    ]
-  ]
+  test "update without owning picture" do
+    post :update,
+      id: @picture,
+      pixels: valid_pixels,
+      name: 'valid_update',
+      palette_id: palettes(:gals_default_palette).id,
+      cell_size: 20
+    assert_response :unauthorized
+  end
 
 end
