@@ -9,8 +9,6 @@ script:
 - xvfb-run bundle exec rake
 - rake teaspoon
 bundler_args: --binstubs=./bundler_stubs
-env:
-  - ON_TRAVIS = 'true'
 deploy:
   provider: heroku
   api_key:

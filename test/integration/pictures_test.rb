@@ -41,7 +41,7 @@ feature 'Pictures' do
   # http://stackoverflow.com/questions/40098319/rails-javascript-test-fails-on-travis-ci-works-locally
 
   scenario 'as a picture owner, I can change the name of a picture via the editor', js: true do
-    if ENV['ON_TRAVIS'] != 'true'
+    if ENV['TRAVIS'] != 'true'
       login_user
       visit picture_path(pictures(:tony_picture01).id)
       page.must_have_content 'tony_picture01'
@@ -64,7 +64,7 @@ feature 'Pictures' do
   end
 
   scenario 'as a picture owner, I can change the name of a picture via picture display', js: true do
-    if ENV['ON_TRAVIS'] != 'true'
+    if ENV['TRAVIS'] != 'true'
       login_user
       visit show_picture_path(pictures(:tony_picture02).id)
       page.must_have_content 'tony_picture02'
