@@ -24,6 +24,9 @@ gem 'figaro'
 gem 'groupdate'
 gem 'simple_form'
 
+# Avoids JS precompilation problem per https://github.com/jejacks0n/teaspoon/issues/443
+gem 'sprockets-rails', '~> 2.0'
+
 group :production do
   gem 'rails_12factor' # for Heroku
 end
