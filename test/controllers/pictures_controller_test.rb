@@ -65,10 +65,21 @@ class PicturesControllerTest < ActionController::TestCase
     assert_response :bad_request
   end
 
-  # test "edit" do
-  #   get :show, id: @picture
-  #   assert_response :success
-  # end
+  test "edit owned picture" do
+    sign_in users(:rocket)
+    post :edit,
+      id: pictures(:rocket_picture01)
+    assert_equal assigns(:palettes), [palettes(:gals_default_palette), palettes(:gals_perler_palette), palettes(:rockets_palette1), palettes(:rockets_palette2)]
+    assert_response :success
+  end
+
+  test "edit somebody else's picture" do
+    sign_in users(:rocket)
+    post :edit,
+      id: pictures(:tony_picture02)
+    assert_equal assigns(:palettes), [palettes(:gals_default_palette), palettes(:gals_perler_palette), palettes(:rockets_palette1), palettes(:rockets_palette2)]
+    assert_redirected_to editor_path
+  end
 
   test "update" do
     sign_in users(:galactus)
