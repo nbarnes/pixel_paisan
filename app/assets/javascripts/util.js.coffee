@@ -56,7 +56,7 @@ $ ->
     return raw_name.replace(/\ /g, '_').replace(/[^\w\s]/g, '')
 
   window.massage_to_number = (raw_string) ->
-    if raw_string == undefined
+    if raw_string == undefined || raw_string == null
       return 0
     return raw_string.replace(/\D/g, '')
 
