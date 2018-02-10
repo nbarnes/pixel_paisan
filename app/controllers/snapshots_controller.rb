@@ -16,9 +16,4 @@ class SnapshotsController < ApplicationController
       @snapshot = Snapshot.find(params[:id])
     end
 
-    # Do we really need this if we're never creating via controller action?
-    def snapshot_params
-      params[:snapshot].permit(:pixels)
-    end
-
 end
