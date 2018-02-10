@@ -5,7 +5,7 @@ class Snapshot < ActiveRecord::Base
   belongs_to :picture, inverse_of: :snapshots, counter_cache: true
 
   validates :picture, presence: true
-  validates :cell_size, numericality: { less_than_or_equal_to: 50 }
+  validates :cell_size, numericality: { less_than_or_equal_to: 150 }
 
   after_create :update_picture
 
