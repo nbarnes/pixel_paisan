@@ -22,6 +22,8 @@ window.ColdStorage = (->
         show_modal_pane('picture_saved_pane', true)
         set_modal_closable()
         clearTimeout(saving_picture_modal_timeout)
+        Picture.set_picture_id(data.picture_id)
+        Picture.set_name(data.picture_name)
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX transmission of image failure')
         show_modal_pane('picture_upload_error_pane', true)
