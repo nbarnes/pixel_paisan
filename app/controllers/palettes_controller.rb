@@ -35,16 +35,15 @@ class PalettesController < ApplicationController
   end
 
   def destroy
-    if @palette.user == current_user
-      palette_name = @palette.name
-      @palette.destroy
-      redirect_to user_palettes_path(current_user), notice: "Palette '#{palette_name}' was deleted."
-    else
-      head :unauthorized
-    end
+    (head :unauthorized) && return unless @palette.user_id == current_user.id
+    palette_name = @palette.name
+    @palette.destroy
+    redirect_to user_palettes_path(current_user), notice: "Palette '#{palette_name}' was deleted."
   end
 
-  def new_color; end
+  def new_color
+    (head :unauthorized) && return unless @palette.user_id == current_user.id
+  end
 
   def create_color
     (head :unauthorized) && return unless @palette.user_id == current_user.id
@@ -52,7 +51,6 @@ class PalettesController < ApplicationController
     (head :bad_request) && return unless rgba_valid? @new_color
     @palette.colors << @new_color
     @palette.save!
-
     respond_to do |format|
       format.html do
         redirect_to @palette

@@ -12,17 +12,17 @@ class PicturesControllerTest < ActionController::TestCase
     assert_equal assigns(:picture), @picture
   end
 
-  test "destroy without owning picture" do
-    delete :destroy, id: @picture
-    assert Picture.exists? @picture.id
-    assert_response :unauthorized
-  end
-
   test "destroy while owning picture" do
     sign_in users(:galactus)
     delete :destroy, id: @picture
     assert_not Picture.exists? @picture.id
     assert_redirected_to gallery_path(@picture.gallery.id)
+  end
+
+  test "destroy without owning picture" do
+    delete :destroy, id: @picture
+    assert Picture.exists? @picture.id
+    assert_response :unauthorized
   end
 
   test "create" do
