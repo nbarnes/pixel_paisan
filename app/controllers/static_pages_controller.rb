@@ -10,4 +10,6 @@ class StaticPagesController < ApplicationController
 
   def faq; end
 
+  def ajax_login; end
+
 end

@@ -2,7 +2,15 @@
 Rails.application.routes.draw do
 
   mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
-  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}, :path => "accounts"
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
+  
+  Rails.application.routes.draw do
+    devise_for :users, controllers: {
+      sessions: 'users/sessions'
+    }
+  end
+
+  get 'ajax-auth', to: 'static_pages#ajax_login'
 
   resources :users do
     get 'palettes', to: 'palettes#user_index'

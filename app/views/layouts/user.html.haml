@@ -27,4 +27,10 @@
       = ' - '
       = link_to 'Admin', admin_activities_path
 
+    - if Rails.env == 'development'
+      = ' - '
+      = link_to 'AJAX test page', ajax_auth_path
+
+
+
 = render template: 'layouts/application'
