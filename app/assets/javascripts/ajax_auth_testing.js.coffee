@@ -14,19 +14,22 @@ $ ->
         error_callback: (jqXHR, textStatus, errorThrown) ->
           console.log('AJAX login failure')
       )
+      e.preventDefault()
 
 
     $('#signup_submit_button').click (e) ->
       console.log('signup_submit_button')
-      # do_ajax(
-      #   url: "/pictures/#{picture_id}",
-      #   verb: 'GET'
-      #   success_callback: (data, textStatus, jqXHR) ->
-      #     # console.log('AJAX get of picture data success')
-      #     $.modal.close()
-      #     PackingTape.import_picture(data)
-      #   error_callback: (jqXHR, textStatus, errorThrown) ->
-      #     show_modal_pane('picture_retrieval_failure_pane', true)
-      #     set_modal_closeable()
-      #     console.log('AJAX get of picture data failure'
-      # )
+      name = $('#signup_name_field').val();
+      email = $('#signup_email_field').val();
+      password = $('#signup_password_field').val();
+      password_confirmation = $('#signup_password_field').val();
+      do_ajax(
+        data: {user: { "name": name, "email": email, "password": password, "password_confirmation": password_confirmation }},
+        url: "/users",
+        verb: 'POST'
+        success_callback: (data, textStatus, jqXHR) ->
+          console.log('AJAX login success')
+        error_callback: (jqXHR, textStatus, errorThrown) ->
+          console.log('AJAX login failure')
+      )
+      e.preventDefault()
