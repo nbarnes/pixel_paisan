@@ -323,7 +323,7 @@ DEPENDENCIES
   rails_12factor
   rails_best_practices
   rmagick
-  rubocop
+  rubocop (~> 0.52)
   sass-rails
   simple_form
   simplecov
