@@ -46,7 +46,7 @@ group :development do
   gem 'brakeman', require: false
   gem 'haml-lint', require: false
   gem 'letter_opener'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.52', require: false
   gem 'spring'
 end
 
