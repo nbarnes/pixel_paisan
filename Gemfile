@@ -33,7 +33,7 @@ end
 
 group :test, :development do
   gem 'bullet'
-  gem 'capybara-webkit'
+  gem 'capybara-selenium'
   gem 'magic_lamp'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
@@ -53,6 +53,5 @@ end
 group :test do
   gem 'headhunter'
   gem 'minitest-reporters'
-  gem 'poltergeist'
   gem 'simplecov'
 end

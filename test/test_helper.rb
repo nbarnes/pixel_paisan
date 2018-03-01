@@ -4,24 +4,27 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
-require 'capybara/poltergeist'
+require "selenium/webdriver"
 
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   fixtures :all
 
-  # Capybara.javascript_driver = :webkit
-
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, timeout: 180)
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
-
-  Capybara.javascript_driver = :poltergeist
-
-  Capybara::Webkit.configure do |config|
-    config.allow_url('http://fonts.googleapis.com/css?family=Molengo')
-    config.allow_url('http://fonts.googleapis.com/css?family=Lekton')
+  
+  Capybara.register_driver :headless_chrome do |app|
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w(headless disable-gpu) }
+    )
+  
+    Capybara::Selenium::Driver.new app,
+      browser: :chrome,
+      desired_capabilities: capabilities
   end
+  
+  Capybara.javascript_driver = :headless_chrome
 
   def login_admin
     visit editor_path
