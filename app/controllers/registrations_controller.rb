@@ -7,7 +7,6 @@ class RegistrationsController < Devise::RegistrationsController
         super
       end
       format.js do
-        binding.pry
         build_resource sign_up_params
         if resource.save
           if resource.active_for_authentication?
