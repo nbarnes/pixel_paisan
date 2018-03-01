@@ -10,7 +10,6 @@
     %br
     %button#login_submit_button Submit Login
 
-
   %br
 
   #signup.bordered
@@ -27,3 +26,21 @@
     %input#signup_password_confirmation_field{type: 'text'}
     %br
     %button#signup_submit_button Submit Signup
+
+  %br
+
+  #form_signup.bordered
+    = form_for @user, url: "/users", method: "POST", remote: true do |f|
+      = label_tag :name, "Name:"
+      = f.text_field :name
+      %br
+      = label_tag :email, "Email:"
+      = f.text_field :email
+      %br
+      = label_tag :password, "Password:"
+      = f.text_field :password
+      %br
+      = label_tag :password_confirmation, "Password Confirmation:"
+      = f.text_field :password_confirmation
+      %br
+      = submit_tag("Submit Signup")

@@ -10,6 +10,8 @@ class StaticPagesController < ApplicationController
 
   def faq; end
 
-  def ajax_login; end
+  def ajax_login
+    @user = User.new
+  end
 
 end
