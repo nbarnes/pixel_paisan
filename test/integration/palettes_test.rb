@@ -40,7 +40,7 @@ feature 'Palettes' do
     visit user_palettes_path(users(:tony).id)
     click_on "tony's palette"
     find('div div div', text: '128,0,0').find(:xpath, '..').click_on 'Remove Color'
-    page.evaluate_script('window.confirm = function() { return true; }')
+    page.driver.browser.switch_to.alert.accept
     page.wont_have_content '128,0,0'
   end
 
