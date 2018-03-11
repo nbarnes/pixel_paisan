@@ -39,7 +39,7 @@ class Picture < ActiveRecord::Base
   def add_snapshot(params)
     # rubocop:disable Style/GuardClause
     unless current_version && pixels_same(params[:pixels], current_version.pixels)
-      snapshot = snapshots.build(pixels: params[:pixels], cell_size: params[:cell_size])
+      snapshots.build(pixels: params[:pixels], cell_size: params[:cell_size])
     end
     # rubocop:enable Style/GuardClause
   end
