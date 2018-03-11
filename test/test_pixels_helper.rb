@@ -1,4 +1,5 @@
 
+# rubocop:disable Metrics/MethodLength
 def valid_pixels
   return [
     [
@@ -62,7 +63,6 @@ def valid_pixels
       }
     ]
   ]
-
 end
 
 def invalid_pixels_color_range
@@ -128,8 +128,8 @@ def invalid_pixels_color_range
       }
     ]
   ]
-
 end
+# rubocop:enable Metrics/MethodLength
 
 # Making a canvas larger than the controller will accept
 def invalid_pixels_canvas_dimension
@@ -137,13 +137,12 @@ def invalid_pixels_canvas_dimension
   600.times do
     invalid_row = []
     600.times do
-      invalid_row.push 
-        {
-          r: 100,
-          g: 150,
-          b: 200,
-          a: 1
-        }
+      invalid_row.push(
+        r: 100,
+        g: 150,
+        b: 200,
+        a: 1
+      )
     end
     invalid_canvas.push invalid_row
   end

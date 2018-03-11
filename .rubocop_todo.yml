@@ -40,6 +40,6 @@ Style/ClassAndModuleChildren:
 # Offense count: 2
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: snake_case, camelCase
-Style/MethodName:
+Naming/MethodName:
   Exclude:
     - 'app/models/concerns/png_handler.rb'

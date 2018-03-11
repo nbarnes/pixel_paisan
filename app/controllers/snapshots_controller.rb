@@ -1,6 +1,6 @@
 class SnapshotsController < ApplicationController
 
-  before_action :set_snapshot, only: %i(show destroy)
+  before_action :set_snapshot, only: %i[show destroy]
 
   def show; end
 

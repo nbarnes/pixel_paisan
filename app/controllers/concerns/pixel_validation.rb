@@ -15,7 +15,7 @@ module PixelValidation
 
   def rgba_valid?(rgba)
     return false unless rgba.is_a? Hash
-    return false unless (%w(r g b a) - rgba.keys).empty?
+    return false unless (%w[r g b a] - rgba.keys).empty?
     return false unless rgba.values.all? { |val| val.to_s =~ /[0-9]/ }
     return false unless rgba.values.all? { |val| val.to_i.between? 0, 255 }
     return true

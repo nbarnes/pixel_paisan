@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20161102230331) do
   create_table "palettes", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",       null: false
     t.boolean  "is_default"
     t.jsonb    "colors"
     t.integer  "user_id",    null: false

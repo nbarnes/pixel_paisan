@@ -45,7 +45,7 @@ class Picture < ActiveRecord::Base
   end
 
   def pixels_same(foo, bar)
-   return false unless (foo.size == bar.size)
+    return false unless foo.size == bar.size
     foo.each_with_index do |row, x|
       row.each_with_index do |_column, y|
         return false unless pixel_equal(foo[x][y], bar[x][y])

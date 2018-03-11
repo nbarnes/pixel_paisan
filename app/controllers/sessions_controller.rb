@@ -2,6 +2,7 @@ class SessionsController < Devise::SessionsController
 
   respond_to :json
 
+  # rubocop:disable Metrics/MethodLength
   def create
     respond_to do |format|
       format.html do
@@ -10,20 +11,21 @@ class SessionsController < Devise::SessionsController
       format.json do
         resource = User.find_for_database_authentication(email: params[:email])
         return invalid_login_attempt unless resource
-      
+
         if resource.valid_password?(params[:password])
           sign_in :user, resource
           render json: {
-          message: 'Login success',
-          status: 200
+            message: 'Login success',
+            status: 200
           }, status: 200
           return
         end
-      
+
         invalid_login_attempt
       end
-   end
+    end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def invalid_login_attempt
     set_flash_message(:alert, :invalid)

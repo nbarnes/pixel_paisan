@@ -1,6 +1,6 @@
 class PalettesController < ApplicationController
   include PixelValidation
-  before_action :set_palette, except: %i(index user_index new create)
+  before_action :set_palette, except: %i[index user_index new create]
   respond_to :html
 
   def index

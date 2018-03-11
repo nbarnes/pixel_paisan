@@ -4,7 +4,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/rails'
 require 'minitest/rails/capybara'
-require "selenium/webdriver"
+require 'selenium/webdriver'
 
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
@@ -13,17 +13,17 @@ class ActiveSupport::TestCase
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
-  
+
   Capybara.register_driver :headless_chrome do |app|
     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w(headless disable-gpu) }
+      chromeOptions: { args: %w[headless disable-gpu] }
     )
-  
+
     Capybara::Selenium::Driver.new app,
-      browser: :chrome,
-      desired_capabilities: capabilities
+                                   browser: :chrome,
+                                   desired_capabilities: capabilities
   end
-  
+
   Capybara.javascript_driver = :headless_chrome
 
   def login_admin

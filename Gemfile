@@ -51,8 +51,8 @@ group :development do
 end
 
 group :test do
-  gem 'headhunter'
   gem 'chromedriver-helper'
+  gem 'headhunter'
   gem 'minitest-reporters'
   gem 'simplecov'
 end
