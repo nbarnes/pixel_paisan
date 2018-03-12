@@ -30,13 +30,17 @@ $ ->
       console.log('TODO')
 
     $('#canvas_dimension_option').click ->
-      new_dimension = massage_to_number(window.prompt('Enter a new size for your picture', '50'))
+      new_dimension = massage_to_number(
+        window.prompt('Enter a new size for your picture', '50')
+      )
       if new_dimension > 100 || new_dimension < 2
         new_dimension = 100
       Picture.set_dimension(new_dimension)
 
     $('#cell_size_option').click ->
-      new_cell_size = massage_to_number(window.prompt('Enter a new pixel size for your picture', '10'))
+      new_cell_size = massage_to_number(
+        window.prompt('Enter a new pixel size for your picture', '10')
+      )
       if new_cell_size > 30 || new_cell_size < 1
         new_cell_size = 30
       Picture.set_cell_size(new_cell_size)

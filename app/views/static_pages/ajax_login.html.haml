@@ -2,45 +2,45 @@
 #ajax_auth_testing_panel
 
   #login.bordered
-    %label{for: 'login_email_field'} Email:
-    %input#login_email_field{type: 'text'}
+    %label{ for: 'login_email_field' } Email:
+    %input#login_email_field{ type: 'text' }
     %br
-    %label{for: 'login_password_field'} Password:
-    %input#login_password_field{type: 'text'}
+    %label{ for: 'login_password_field' } Password:
+    %input#login_password_field{ type: 'text' }
     %br
     %button#login_submit_button Submit Login
 
   %br
 
   #signup.bordered
-    %label{for: 'signup_name_field'} Username:
-    %input#signup_name_field{type: 'text'}
+    %label{ for: 'signup_name_field' } Username:
+    %input#signup_name_field{ type: 'text' }
     %br
-    %label{for: 'signup_email_field'} Email:
-    %input#signup_email_field{type: 'text'}
+    %label{ for: 'signup_email_field' } Email:
+    %input#signup_email_field{ type: 'text' }
     %br
-    %label{for: 'signup_password_field'} Password:
-    %input#signup_password_field{type: 'text'}
+    %label{ for: 'signup_password_field' } Password:
+    %input#signup_password_field{ type: 'text' }
     %br
-    %label{for: 'signup_password_confirmation_field'} Confirm Password:
-    %input#signup_password_confirmation_field{type: 'text'}
+    %label{ for: 'signup_password_confirmation_field' } Confirm Password:
+    %input#signup_password_confirmation_field{ type: 'text' }
     %br
     %button#signup_submit_button Submit Signup
 
   %br
 
   #form_signup.bordered
-    = form_for @user, url: "/users", method: "POST", remote: true do |f|
-      = label_tag :name, "Name:"
+    = form_for @user, url: '/users', method: 'POST', remote: true do |f|
+      = label_tag :name, 'Name:'
       = f.text_field :name
       %br
-      = label_tag :email, "Email:"
+      = label_tag :email, 'Email:'
       = f.text_field :email
       %br
-      = label_tag :password, "Password:"
+      = label_tag :password, 'Password:'
       = f.text_field :password
       %br
-      = label_tag :password_confirmation, "Password Confirmation:"
+      = label_tag :password_confirmation, 'Password Confirmation:'
       = f.text_field :password_confirmation
       %br
-      = submit_tag("Submit Signup")
+      = submit_tag('Submit Signup')

@@ -52,7 +52,14 @@ window.ColdStorage = (->
       verb: 'POST'
       data: payload
       success_callback: (data, textStatus, jqXHR) ->
-        Palettes.add_color_button_to_palette({ r: data.r, g: data.g, b: data.b, a: data.a }, payload.palette_id)
+        Palettes.add_color_button_to_palette({
+                                               r: data.r,
+                                               g: data.g,
+                                               b: data.b,
+                                               a: data.a
+                                             },
+                                             payload.palette_id
+                                            )
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX posting of new color failure')
 

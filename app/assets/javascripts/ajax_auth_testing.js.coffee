@@ -3,8 +3,8 @@ $ ->
 
     $('#login_submit_button').click (e) ->
       console.log('login_submit_button')
-      email = $('#login_email_field').val();
-      password = $('#login_password_field').val();
+      email = $('#login_email_field').val()
+      password = $('#login_password_field').val()
       do_ajax(
         data: {"email": email, "password": password},
         url: "/users/sign_in",
@@ -19,12 +19,19 @@ $ ->
 
     $('#signup_submit_button').click (e) ->
       console.log('signup_submit_button')
-      name = $('#signup_name_field').val();
-      email = $('#signup_email_field').val();
-      password = $('#signup_password_field').val();
-      password_confirmation = $('#signup_password_field').val();
+      name = $('#signup_name_field').val()
+      email = $('#signup_email_field').val()
+      password = $('#signup_password_field').val()
+      password_confirmation = $('#signup_password_field').val()
       do_ajax(
-        data: {user: { "name": name, "email": email, "password": password, "password_confirmation": password_confirmation }},
+        data: {
+          user: {
+            "name": name,
+            "email": email,
+            "password": password,
+            "password_confirmation": password_confirmation
+          }
+        },
         url: "/users",
         verb: 'POST'
         success_callback: (data, textStatus, jqXHR) ->

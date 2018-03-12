@@ -9,7 +9,8 @@
   - @created_daily.each do |counts|
     %tr
       %td
-        = link_to "#{counts[0].strftime('%A')} the #{counts[0].day.ordinalize}", admin_activity_path(:day, counts[0])
+        = link_to "#{counts[0].strftime('%A')} the #{counts[0].day.ordinalize}",
+                  admin_activity_path(:day, counts[0])
       %td
         = counts[1]
       %td

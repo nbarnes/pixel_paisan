@@ -23,7 +23,7 @@
     = ' - '
     = link_to 'FAQ', faq_path
 
-    - if user_signed_in? and current_user.role == 'admin'
+    - if user_signed_in? && current_user.role == 'admin'
       = ' - '
       = link_to 'Admin', admin_activities_path
 

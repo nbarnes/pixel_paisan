@@ -20,7 +20,7 @@ window.Painter = (->
       undo_block = undo_stack.pop()
       for undo_action in undo_block
         if undo_action != undefined
-          Picture.get_cell(undo_action.x, undo_action.y).paint(undo_action.color);
+          Picture.get_cell(undo_action.x, undo_action.y).paint(undo_action.color)
           draw_cell(undo_action.x, undo_action.y, cell_size, undo_action.color)
 
   redo = ->
@@ -34,7 +34,10 @@ window.Painter = (->
 
   draw_cursor = (canvas_x, canvas_y) ->
     cell_coordinates = get_cell_coordinates(canvas_x, canvas_y)
-    draw_cell(cell_coordinates.x, cell_coordinates.y, Picture.get_cell_size(), ColorSelection.get_current_color())
+    draw_cell(cell_coordinates.x,
+              cell_coordinates.y,
+              Picture.get_cell_size(),
+              ColorSelection.get_current_color())
 
   remove_cursor = (canvas_x, canvas_y) ->
     cell_coordinates = get_cell_coordinates(canvas_x, canvas_y)

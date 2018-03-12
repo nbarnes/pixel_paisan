@@ -1,5 +1,15 @@
 linters:
   LineLength:
     max: 100
+    exclude: app/views/static_pages/faq.html.haml
   ClassesBeforeIds:
     EnforcedStyle: 'id'
+  IdNames:
+    enabled: true
+    style: snake_case
+  InstanceVariables:
+    enabled: false
+  MultilinePipe:
+    enabled: false
+  InlineStyles:
+    exclude: app/views/palettes/*.html.haml

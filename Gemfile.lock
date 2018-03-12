@@ -76,6 +76,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    coffeelint (1.16.1)
+      coffee-script
+      execjs
+      json
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
@@ -305,6 +309,7 @@ DEPENDENCIES
   chromedriver-helper
   chunky_png
   coffee-rails
+  coffeelint
   devise
   figaro
   groupdate

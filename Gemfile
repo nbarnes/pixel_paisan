@@ -44,6 +44,7 @@ end
 
 group :development do
   gem 'brakeman', require: false
+  gem 'coffeelint', require: false
   gem 'haml-lint', require: false
   gem 'letter_opener'
   gem 'rubocop', '~> 0.52', require: false

@@ -22,5 +22,7 @@ $ ->
       $("#color_display_panel").css('background-color', new_color)
 
     $("#add_new_color_button").click () ->
-      Palettes.add_new_color_to_palette($('#r_value_field').val(), $('#g_value_field').val(), $('#b_value_field').val())
+      Palettes.add_new_color_to_palette($('#r_value_field').val(),
+                                        $('#g_value_field').val(),
+                                        $('#b_value_field').val())
       $.modal.close()
