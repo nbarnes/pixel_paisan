@@ -1,12 +1,12 @@
 
 # Ignored because it's mostly a documentation file with a lot of overly-long
 # lines.
-/spec/javascripts/spec_helper.coffee
+**/spec/javascripts/spec_helper.coffee
 
 # Ignored because I can't figure out what the linter's problem is with the
 # indenting on lines 55-62.  Would be nice to be able to ignore blocks with
 # specific linters, like you can in rubocop
-/app/assets/javascripts/drawing/cold_storage.js.coffee
+**/app/assets/javascripts/drawing/cold_storage.js.coffee
 
 # Ignore various Ruby and/or Rails files
 Gemfile
