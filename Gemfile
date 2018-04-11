@@ -44,6 +44,7 @@ end
 
 group :development do
   gem 'brakeman', require: false
+  gem 'bundle-audit', require: false
   gem 'coffeelint', require: false
   gem 'haml-lint', require: false
   gem 'letter_opener'
