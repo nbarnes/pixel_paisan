@@ -124,6 +124,7 @@ GEM
       rails
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    iniparse (1.4.2)
     io-like (0.3.0)
     jquery-datatables-rails (3.4.0)
       actionpack (>= 3.1)
@@ -175,6 +176,9 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    overcommit (0.44.0)
+      childprocess (~> 0.6, >= 0.6.3)
+      iniparse (~> 1.4)
     parallel (1.12.1)
     parser (2.5.0.2)
       ast (~> 2.4.0)
@@ -328,6 +332,7 @@ DEPENDENCIES
   magic_lamp
   minitest-rails-capybara
   minitest-reporters
+  overcommit
   pg (~> 0.15)
   pry-rails
   quiet_assets

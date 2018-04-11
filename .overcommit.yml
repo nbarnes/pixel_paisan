@@ -18,6 +18,8 @@
 PreCommit:
   AuthorName:
     enabled: false
+  BundleAudit:
+    enabled: true
   RuboCop:
     enabled: true
     on_warn: fail # Treat all warnings as failures

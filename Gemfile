@@ -48,6 +48,7 @@ group :development do
   gem 'coffeelint', require: false
   gem 'haml-lint', require: false
   gem 'letter_opener'
+  gem 'overcommit'
   gem 'rubocop', '~> 0.52', require: false
   gem 'spring'
 end
