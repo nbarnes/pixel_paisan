@@ -14,22 +14,4 @@
   %br
 
   #editor_modal_container.modal_container
-
-    #picture_saving_pane.modal_content_pane
-      Your picture is being saved.  This may take a few moments.
-    #picture_saved_pane.modal_content_pane
-      Your picture has been successfully saved. Click anywhere to close this window.
-    #upload_timeout_pane.modal_content_pane
-      It is taking a long time to communicate with the Pixel Paisan server to save your |
-      picture. Your internet connection may have been interrupted. Click anywhere to close |
-      this window. |
-    #picture_upload_error_pane.modal_content_pane
-      An error occured while uploading the picture.
-    #log_in_to_save_pane.modal_content_pane
-      You must be logged in to save your work.
-    #retrieving_picture_pane.modal_content_pane
-      Loading your picture from the server.
-    #picture_retrieval_failure_pane.modal_content_pane
-      It is taking a long time to communicate with the Pixel Paisan server while loading your |
-      picture. Your internet connection may have been interrupted. Click anywhere to close |
-      this window. |
+    = render 'editor_modals'

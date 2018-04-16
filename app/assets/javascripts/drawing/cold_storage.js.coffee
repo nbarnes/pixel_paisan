@@ -2,9 +2,9 @@
 window.ColdStorage = (->
 
   store_picture = (serialized_picture) ->
-    show_modal_pane('picture_saving_pane', false)
+    show_modal('awaiting_picture_save_modal')
     window.saving_picture_modal_timeout = setTimeout ( ->
-      show_modal_pane('upload_timeout_pane', true)
+      show_modal('picture_save_timeout_modal', true)
       set_modal_closable()
       ), 300000
     if serialized_picture.id == undefined
@@ -19,20 +19,20 @@ window.ColdStorage = (->
       verb: verb
       success_callback: (data, textStatus, jqXHR) ->
         # console.log('AJAX transmission of image success')
-        show_modal_pane('picture_saved_pane', true)
+        show_modal('picture_save_success_modal', true)
         set_modal_closable()
         clearTimeout(saving_picture_modal_timeout)
         Picture.set_picture_id(data.picture_id)
         Picture.set_name(data.picture_name)
       error_callback: (jqXHR, textStatus, errorThrown) ->
         console.log('AJAX transmission of image failure')
-        show_modal_pane('picture_upload_error_pane', true)
+        show_modal('picture_save_server_error_modal', true)
         set_modal_closable()
         clearTimeout(saving_picture_modal_timeout)
     )
 
   get_picture = (picture_id) ->
-    show_modal_pane('retrieving_picture_pane', false)
+    show_modal('awaiting_picture_load_modal')
     do_ajax(
       url: "/pictures/#{picture_id}",
       verb: 'GET'
@@ -41,7 +41,7 @@ window.ColdStorage = (->
         $.modal.close()
         PackingTape.import_picture(data)
       error_callback: (jqXHR, textStatus, errorThrown) ->
-        show_modal_pane('picture_retrieval_failure_pane', true)
+        show_modal('picture_load_server_error_modal', true)
         set_modal_closeable()
         console.log('AJAX get of picture data failure')
     )

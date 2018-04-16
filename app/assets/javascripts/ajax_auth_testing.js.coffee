@@ -35,8 +35,8 @@ $ ->
         url: "/users",
         verb: 'POST'
         success_callback: (data, textStatus, jqXHR) ->
-          console.log('AJAX login success')
+          console.log('AJAX signup success')
         error_callback: (jqXHR, textStatus, errorThrown) ->
-          console.log('AJAX login failure')
+          console.log('AJAX signup failure')
       )
       e.preventDefault()

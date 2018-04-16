@@ -10,7 +10,7 @@ $ ->
       if a_user_is_logged_in()
         ColdStorage.store_picture(PackingTape.pack_for_picture(Picture))
       else
-        show_modal_pane('log_in_to_save_pane', true)
+        show_modal('login_in_to_save_modal', true)
 
     $('#rename_picture_option').click ->
       new_picture_name = window.prompt('Enter a new name for your picture', '')
