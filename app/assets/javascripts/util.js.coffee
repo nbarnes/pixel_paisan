@@ -64,23 +64,18 @@ $ ->
     return $('#painting_application_panel').data('user-id')
 
   window.do_ajax = ({data, url, verb, success_callback, error_callback}) ->
-    $.ajax url,
-      type: verb,
-      data: JSON.stringify(data)
-      dataType: 'json'
-      contentType: 'application/json'
-      # beforeSend: (req) ->
-      #   req.setRequestHeader('Accept', 'application/json');
-      success: (data, textStatus, jqXHR) ->
-        # console.log('pixel_paisan_ajax success callback execution')
-        # console.log("returned data = #{JSON.stringify(data, undefined, 2)}")
-        # console.log(textStatus)
-        # console.log(jqXHR)
-        # console.log(jqXHR.getAllResponseHeaders())
-        success_callback(data, textStatus, jqXHR)
-      error: (jqXHR, textStatus, errorThrown) ->
-        console.log("#{JSON.stringify(jqXHR, undefined, 2)}")
-        console.log("#{textStatus}")
-        console.log("#{errorThrown}")
-        console.log(jqXHR.getAllResponseHeaders())
-        error_callback(jqXHR, textStatus, errorThrown)
+    fetch(url, {
+      body: JSON.stringify(data)
+      method: verb
+      headers: {
+        "content-type": "application/json"
+        "accept": "application/json"
+        "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
+      }
+      credentials: 'same-origin'
+    })
+    .then( (response) ->
+      return response.json()
+    ).then( (json) ->
+      success_callback(json)
+    )

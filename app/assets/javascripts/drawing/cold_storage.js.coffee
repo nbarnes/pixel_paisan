@@ -2,9 +2,11 @@
 window.ColdStorage = (->
 
   store_picture = (serialized_picture) ->
+    execute_picture_save_callback = true
     show_modal('awaiting_picture_save_modal')
     window.saving_picture_modal_timeout = setTimeout ( ->
       show_modal('picture_save_timeout_modal', true)
+      execute_picture_save_callback = false
       set_modal_closable()
       ), 300000
     if serialized_picture.id == undefined
@@ -18,17 +20,19 @@ window.ColdStorage = (->
       url: url
       verb: verb
       success_callback: (data, textStatus, jqXHR) ->
-        # console.log('AJAX transmission of image success')
-        show_modal('picture_save_success_modal', true)
-        set_modal_closable()
-        clearTimeout(saving_picture_modal_timeout)
-        Picture.set_picture_id(data.picture_id)
-        Picture.set_name(data.picture_name)
+        if execute_picture_save_callback
+          # console.log('AJAX transmission of image success')
+          show_modal('picture_save_success_modal', true)
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
+          Picture.set_picture_id(data.picture_id)
+          Picture.set_name(data.picture_name)
       error_callback: (jqXHR, textStatus, errorThrown) ->
-        console.log('AJAX transmission of image failure')
-        show_modal('picture_save_server_error_modal', true)
-        set_modal_closable()
-        clearTimeout(saving_picture_modal_timeout)
+        if execute_picture_save_callback
+          console.log('AJAX transmission of image failure')
+          show_modal('picture_save_server_error_modal', true)
+          set_modal_closable()
+          clearTimeout(saving_picture_modal_timeout)
     )
 
   get_picture = (picture_id) ->
@@ -67,7 +71,6 @@ window.ColdStorage = (->
     do_ajax
       url: "/palettes/#{palette_id}",
       verb: 'GET'
-      data: {}
       success_callback: (data, textStatus, jqXHR) ->
         Palettes.import_palette(data)
       error_callback: (jqXHR, textStatus, errorThrown) ->
