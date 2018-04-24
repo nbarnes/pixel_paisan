@@ -1,9 +1,8 @@
 - content_for :navbar do
-  #navbar
-    = link_to 'Activities', admin_activities_path
-    = ' - '
-    = link_to 'Users', admin_users_path
-    = ' - '
-    = link_to 'Logout', destroy_user_session_path, method: :delete
+  = link_to 'Activities', admin_activities_path
+  = ' - '
+  = link_to 'Users', admin_users_path
+  = ' - '
+  = link_to 'Logout', destroy_user_session_path, method: :delete
 
 = render template: 'layouts/application'

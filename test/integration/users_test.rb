@@ -13,7 +13,7 @@ feature 'Users' do
     # Then I should receive a successful login message
     page.must_have_content 'Logout'
     page.must_have_content 'galactus@everywhere.com'
-    page.wont_have_content 'Login'
+    page.find('#navbar').wont_have_content 'Login'
     page.wont_have_content 'Invalid email or password.'
   end
 
@@ -26,7 +26,7 @@ feature 'Users' do
     find_button('Sign up').click
     # Then I should receive a successful login message
     page.must_have_content 'Logout'
-    page.wont_have_content 'Login'
+    page.find('#navbar').wont_have_content 'Login'
     page.wont_have_content 'Invalid email or password.'
   end
 

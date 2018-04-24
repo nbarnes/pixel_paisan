@@ -33,25 +33,6 @@ $ ->
             return true
     return false
 
-  # window.fillStyle_into_color = (fillStyle) ->
-  #   color = {}
-  #   if fillStyle.charAt(0) == "#"
-  #     hex = fillStyle.slice(1)
-  #     bigint = parseInt(hex, 16)
-  #     color.r = (bigint & 0xff0000) >> 16
-  #     color.g = (bigint & 0x00ff00) >> 8
-  #     color.b = bigint & 0x0000ff
-  #     color.a = 1
-  #   else if fillStyle.charAt(0) == "r"
-  #     rgb_string = fillStyle.split(")")
-  #     rgb_string = rgb_string[0].split("(")
-  #     rgb_string = rgb_string[1].split(",")
-  #     color.r = parseInt(rgb_string[0])
-  #     color.g = parseInt(rgb_string[1])
-  #     color.b = parseInt(rgb_string[2])
-  #     color.a = parseFloat(rgb_string[3])
-  #   return color
-
   window.massage_picture_name = (raw_name) ->
     return raw_name.replace(/\ /g, '_').replace(/[^\w\s]/g, '')
 
